@@ -1,17 +1,28 @@
 var apos = require('apostrophe')({
-  shortName: 'apostrophesandbox',
+  shortName: 'workflowsandbox',
   title: 'Apostrophe Sandbox 2.0.0',
   demo: true,
+  baseUrl: 'http://localhost:3000',
   
-  bundles: ['apostrophe-blog'],
-
   // These are the modules we want to bring into the project.
   modules: {
-    
+
+    'apostrophe-site-map': {
+      // array of doc types you do NOT want
+      // to include, even though they are
+      // accessible on the site. You can also
+      // do this at the command line
+      excludeTypes: [],
+      perLocale: true
+    },
+  
     'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
     'apostrophe-express': {
       session: {
-        secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f'
+        secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',
+        cookie: {
+          // domain: 'workflow.com'
+        }
       }
     },
     
@@ -28,8 +39,47 @@ var apos = require('apostrophe')({
 
     // REMOVE ME IMMEDIATELY if you are not running a public demo
     // that should let EVERYBODY be INSTANTLY loggged in AS ADMIN!
-    'demo-autologin': {},
+    // 'demo-autologin': {},
+    
+    'apostrophe-workflow': {
+      alias: 'workflow',
+      locales: [
+        {
+          name: 'default',
+          label: 'Default',
+          children: [
+            {
+              name: 'en',
+              label: 'en',
+              stylesheet: 'en'
+            },
+            {
+              name: 'fr',
+              label: 'fr'
+            }
+          ]
+        },
+      ],
+      defaultLocale: 'default',
+      defaultStylesheet: 'default'
+    },
 
+    'apostrophe-review-and-deploy': {
+      deployTo: [
+        {
+          name: '3001',
+          baseUrl: 'http://localhost:3001',
+          prefix: '',
+          apikey: 'XYZ'
+        },
+        {
+          name: '3002',
+          baseUrl: 'http://localhost:3002',
+          prefix: '',
+          apikey: 'XYZ'
+        }
+      ]
+    }
   }
 
 });
