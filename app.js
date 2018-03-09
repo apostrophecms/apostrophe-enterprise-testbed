@@ -1,5 +1,5 @@
 var apos = require('apostrophe')({
-  shortName: 'workflowsandbox',
+  shortName: 'apostrophe-enterprise-testbed',
   title: 'Apostrophe Sandbox 2.0.0',
   demo: true,
   baseUrl: 'http://localhost:3000',
@@ -36,10 +36,6 @@ var apos = require('apostrophe')({
     // Apostrophe Sandbox (as-) specific modules
     'as-helpers': {},
     'as-two-column-block-widgets': {},
-
-    // REMOVE ME IMMEDIATELY if you are not running a public demo
-    // that should let EVERYBODY be INSTANTLY loggged in AS ADMIN!
-    // 'demo-autologin': {},
     
     'apostrophe-workflow': {
       alias: 'workflow',
@@ -51,7 +47,6 @@ var apos = require('apostrophe')({
             {
               name: 'en',
               label: 'en',
-              stylesheet: 'en'
             },
             {
               name: 'fr',
@@ -60,8 +55,7 @@ var apos = require('apostrophe')({
           ]
         },
       ],
-      defaultLocale: 'default',
-      defaultStylesheet: 'default'
+      defaultLocale: 'default'
     },
 
     'apostrophe-review-and-deploy': {

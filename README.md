@@ -1,6 +1,5 @@
-# Apostrophe Sandbox
+# apostrophe-enterprise-testbed
 
-This project powers the [live Apostrophe demo](http://demo.apostrophecms.org). Feel free to study it, but you're better off forking the [apostrophe boilerplate project](https://github.com/punkave/apostrophe-boilerplate) when creating new projects of your own.
+This project is intended as a tested for browser-based functional tests. It is not intended as a sample website.
 
-In fact, you're best off the [creating your first project](http://apostrophecms.org/docs/tutorials/getting-started/creating-your-first-project.html) tutorial, which covers how to use [apostrophe-cli](https://github.com/punkave/apostrophe-cli) to speed through that process.
-
+Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm.
