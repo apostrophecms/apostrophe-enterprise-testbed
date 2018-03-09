@@ -41,8 +41,9 @@ var apos = require('apostrophe')({
       alias: 'workflow',
       locales: [
         {
-          name: 'default',
-          label: 'Default',
+          name: 'master',
+          label: 'Master',
+          private: true,
           children: [
             {
               name: 'en',
@@ -51,11 +52,20 @@ var apos = require('apostrophe')({
             {
               name: 'fr',
               label: 'fr'
+            },
+            {
+              name: 'es',
+              label: 'es'
             }
           ]
         },
       ],
-      defaultLocale: 'default'
+      defaultLocale: 'en',
+      prefixes: {
+        fr: '/fr',
+        en: '/en',
+        es: '/es'
+      }
     },
 
     'apostrophe-review-and-deploy': {

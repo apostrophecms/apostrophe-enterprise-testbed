@@ -4,7 +4,9 @@
   "description": "Testbed for browser-based functional testing of apostrophe, apostrophe-workflow and related modules common in an enterprise setting.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dump": "mongodump -d apostrophe-enterprise-testbed",
+    "restore": "mongorestore --noIndexRestore mongodump/ --drop"
   },
   "repository": {
     "type": "git",
