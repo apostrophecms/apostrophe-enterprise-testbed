@@ -52,12 +52,10 @@ You (or more likely your automated tests) can now log in at `http://localhost:30
 * Reopen the article. Commit the article.
 * Ropen the article. Export the article to all other locales.
 * Verify the article can be found under "Articles" in draft mode for the `es` locale.
-* 
-edit page type of an existing page (statique to home). All content may disappear (different area names, it's OK)
-change page type back. All content comes back
-test creating and editing slide shows
-test editing widgets: list specifics here
-create a new piece; populate it with content
-edit an existing piece; change content
-view the reorganize modal
-move a page via reorganize
+* Edit page type of an existing page (change "default" to "alternate"). Some content may disappear due to changed area names, this is OK.
+* Change page type back. All content appears as before.
+* View the reorganize modal. Should display the page tree including the regression test page.
+* Move a page via reorganize (drag and drop the "regression test" page to "trash").
+* Verify the regression test page URL is now a 404.
+* Return to the home page. Open reorganize and drag and drop the "regression test" page out of "trash" and drop it on the home page, making it a live child again.
+* Verify the page is now reachable at its URL again.

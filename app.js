@@ -1,7 +1,5 @@
 var apos = require('apostrophe')({
   shortName: 'apostrophe-enterprise-testbed',
-  title: 'Apostrophe Sandbox 2.0.0',
-  demo: true,
   baseUrl: 'http://localhost:3000',
   
   // These are the modules we want to bring into the project.
