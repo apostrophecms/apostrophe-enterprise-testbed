@@ -54,7 +54,7 @@ You (or more likely your automated tests) can now log in at `http://localhost:30
 * Reopen the article. Commit the article. (The preview area says "no preview available," this is OK.)
 * Ropen the article. Export the article to all other locales.
 * Verify the article can be found under "Articles" in draft mode for the `es` locale.
-* Edit page type of your regression test page (change "default" to "alternate"). Verify that the page now says:
+* Return to "en" locale. Edit page type of your regression test page (change "default" to "alternate"). Verify that the page now says:
 
 ```
 You are on the "Alternate Page" template
