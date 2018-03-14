@@ -25,7 +25,9 @@ var apos = require('apostrophe')({
     },
     
     // Standard Apostrophe Modules
-    'apostrophe-assets': {},
+    'apostrophe-assets': {
+      jQuery: 3
+    },
     'apostrophe-blog': {},
     'apostrophe-blog-pages': {},
     'apostrophe-blog-widgets': {},
