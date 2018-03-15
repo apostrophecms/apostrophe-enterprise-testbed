@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
-    "test": "node test/test.js"
+    "e2e": "nightwatch ./tests/scenarios",
+    "test": "npm run e2e"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,10 @@
     "html2plaintext": "^1.0.1",
     "lodash": "^3.10.1",
     "moment": "^2.14.1"
+  },
+  "devDependencies": {
+    "nightwatch": "^0.9.20",
+    "phantomjs-prebuilt": "^2.1.16",
+    "shelljs": "^0.8.1"
   }
 }
