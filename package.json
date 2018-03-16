@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
-    "restore": "mongorestore --noIndexRestore mongodump/ --drop"
+    "restore": "mongorestore --noIndexRestore mongodump/ --drop",
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
