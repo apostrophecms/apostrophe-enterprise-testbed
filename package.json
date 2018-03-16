@@ -18,11 +18,11 @@
   "dependencies": {
     "apostrophe": "apostrophecms/apostrophe",
     "apostrophe-blog": "apostrophecms/apostrophe-blog",
-    "apostrophe-workflow": "apostrophecms/apostrophe-workflow",
     "apostrophe-review-and-deploy": "apostrophecms/apostrophe-review-and-deploy",
     "apostrophe-site-map": "apostrophecms/apostrophe-site-map",
+    "apostrophe-workflow": "apostrophecms/apostrophe-workflow",
     "html2plaintext": "^1.0.1",
-    "lodash": "^3.1.0",
+    "lodash": "^3.10.1",
     "moment": "^2.14.1"
   }
 }
