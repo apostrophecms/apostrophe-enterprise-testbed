@@ -16,3 +16,4 @@ public/css/master-*.less
 .jshintrc
 public/js/_site-compiled.js
 scripts/sync-up
+tests/reports

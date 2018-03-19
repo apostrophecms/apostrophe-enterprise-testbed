@@ -17,7 +17,7 @@ function run(config, ready) {
           excludeTypes: [],
           perLocale: true
         },
-      
+
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
         'apostrophe-express': {
           session: {
@@ -27,7 +27,7 @@ function run(config, ready) {
             }
           }
         },
-        
+
         // Standard Apostrophe Modules
         'apostrophe-assets': {
           jQuery: 3
@@ -40,7 +40,7 @@ function run(config, ready) {
         // Apostrophe Sandbox (as-) specific modules
         'as-helpers': {},
         'as-two-column-block-widgets': {},
-        
+
         'apostrophe-workflow': {
           alias: 'workflow',
           locales: [
