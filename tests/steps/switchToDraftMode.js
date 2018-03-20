@@ -1,11 +1,15 @@
 module.exports = {
   'switch mode to "draft"': function(client) {
-    client.click('.apos-dropdown--button.apos-workflow-state');
-    client.click(`li[data-apos-workflow-mode=draft]`);
-    client.waitForElementPresent('li[data-apos-workflow-mode=live]', 2000);
+    const modeSwithcerBtnSelector = '.apos-dropdown--button.apos-workflow-state';
+    const requiredModeBtnSelector = `li[data-apos-workflow-mode=draft]`;
+    const listItemToBeChangedSelector = 'li[data-apos-workflow-mode=live]';
 
-    client.expect
-      .element('.apos-dropdown--button.apos-workflow-state .apos-button-label')
-      .text.to.contain('Draft');
+    client.click(modeSwithcerBtnSelector);
+    client.click(requiredModeBtnSelector);
+    client.waitForElementPresent(listItemToBeChangedSelector, 2000);
+
+    const labelSelector = '.apos-dropdown--button.apos-workflow-state .apos-button-label';
+
+    client.expect.element(labelSelector).text.to.contain('Draft');
   }
 };
