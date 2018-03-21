@@ -1,12 +1,16 @@
 module.exports = (locale) => ({
   [`switch local to "${locale}"`]: function(client) {
-    client.click('a[data-apos-admin-bar-item=apostrophe-workflow-locale-picker-modal]');
-    client.waitForElementVisible('.apos-workflow-locale-picker-modal', 1000);
-    client.click(`a[data-apos-locale=${locale}]`);
+    const localeSwitcherBtnSelector = 'a[data-apos-admin-bar-item=apostrophe-workflow-locale-picker-modal]';
+    const modalDialogSelector = '.apos-workflow-locale-picker-modal';
+    const requiredLocaleBtnSelector = `a[data-apos-locale=${locale}]`;
+
+    client.click(localeSwitcherBtnSelector);
+    client.waitForElementVisible(modalDialogSelector, 1000);
+    client.click(requiredLocaleBtnSelector);
+
+    const labelSelector = `${localeSwitcherBtnSelector} .apos-button-label`;
 
     client.assert.urlContains(locale);
-    client.expect
-      .element('a[data-apos-admin-bar-item=apostrophe-workflow-locale-picker-modal] .apos-button-label')
-      .text.to.contain(locale);
+    client.expect.element(labelSelector).text.to.contain(locale);
   }
 });

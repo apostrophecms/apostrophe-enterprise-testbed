@@ -1,10 +1,17 @@
 module.exports = {
   'login step': function(client) {
-    client.click('.demo-login-button a');
-    client.setValue('.apos-login-username input', 'admin');
-    client.setValue('.apos-login-password input', 'demo');
-    client.click('.apos-login-submit input');
+    const loginBtnSelector = '.demo-login-button a';
+    const usernameInputSelector = '.apos-login-username input';
+    const passInputSelector = '.apos-login-password input';
+    const submitBtnSelector = '.apos-login-submit input';
 
-    client.expect.element('body.apos-workflow-live-page').to.be.present;
+    client.click(loginBtnSelector);
+    client.setValue(usernameInputSelector, 'admin');
+    client.setValue(passInputSelector, 'demo');
+    client.click(submitBtnSelector);
+
+    const loggedInPageSelector = 'body.apos-workflow-live-page';
+
+    client.expect.element(loggedInPageSelector).to.be.present;
   }
 };

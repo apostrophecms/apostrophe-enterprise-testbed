@@ -6,6 +6,9 @@ module.exports = Object.assign(
   steps.login,
   steps.switchLocale('en'),
   steps.switchToDraftMode,
+  steps.makeSubPage('Regression test'),
+  steps.submitChanges,
+  steps.checkSubmitted('Regression test'),
 {
   before: (client, done) => {
     client.resizeWindow(1200, 800);
@@ -20,6 +23,7 @@ module.exports = Object.assign(
   },
 
   flow(client) {
+    client.pause(3000);
     client.saveScreenshot('look-at-me.png');
   }
 });
