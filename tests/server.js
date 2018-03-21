@@ -2,6 +2,7 @@ const shell = require('shelljs');
 const app = require('../app.js');
 const aposCfg = {argv: {_: {}}};
 
+exports.URL = 'http://localhost:3000';
 exports.create = () => {
   let apos;
 
