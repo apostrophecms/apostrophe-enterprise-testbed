@@ -2,13 +2,21 @@ const server = require('../server');
 const steps = require('../steps');
 
 module.exports = Object.assign(
-  steps.main,
-  steps.login,
+  steps.main(),
+  steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode,
+  steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.submitChanges,
+  steps.submitChanges(),
   steps.checkSubmitted('Regression test'),
+  steps.switchToLiveMode(),
+  steps.confirm404ByRelativeUrl('regression-test'),
+  steps.switchToDraftMode(),
+  steps.navigateToPage('regression-test'),
+  steps.commitChanges(),
+  steps.navigateToHome(),
+  steps.switchToLiveMode(),
+  steps.confirm200ByRelativeUrl('regression-test'),
 {
   before: (client, done) => {
     client.resizeWindow(1200, 800);
@@ -21,9 +29,4 @@ module.exports = Object.assign(
     client.end();
     this._server.stop(done);
   },
-
-  flow(client) {
-    client.pause(3000);
-    client.saveScreenshot('look-at-me.png');
-  }
 });
