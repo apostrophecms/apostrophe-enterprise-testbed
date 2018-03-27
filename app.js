@@ -1,5 +1,29 @@
 var _ = require('lodash');
 
+var locales;
+var prefixes;
+
+if (process.env.EXTRA_LOCALES) {
+  prefixes = {
+    fr: '/fr',
+    en: '/en',
+    es: '/es',
+    be: '/be',
+    de: '/de',
+    au: '/au',
+    nl: '/nl',
+    ru: '/ru',
+    hu: '/hu',
+    th: '/th'
+  };
+} else {
+  prefixes = {
+    fr: '/fr',
+    en: '/en',
+    es: '/es',
+  }
+}
+
 function run(config, ready) {
   var apos = require('apostrophe')(
     _.assign({
@@ -61,15 +85,40 @@ function run(config, ready) {
                   name: 'es',
                   label: 'es'
                 }
-              ]
+              ].concat(process.env.EXTRA_LOCALES ? [
+                {
+                  name: 'be',
+                  label: 'Belgium'
+                },
+                {
+                  name: 'de',
+                  label: 'Germany'
+                },
+                {
+                  name: 'au',
+                  label: 'Australia'
+                },
+                {
+                  name: 'nl',
+                  label: 'Netherlands'
+                },
+                {
+                  name: 'ru',
+                  label: 'Russia'
+                },
+                {
+                  name: 'hu',
+                  label: 'Hungary'
+                },
+                {
+                  name: 'th',
+                  label: 'Thailand'
+                }
+              ] : [])
             },
           ],
           defaultLocale: 'en',
-          prefixes: {
-            fr: '/fr',
-            en: '/en',
-            es: '/es'
-          }
+          prefixes: prefixes
         },
 
         'apostrophe-review-and-deploy': {

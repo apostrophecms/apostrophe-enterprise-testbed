@@ -6,13 +6,15 @@ Dependencies point to the github master branches of modules in order to ensure t
 
 ## Testing the site
 
-Restore the provided database from the `mongodump` folder:
+Restore the provided test database:
 
-```
-mongorestore --noIndexRestore mongodump/ --drop
-```
+`npm run restore`
 
-You (or more likely your automated tests) can now log in at `http://localhost:3000` as username `admin`, password `demo`.
+Then start the site:
+
+`node app`
+
+You (or your automated tests) can now log in at `http://localhost:3000` as username `admin`, password `demo`.
 
 ## Tests to perform
 
@@ -54,6 +56,9 @@ You (or more likely your automated tests) can now log in at `http://localhost:30
 * Reopen the article. Commit the article. (The preview area says "no preview available," this is OK.)
 * Ropen the article. Export the article to all other locales.
 * Verify the article can be found under "Articles" in draft mode for the `es` locale.
+* Still in `es`: add a blog widget to the regression test page. Pick "individually" and select the article.
+* Commit and export.
+* Verify that the blog widget also shows the article in the `fr` locale, in draft mode.
 * Return to "en" locale. Edit page type of your regression test page (change "default" to "alternate"). Verify that the page now says:
 
 ```
@@ -68,3 +73,14 @@ And that the slideshow is still present.
 * In the logged-inbrowser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
 * In the logged-in browser, return to the home page. Open reorganize and drag and drop the "regression test" page out of "trash" and drop it on the home page, making it a live child again.
 * In the logged-in browser, verify the page is now reachable at its URL again.
+
+## Configuration test: adding new locales
+
+*These tests currently require a developer, they could and should be automated too.*
+
+* Run `EXTRA_LOCALES=1 node app apostrophe-workflow:add-missing-locales`.
+* Restart the site, this time with `EXTRA_LOCALES=1 node app`.
+* Verify that the regression test page you created now exists, it may be as a trashed draft (find it via "Reorganize"), in the new `ru` locale (you may need to refresh the page to see this locale choice, that is OK).
+* The joined content (images and article) may not appear because it is also in the trash so far. This is OK for now.
+* Rescue the page from the trash and commit it.
+* View it in the incognito window.
