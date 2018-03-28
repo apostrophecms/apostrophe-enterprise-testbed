@@ -1,18 +1,20 @@
-const phantomjs = require('phantomjs-prebuilt');
+const chromedriver = require('chromedriver');
 const WEBDRIVER_PORT = 4444;
 
 global.testing = true;
 
 module.exports = {
   before: function(done) {
-    phantomjs.run(`--webdriver=${WEBDRIVER_PORT}`)
-      .then(program => {
-        this._phantomjs = program;
-        done();
-      });
+    chromedriver.start([
+      `--port=${WEBDRIVER_PORT}`,
+      '--url-base=wd/hub',
+    ]);
+
+    done();
   },
   after: function(done) {
-    this._phantomjs.kill();
+    chromedriver.stop();
+
     done();
 
     // TODO: There is problem. NW cannot handle exceptions becaus of it

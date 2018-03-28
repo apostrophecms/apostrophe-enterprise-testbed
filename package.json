@@ -22,13 +22,13 @@
     "apostrophe-review-and-deploy": "github:apostrophecms/apostrophe-review-and-deploy",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
+    "chromedriver": "^2.37.0",
     "html2plaintext": "^1.0.1",
     "lodash": "^3.10.1",
     "moment": "^2.21.0"
   },
   "devDependencies": {
     "nightwatch": "^0.9.20",
-    "phantomjs-prebuilt": "^2.1.16",
     "shelljs": "^0.8.1"
   }
 }

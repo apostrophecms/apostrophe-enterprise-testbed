@@ -22,10 +22,9 @@
         "path": "./screenshots"
       },
       "desiredCapabilities": {
-        "browserName" : "phantomjs",
+        "browserName" : "chrome",
         "javascriptEnabled" : true,
-        "acceptSslCerts" : true,
-        "phantomjs.cli.args" : ["--ignore-ssl-errors=true"]
+        "acceptSslCerts" : true
       }
     }
   }

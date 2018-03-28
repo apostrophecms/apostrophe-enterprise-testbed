@@ -14,14 +14,15 @@ module.exports = () => {
       const masterLocaleBtnSelector = '[for*=master] span';
 
       client.click(commitBtnSelector);
-      client.waitForElementVisible(modalDialogSelector, 2000);
+      client.waitForElementVisible(modalDialogSelector, 5000);
       client.click(confirmBtnSelector);
+      client.waitForElementVisible(masterLocaleBtnSelector, 5000);
       client.click(masterLocaleBtnSelector);
       client.click(exportBtnSelector);
 
       // TODO: we can capture and see messages about commiting and exporting
       // but modal dialog is visible
-      // client.waitForElementNotVisible(modalDialogSelector, 2000);
+      client.waitForElementNotPresent(modalDialogSelector, 5000);
     }
   };
 };
