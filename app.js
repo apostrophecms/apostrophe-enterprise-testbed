@@ -56,7 +56,54 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
-        'apostrophe-blog': {},
+        'apostrophe-blog': {
+          addFields: [
+            {
+              type: 'select',
+              name: 'select',
+              choices: [
+                {
+                  label: 'one',
+                  value: 'one',
+                  showFields: [ 'one' ]
+                },
+                {
+                  label: 'two',
+                  value: 'two',
+                  showFields: [ 'two' ]
+                }
+              ]
+            },
+            {
+              name: 'one',
+              type: 'select',
+              choices: [
+                {
+                  label: 'aye',
+                  value: 'aye'
+                },
+                {
+                  label: 'bee',
+                  value: 'bee'
+                }
+              ]
+            },
+            {
+              name: 'two',
+              type: 'select',
+              choices: [
+                {
+                  label: 'aye',
+                  value: 'aye'
+                },
+                {
+                  label: 'bee',
+                  value: 'bee'
+                }
+              ]
+            },
+          ]
+        },
         'apostrophe-blog-pages': {},
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
