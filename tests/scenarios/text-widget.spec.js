@@ -15,8 +15,9 @@ module.exports = Object.assign(
     },
 
     after: (client, done) => {
-      client.end();
-      this._server.stop(done);
+      client.end(() => {
+        this._server.stop(done);
+      });
     },
   },
   steps.main(),

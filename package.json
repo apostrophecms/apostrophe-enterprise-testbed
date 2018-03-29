@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
-    "e2e": "nightwatch ./tests/scenarios",
+    "e2e-local": "nightwatch tests/scenarios --config nightwatch.js --env locale",
+    "e2e-remote": "nightwatch tests/scenarios --config nightwatch.js --env remote",
     "test": "npm run e2e"
   },
   "repository": {
@@ -28,7 +29,9 @@
     "moment": "^2.21.0"
   },
   "devDependencies": {
+    "death": "^1.1.0",
     "nightwatch": "^0.9.20",
+    "sauce-connect-launcher": "^1.2.3",
     "shelljs": "^0.8.1"
   }
 }

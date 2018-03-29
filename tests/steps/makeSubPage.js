@@ -12,15 +12,14 @@ module.exports = (pageName) => {
       const inputTitleSelector = '.apos-field-input';
       const saveBtnSelector = '[data-apos-save]';
 
-      client.click('body');
+      client.pause(200);
       client.click(pageMenuBtnSelector);
-      client.waitForElementVisible(pageMenuDropdownSelector, 1000);
+      client.waitForElementVisible(pageMenuDropdownSelector, 5000);
       client.click(pageMenuCreatePageSelector);
-      client.waitForElementVisible(modalDialogSelector, 2000);
+      client.waitForElementVisible(modalDialogSelector, 5000);
       client.clearValue(inputTitleSelector);
       client.setValue(inputTitleSelector, pageName);
       client.click(saveBtnSelector);
-      client.pause(1000);
     }
   };
 };

@@ -13,6 +13,7 @@ module.exports = () => {
       const exportBtnSelector = '.apos-workflow-export-modal [data-apos-save]';
       const masterLocaleBtnSelector = '[for*=master] span';
 
+      client.pause(200);
       client.click(commitBtnSelector);
       client.waitForElementVisible(modalDialogSelector, 5000);
       client.click(confirmBtnSelector);

@@ -18,7 +18,7 @@ module.exports = (documentName) => {
       client.click(submissionsBtnSelector);
       client.click(submissionsBtnSelector);
 
-      client.expect.element('.apos-table [data-list]').text.to.contain(documentName).before(200);
+      client.expect.element('.apos-table [data-list]').text.to.contain(documentName).before(1000);
 
       client.click(doneBtnSelector);
     }

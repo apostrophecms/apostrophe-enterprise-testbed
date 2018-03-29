@@ -4,6 +4,23 @@ This project is intended as a tested for browser-based functional tests. It is n
 
 Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm.
 
+## e2e testing
+```sh
+npm i
+```
+How to run locally:
+```sh
+npm run e2e-local
+```
+How to run remotely:
+Sign-up on [saucelabs](saucelabs.com).
+
+Retrive name and access key, then subtitute it into command below:
+
+```sh
+SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> run e2e-remote
+```
+
 ## Testing the site
 
 Restore the provided test database:
