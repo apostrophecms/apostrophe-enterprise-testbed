@@ -2,15 +2,22 @@ const shell = require('shelljs');
 const app = require('../app.js');
 const aposCfg = {argv: {_: {}}};
 
+let apos;
+
 exports.URL = 'http://localhost:3000';
 exports.create = () => {
-  let apos;
-
   return {
     start(cb) {
+      // TODO: do not start new instnce
       restoreMongoDump();
 
-      apos = app(aposCfg, () => {cb()});
+      if (!apos) {
+        apos = app(aposCfg, () => {cb()});
+
+        return;
+      }
+
+      cb();
     },
     stop(cb) {
       cb();

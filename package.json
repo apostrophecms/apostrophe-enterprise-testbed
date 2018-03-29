@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
-    "e2e": "nightwatch ./tests/scenarios",
+    "e2e-local": "nightwatch tests/scenarios --config nightwatch.js --env locale",
+    "e2e-remote": "nightwatch tests/scenarios --config nightwatch.js --env remote",
     "test": "npm run e2e"
   },
   "repository": {
@@ -22,13 +23,15 @@
     "apostrophe-review-and-deploy": "github:apostrophecms/apostrophe-review-and-deploy",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
+    "chromedriver": "^2.37.0",
     "html2plaintext": "^1.0.1",
     "lodash": "^3.10.1",
     "moment": "^2.21.0"
   },
   "devDependencies": {
+    "death": "^1.1.0",
     "nightwatch": "^0.9.20",
-    "phantomjs-prebuilt": "^2.1.16",
+    "sauce-connect-launcher": "^1.2.3",
     "shelljs": "^0.8.1"
   }
 }
