@@ -1,9 +1,5 @@
-const _ = require('lodash');
 const server = require('../server');
 const steps = require('../steps');
-
-const contentMainBlockSelector = '.demo-main';
-const richTextSelector = `${contentMainBlockSelector} [data-rich-text]`;
 
 module.exports = Object.assign(
   {
@@ -25,24 +21,7 @@ module.exports = Object.assign(
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  {
-    'add Rich Text widget': function(client) {
-      const addContentBtnSelector = `${contentMainBlockSelector} [data-apos-add-content]`;
-      const richTextBtnSelector = `${contentMainBlockSelector} [data-apos-add-item=apostrophe-rich-text]`;
-
-      client.click(addContentBtnSelector);
-      client.click(addContentBtnSelector);
-      client.click(richTextBtnSelector);
-      client.pause(1000);
-      client.execute(function () {
-        const ckeditorInstance = _.find(CKEDITOR.instances);
-
-        ckeditorInstance.setData('Rich Text Widget line');
-      });
-
-      client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line');
-    }
-  },
+  steps.addTextWidgetToPage('Rich Text Widget line'),
   steps.submitChanges(),
   steps.commitChanges(),
   steps.switchToLiveMode(),
@@ -51,6 +30,8 @@ module.exports = Object.assign(
   steps.navigateToPage('regression-test'),
   {
     'should have the Rich Text widget': function(client) {
+      const richTextSelector = `.demo-main [data-rich-text]`;
+
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line');
     }
   },
