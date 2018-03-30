@@ -31,6 +31,7 @@
   "devDependencies": {
     "death": "^1.1.0",
     "nightwatch": "^0.9.20",
+    "once": "^1.4.0",
     "sauce-connect-launcher": "^1.2.3",
     "shelljs": "^0.8.1"
   }

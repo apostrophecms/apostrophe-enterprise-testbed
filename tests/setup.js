@@ -1,6 +1,12 @@
-const onDeath = require('death')({uncaughtException: true});
+const onDeath = require('death')({
+  uncaughtException: true,
+  exit: true,
+  SIGUSR1: true,
+  SIGUSR2: true,
+});
 const chromedriver = require('chromedriver');
 const sauceConnectLauncher = require('sauce-connect-launcher');
+const server = require('./server');
 
 const WEBDRIVER_PORT = 4444;
 const scOpts = {
@@ -15,8 +21,6 @@ const checkVenvs = () => {
     throw new Error('SAUCE_ACCESS_KEY is required venv');
   }
 }
-
-global.testing = true;
 
 module.exports = {
   before: function(done) {
@@ -35,29 +39,12 @@ module.exports = {
         throw new Error('Unable to connect to SauceLabs.\n' + err);
       }
 
-      this._sc = sc;
-
       console.log("Started Sauce Connect Process");
       done();
     });
   },
   after: function(done) {
-    if (isLocalRunning.call(this)) {
-      chromedriver.stop();
-
-      done();
-      process.exit();
-      return;
-    }
-
-    this._sc.close(() => {
-      console.log('Closed Sauce Connect process');
-      done();
-
-      // TODO: There is problem. NW cannot handle exceptions becaus of it
-      // dirty hack, because apos still live
-      process.exit();
-    });
+    clean(done);
   }
 }
 
@@ -65,13 +52,16 @@ function isLocalRunning() {
   return this.test_settings.selenium_host === 'localhost';
 }
 
+function clean(cb) {
+  chromedriver.stop();
+  server.clean();
+  sauceConnectLauncher.kill(cb);
+}
+
 onDeath((signal, err) => {
   if (err) {
     console.log(err);
   }
 
-  chromedriver.stop();
-  sauceConnectLauncher.kill(() => {
-    process.exit(signal);
-  });
+  clean(() => process.exit(signal));
 });

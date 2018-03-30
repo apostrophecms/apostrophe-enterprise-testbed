@@ -1,28 +1,36 @@
 const shell = require('shelljs');
-const app = require('../app.js');
-const aposCfg = {argv: {_: {}}};
+const once = require('once');
 
-let apos;
+const serverProcesses = [];
 
 exports.URL = 'http://localhost:3000';
+
+exports.clean = () => {
+  serverProcesses.forEach((prc) => {
+    if (!prc.killed) {
+      prc.kill();
+    }
+  });
+};
+
 exports.create = () => {
+  let server;
+
   return {
     start(cb) {
-      // TODO: do not start new instnce
       restoreMongoDump();
 
-      if (!apos) {
-        apos = app(aposCfg, () => {cb()});
+      process.argv = process.argv.slice(0, 2);
 
-        return;
-      }
+      server = shell.exec('node app', {async: true,});
+      onceCb = once(cb);
 
-      cb();
+      serverProcesses.push(server);
+      server.stdout.on('data', onceCb);
     },
     stop(cb) {
+      server.kill();
       cb();
-      // TODO: MongoError if we are trying to destroy
-      // apos.destroy(() => {cb()});
     }
   };
 };
