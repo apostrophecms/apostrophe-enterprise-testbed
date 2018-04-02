@@ -22,7 +22,7 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   steps.submitChanges(),
-  steps.checkSubmitted('Regression test'),
+  steps.checkSubmitted(['Regression test']),
   steps.switchToLiveMode(),
   steps.confirm404ByRelativeUrl('regression-test'),
   steps.switchToDraftMode(),
