@@ -18,11 +18,6 @@ module.exports = () => {
       const loggedInPageSelector = 'body.apos-workflow-live-page';
 
       client.expect.element(loggedInPageSelector).to.be.present;
-
-      // do not collapse admin bar automatically
-      client.execute(function() {
-        apos.adminBar.autoCollapse = function() {};
-      });
     }
   };
 };
