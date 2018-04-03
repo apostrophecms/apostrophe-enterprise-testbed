@@ -8,7 +8,7 @@ module.exports = (pageName) => {
       const pageSelector = `.top .nav-item a[href$="${pageName}"]`;
 
       client.click(pageSelector);
-      client.waitForElementVisible('body', 4000);
+      client.waitForElementVisible('body');
     }
   };
 };

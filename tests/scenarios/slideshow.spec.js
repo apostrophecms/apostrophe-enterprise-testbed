@@ -39,7 +39,7 @@ module.exports = Object.assign(
       client.pause(200);
       client.click('body');
       client.click(contextBtnSelector);
-      client.waitForElementVisible(contextSubMenuSelector, 3000);
+      client.waitForElementVisible(contextSubMenuSelector);
       client.click(contextSubMenuImageSelector);
       client.waitForElementVisible(modalDialogSelector, 7000);
       client.execute(function() {

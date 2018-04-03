@@ -13,7 +13,7 @@ module.exports = () => {
       client.click(modeSwithcerBtnSelector);
       client.click(requiredModeBtnSelector);
 
-      client.waitForElementPresent(listItemToBeChangedSelector, 5000);
+      client.waitForElementPresent(listItemToBeChangedSelector);
 
       const labelSelector = '.apos-dropdown--button.apos-workflow-state .apos-button-label';
 

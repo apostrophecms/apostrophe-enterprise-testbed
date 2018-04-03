@@ -20,7 +20,7 @@ const checkVenvs = () => {
   if (!process.env.SAUCE_ACCESS_KEY) {
     throw new Error('SAUCE_ACCESS_KEY is required venv');
   }
-}
+};
 
 module.exports = {
   before: function(done) {
@@ -34,7 +34,7 @@ module.exports = {
     }
 
     checkVenvs();
-    sauceConnectLauncher(scOpts, (err, sc) => {
+    sauceConnectLauncher(scOpts, (err) => {
       if (err) {
         throw new Error('Unable to connect to SauceLabs.\n' + err);
       }
@@ -45,8 +45,9 @@ module.exports = {
   },
   after: function(done) {
     clean(done);
-  }
-}
+  },
+  waitForConditionTimeout : 5000,
+};
 
 function isLocalRunning() {
   return this.test_settings.selenium_host === 'localhost';
