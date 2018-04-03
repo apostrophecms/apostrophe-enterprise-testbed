@@ -1,24 +1,36 @@
 let counter = 0;
 
-module.exports = (documentName) => {
+module.exports = (documentNames) => {
   counter++;
 
   return {
-    [`[${counter}] check submited item "${documentName}"`]: function(client) {
+    [`[${counter}] check submited`]: function(client) {
       const menuBtnSelector = '[data-apos-actionable=data-apos-admin-bar]';
-      const workflowXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[9]';
+      const openedMenuSelector = '.apos-admin-bar.apos-active';
       const submissionsBtnSelector = '[data-apos-admin-bar-item=apostrophe-workflow-manage-modal]';
+      const subMenuSelector = '.apos-dropdown--admin.apos-active';
       const doneBtnSelector = '[data-apos-cancel]';
+      const listItemsSelector = '.apos-table [data-list]';
+      const modalDialogSelector = '.apos-workflow-submit-modal';
 
-      client.click(menuBtnSelector);
-      client.click(menuBtnSelector);
-      client.useXpath();
-      client.click(workflowXPathSelector);
-      client.useCss();
+      client.execute(function() {
+        if ($('.apos-admin-bar.apos-active').length === 0) {
+          $('[data-apos-actionable=data-apos-admin-bar]').click();
+        }
+      });
+      client.waitForElementPresent(openedMenuSelector, 9000)
+      client.execute(function() {
+        setTimeout(function() {
+          $(".apos-admin-bar-item-inner:contains(Workflow)").click();
+        }, 300);
+      });
+      client.waitForElementPresent(subMenuSelector, 9000)
       client.click(submissionsBtnSelector);
-      client.click(submissionsBtnSelector);
+      client.waitForElementPresent(modalDialogSelector, 9000);
 
-      client.expect.element('.apos-table [data-list]').text.to.contain(documentName).before(1000);
+      documentNames.forEach((name) => {
+        client.expect.element(listItemsSelector).text.to.contain(name);
+      });
 
       client.click(doneBtnSelector);
     }
