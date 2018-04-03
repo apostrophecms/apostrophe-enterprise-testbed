@@ -14,9 +14,9 @@ module.exports = (pageName) => {
 
       client.pause(200);
       client.click(pageMenuBtnSelector);
-      client.waitForElementVisible(pageMenuDropdownSelector, 5000);
+      client.waitForElementVisible(pageMenuDropdownSelector);
       client.click(pageMenuCreatePageSelector);
-      client.waitForElementVisible(modalDialogSelector, 5000);
+      client.waitForElementVisible(modalDialogSelector);
       client.clearValue(inputTitleSelector);
       client.setValue(inputTitleSelector, pageName);
       client.click(saveBtnSelector);

@@ -31,7 +31,7 @@ module.exports = Object.assign(
 
       client.click(trashBtnSelector);
 
-      client.expect.element(richTextSelector).to.not.be.present.before(5000)
+      client.expect.element(richTextSelector).to.not.be.present;
     }
   },
   {
@@ -41,15 +41,13 @@ module.exports = Object.assign(
       const deletedDiffSelector = '.apos-workflow-widget-diff--deleted';
 
       client.pause(200);
-      client.waitForElementVisible(commitBtnSelector, 5000);
+      client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
-      client.waitForElementVisible(modalDialogSelector, 5000);
+      client.waitForElementVisible(modalDialogSelector);
       client.frame(0);
 
-      client.expect.element(deletedDiffSelector).to.be.visible.before(5000);
+      client.expect.element(deletedDiffSelector).to.be.visible;
       client.expect.element(deletedDiffSelector).text.to.equal('Rich Text Widget line');
-
-      client.pause(5000);
     }
   }
 );
