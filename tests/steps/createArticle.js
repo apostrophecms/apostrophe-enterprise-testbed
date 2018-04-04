@@ -17,7 +17,7 @@ module.exports = (articleName) => {
       const metaBodySelector = '[data-apos-group=meta]';
       const infoBodySelector = '[data-apos-group=default]';
       const inputTitleSelector = '.apos-field-title input';
-      const inputPublishedSelector = '.apos-field-published select';
+      const selectPublishedSelector = '.apos-field-published select';
       const inputPublicationDateSelector = '.apos-field-date input';
       const metaTabSelector = '[data-apos-open-group=meta]';
       const infoTabSelector = '[data-apos-open-group=default]';
@@ -36,7 +36,7 @@ module.exports = (articleName) => {
       client.setValue(inputTitleSelector, articleName);
       client.click(metaTabSelector);
       client.waitForElementVisible(metaBodySelector);
-      client.setValue(inputPublishedSelector, 'Yes');
+      client.setValue(selectPublishedSelector, 'Yes');
       client.click(infoTabSelector);
       client.waitForElementVisible(infoBodySelector);
 
