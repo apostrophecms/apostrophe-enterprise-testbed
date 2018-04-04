@@ -1,17 +1,21 @@
 let counter = 0;
 
-module.exports = (text) => {
+module.exports = ({block, text} = {}) => {
+  if (!block) {
+    throw new Error('"block" is required parameter');
+  }
+
   counter++;
 
   return {
-    [`[${counter}] add text "${text}" to the page`]: function(client) {
-      const contentMainBlockSelector = '.demo-main';
-      const richTextSelector = `${contentMainBlockSelector} [data-rich-text]`;
-      const addContentBtnSelector = `${contentMainBlockSelector} [data-apos-add-content]`;
-      const richTextBtnSelector = `${contentMainBlockSelector} [data-apos-add-item=apostrophe-rich-text]`;
+    [`[${counter}] add text widget "${text}" to the "${block}" block`]: function(client) {
+      const richTextSelector = `${block} [data-rich-text]`;
+      const addContentBtnSelector = `${block} [data-apos-add-content]`;
+      const richTextBtnSelector = `${block} [data-apos-add-item=apostrophe-rich-text]`;
 
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
+      client.getLocationInView(block);
       client.waitForElementVisible(richTextBtnSelector);
       client.pause(200);
       client.click(richTextBtnSelector);
