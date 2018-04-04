@@ -10,9 +10,9 @@ module.exports = (text) => {
       const addContentBtnSelector = `${contentMainBlockSelector} [data-apos-add-content]`;
       const richTextBtnSelector = `${contentMainBlockSelector} [data-apos-add-item=apostrophe-rich-text]`;
 
-      client.waitForElementVisible(addContentBtnSelector, 5000);
+      client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
-      client.waitForElementVisible(richTextBtnSelector, 5000);
+      client.waitForElementVisible(richTextBtnSelector);
       client.pause(200);
       client.click(richTextBtnSelector);
       client.pause(2000);

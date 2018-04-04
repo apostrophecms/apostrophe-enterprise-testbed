@@ -29,15 +29,13 @@ module.exports = Object.assign(
       const newDiffSelector = '.apos-workflow-widget-diff--new';
 
       client.pause(200);
-      client.waitForElementVisible(commitBtnSelector, 5000);
+      client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
-      client.waitForElementVisible(modalDialogSelector, 5000);
+      client.waitForElementVisible(modalDialogSelector);
       client.frame(0);
 
-      client.expect.element(newDiffSelector).to.be.visible.before(5000);
-      client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line');
-
-      client.pause(5000);
+      client.expect.element(newDiffSelector).to.be.visible;
+      client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line').before(0);
     }
   }
 );

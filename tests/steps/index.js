@@ -13,4 +13,6 @@ module.exports = {
   navigateToHome: require('./navigateToHome'),
   commitChanges: require('./commitChanges'),
   addTextWidgetToPage: require('./addTextWidgetToPage'),
+  checkNotification: require('./checkNotification'),
+  createArticle: require('./createArticle'),
 };
