@@ -10,7 +10,7 @@ module.exports = (locale) => {
       const requiredLocaleBtnSelector = `a[data-apos-locale=${locale}]`;
 
       client.click(localeSwitcherBtnSelector);
-      client.waitForElementVisible(modalDialogSelector, 1000);
+      client.waitForElementVisible(modalDialogSelector);
       client.click(requiredLocaleBtnSelector);
 
       const labelSelector = `${localeSwitcherBtnSelector} .apos-button-label`;

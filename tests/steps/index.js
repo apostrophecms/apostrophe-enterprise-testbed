@@ -15,7 +15,7 @@ module.exports = {
   navigateToHome: require('./navigateToHome'),
   commit: require('./commit'),
   commitAndExport: require('./commitAndExport'),
-  addTextWidgetToPage: require('./addTextWidgetToPage'),
+  addTextWidgetTo: require('./addTextWidgetTo'),
   checkNotification: require('./checkNotification'),
   createArticle: require('./createArticle'),
   forceExportCurrentPageFor: require('./forceExportCurrentPageFor'),

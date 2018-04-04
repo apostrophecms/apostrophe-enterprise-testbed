@@ -1,17 +1,21 @@
 let counter = 0;
 
-module.exports = (text) => {
+module.exports = ({selector, text} = {}) => {
+  if (!selector) {
+    throw new Error('"selector" is required parameter');
+  }
+
   counter++;
 
   return {
-    [`[${counter}] add text "${text}" to the page`]: function(client) {
-      const contentMainBlockSelector = '.demo-main';
-      const richTextSelector = `${contentMainBlockSelector} [data-rich-text]`;
-      const addContentBtnSelector = `${contentMainBlockSelector} [data-apos-add-content]`;
-      const richTextBtnSelector = `${contentMainBlockSelector} [data-apos-add-item=apostrophe-rich-text]`;
+    [`[${counter}] add text widget "${text}" to the "${selector}" block`]: function(client) {
+      const richTextSelector = `${selector} [data-rich-text]`;
+      const addContentBtnSelector = `${selector} [data-apos-add-content]`;
+      const richTextBtnSelector = `${selector} [data-apos-add-item=apostrophe-rich-text]`;
 
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
+      client.getLocationInView(selector);
       client.waitForElementVisible(richTextBtnSelector);
       client.pause(200);
       client.click(richTextBtnSelector);
