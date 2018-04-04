@@ -27,7 +27,7 @@ module.exports = Object.assign(
   steps.confirm404ByRelativeUrl('regression-test'),
   steps.switchToDraftMode(),
   steps.navigateToPage('regression-test'),
-  steps.commitChanges(),
+  steps.commitAndExport(),
   steps.navigateToHome(),
   steps.switchToLiveMode(),
   steps.confirm200ByRelativeUrl('regression-test'),

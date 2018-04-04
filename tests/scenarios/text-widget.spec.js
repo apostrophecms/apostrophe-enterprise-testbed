@@ -23,7 +23,7 @@ module.exports = Object.assign(
   steps.makeSubPage('Regression test'),
   steps.addTextWidgetToPage('Rich Text Widget line'),
   steps.submitChanges(),
-  steps.commitChanges(),
+  steps.commitAndExport(),
   steps.switchToLiveMode(),
   steps.navigateToHome(),
   steps.confirm200ByRelativeUrl('regression-test'),
