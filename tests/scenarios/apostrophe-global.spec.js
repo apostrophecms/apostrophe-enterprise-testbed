@@ -21,9 +21,9 @@ module.exports = Object.assign(
   steps.switchLocale('es'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.commitChanges(),
+  steps.commitAndExport(),
   steps.addTextWidgetTo({selector: '.footer', text: 'Rich Text Widget line global'}),
-  steps.commitChanges(),
+  steps.commitAndExport(),
   steps.switchLocale('en'),
   {
     'should have the Rich Text widget in the footer': function(client) {

@@ -1,3 +1,5 @@
+const adminMenu = require('../helpers/adminMenu');
+
 let counter = 0;
 
 function castTwoDigits(val) {
@@ -9,8 +11,8 @@ module.exports = (articleName) => {
 
   return {
     [`[${counter}] create an article`]: function(client) {
-      const menuBtnSelector = '[data-apos-actionable=data-apos-admin-bar]';
-      const workflowXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[8]';
+      const blackoutSelector = '.apos-modal-blackout';
+      const articleXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[8]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const addArticleBtnSelector = '[data-apos-create-apostrophe-blog]';
       const basicsBodySelector = '[data-apos-group=basic]';
@@ -24,10 +26,11 @@ module.exports = (articleName) => {
       const saveBtnSelector = '[data-apos-save]';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
-      client.click(menuBtnSelector);
-      client.click(menuBtnSelector);
+      client.waitForElementNotPresent(blackoutSelector);
+      adminMenu.open(client);
       client.useXpath();
-      client.click(workflowXPathSelector);
+      client.waitForElementVisible(articleXPathSelector);
+      client.click(articleXPathSelector);
       client.useCss();
       client.waitForElementVisible(modalBlogSelector);
       client.pause(200);
