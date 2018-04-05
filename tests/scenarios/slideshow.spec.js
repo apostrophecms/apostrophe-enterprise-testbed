@@ -57,7 +57,7 @@ module.exports = Object.assign(
   },
   steps.submitChanges(),
   steps.checkSubmitted(['slide1', 'slide2',]),
-  steps.commitChanges(3),
+  steps.commitAndExport(3),
   steps.switchToLiveMode(),
   {
     'check images': function(client) {

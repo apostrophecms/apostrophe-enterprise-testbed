@@ -22,7 +22,7 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   steps.addTextWidgetToPage('Rich Text Widget line'),
-  steps.commitChanges(),
+  steps.commitAndExport(),
   {
     'delete Rich Text widget from the page': function(client) {
       const contentMainBlockSelector = '.demo-main';
