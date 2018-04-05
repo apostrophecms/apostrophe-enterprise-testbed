@@ -21,7 +21,7 @@ module.exports = Object.assign(
   steps.switchLocale('fr'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.addTextWidgetToPage('Rich Text Widget line'),
+  steps.addTextWidgetTo({selector: '.demo-main', text: 'Rich Text Widget line'}),
   steps.commitAndExport(),
   {
     'delete Rich Text widget from the page': function(client) {

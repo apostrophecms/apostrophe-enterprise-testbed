@@ -29,6 +29,7 @@ module.exports = (itemsCount = 1) => {
         }
 
         client.waitForElementVisible(exportBtnSelector);
+        client.pause(1000);
         client.click(exportBtnSelector);
       }
 

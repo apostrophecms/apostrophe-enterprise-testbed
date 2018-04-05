@@ -21,7 +21,7 @@ module.exports = Object.assign(
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.addTextWidgetTo({selector: '.demo', text: 'Rich Text Widget line'}),
+  steps.addTextWidgetTo({selector: '.demo-main', text: 'Rich Text Widget line'}),
   steps.submitChanges(),
   steps.commitAndExport(),
   steps.switchToLiveMode(),

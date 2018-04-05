@@ -9,13 +9,15 @@ module.exports = ({selector, text} = {}) => {
 
   return {
     [`[${counter}] add text widget "${text}" to the "${selector}" block`]: function(client) {
+      const blackoutSelector = '.apos-modal-blackout';
       const richTextSelector = `${selector} [data-rich-text]`;
       const addContentBtnSelector = `${selector} [data-apos-add-content]`;
       const richTextBtnSelector = `${selector} [data-apos-add-item=apostrophe-rich-text]`;
 
+      client.waitForElementNotPresent(blackoutSelector);
+      client.getLocationInView(selector);
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
-      client.getLocationInView(selector);
       client.waitForElementVisible(richTextBtnSelector);
       client.pause(200);
       client.click(richTextBtnSelector);

@@ -37,7 +37,7 @@ module.exports = Object.assign(
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.waitForElementVisible(controlSelector);
-      client.pause(200);
+      client.pause(1000);
       client.useXpath();
       client.click(workflowModalBtnXPathSelector);
       client.useCss();
@@ -98,6 +98,7 @@ module.exports = Object.assign(
       client.click(exportBtnSelector);
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(finishBtnSelector);
+      client.pause(1000);
       client.click(finishBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
     }

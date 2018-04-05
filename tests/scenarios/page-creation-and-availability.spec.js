@@ -52,7 +52,7 @@ module.exports = Object.assign(
       client.setValue(selectTypeSelector, 'Alternate Page');
       client.useCss();
       client.waitForElementNotPresent(busyLayerSelector);
-      client.pause(200);
+      client.pause(1000);
       client.click(saveBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
 

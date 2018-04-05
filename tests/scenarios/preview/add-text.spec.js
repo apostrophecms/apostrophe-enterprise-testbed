@@ -21,14 +21,13 @@ module.exports = Object.assign(
   steps.switchLocale('es'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.addTextWidgetToPage('Rich Text Widget line'),
+  steps.addTextWidgetTo({selector: '.demo-main', text: 'Rich Text Widget line'}),
   {
     'should show added text in the commit preview': function(client) {
       const commitBtnSelector = '[data-apos-workflow-commit]';
       const modalDialogSelector = '.apos-workflow-commit-modal';
       const newDiffSelector = '.apos-workflow-widget-diff--new';
 
-      client.pause(200);
       client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
       client.waitForElementVisible(modalDialogSelector);
@@ -37,5 +36,5 @@ module.exports = Object.assign(
       client.expect.element(newDiffSelector).to.be.visible;
       client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line').before(0);
     }
-  }
+  },
 );
