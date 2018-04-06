@@ -12,6 +12,7 @@ module.exports = {
   confirm200ByRelativeUrl: require('./confirm200ByRelativeUrl'),
   navigateToRelativeUrl: require('./navigateToRelativeUrl'),
   navigateToRelativeUrlAndconfirm404: require('./navigateToRelativeUrlAndconfirm404'),
+  navigateToRelativeUrlAndconfirm200: require('./navigateToRelativeUrlAndconfirm200'),
   navigateToPage: require('./navigateToPage'),
   navigateToHome: require('./navigateToHome'),
   commit: require('./commit'),
@@ -22,4 +23,5 @@ module.exports = {
   forceExportCurrentPageFor: require('./forceExportCurrentPageFor'),
   makeIncognitoRequestByRelativeUrl: require('./makeIncognitoRequestByRelativeUrl'),
   openAdminBar: require('./openAdminBar'),
+  openContextMenu: require('./openContextMenu'),
 };
