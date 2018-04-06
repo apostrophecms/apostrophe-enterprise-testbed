@@ -6,6 +6,20 @@ const steps = require('../steps');
 
 const fixturesPath = path.resolve(__dirname, '..', 'fixtures');
 
+function checkImages() {
+  return {
+    'check images': function (client) {
+      const slideshowSelector = '.apos-slideshow';
+      const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
+
+      client.waitForElementVisible(slideshowSelector, 50000);
+
+      client.expect.element(slideshowSelector).to.be.present;
+      client.expect.element(slideshow2nItemSelector).to.be.present;
+    },
+  };
+}
+
 module.exports = Object.assign(
   {
     before: (client, done) => {
@@ -102,4 +116,8 @@ module.exports = Object.assign(
       });
     }
   },
+  steps.changePageTypeTo('Alternate Page'),
+  checkImages(),
+  steps.changePageTypeTo('Default Page'),
+  checkImages(),
 );

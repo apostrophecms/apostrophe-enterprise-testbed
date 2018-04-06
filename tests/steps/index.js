@@ -5,6 +5,7 @@ module.exports = {
   switchToLiveMode: require('./switchToLiveMode'),
   switchLocale: require('./switchLocale'),
   makeSubPage: require('./makeSubPage'),
+  changePageTypeTo: require('./changePageTypeTo'),
   submitChanges: require('./submitChanges'),
   checkSubmitted: require('./checkSubmitted'),
   confirm404ByRelativeUrl: require('./confirm404ByRelativeUrl'),
