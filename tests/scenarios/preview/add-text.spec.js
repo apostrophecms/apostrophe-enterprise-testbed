@@ -46,23 +46,10 @@ module.exports = Object.assign(
       client.click(skipExportBtnSelector);
     }
   },
-  {
-    'check new text widget in incognito mode': function(client) {
-      const richTextSelector = '.demo-main [data-rich-text]';
+  steps.makeIncognitoRequestByRelativeUrl((client, $) => {
+    const richTextSelector = '.demo-main [data-rich-text]';
 
-      client.perform((done) => {
-        client.url((res) => {
-          request(res.value, (error, response, body) => {
-            const $ = cheerio.load(body);
-
-            client.assert.equal(response.statusCode, 200);
-            client.assert.ok($(richTextSelector).length);
-            client.assert.equal($(richTextSelector).text(), 'Rich Text Widget line\n');
-
-            done();
-          });
-        });
-      });
-    }
-  },
+    client.assert.ok($(richTextSelector).length);
+    client.assert.equal($(richTextSelector).text(), 'Rich Text Widget line\n');
+  }),
 );

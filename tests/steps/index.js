@@ -20,4 +20,6 @@ module.exports = {
   checkNotification: require('./checkNotification'),
   createArticle: require('./createArticle'),
   forceExportCurrentPageFor: require('./forceExportCurrentPageFor'),
+  makeIncognitoRequestByRelativeUrl: require('./makeIncognitoRequestByRelativeUrl'),
+  openAdminBar: require('./openAdminBar'),
 };

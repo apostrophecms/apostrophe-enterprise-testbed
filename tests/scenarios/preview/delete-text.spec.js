@@ -59,22 +59,9 @@ module.exports = Object.assign(
       client.click(skipExportBtnSelector);
     }
   },
-  {
-    'check deleted text widget in incognito mode': function(client) {
-      const richTextSelector = '.demo-main [data-rich-text]';
+  steps.makeIncognitoRequestByRelativeUrl('/', (client, $) => {
+    const richTextSelector = '.demo-main [data-rich-text]';
 
-      client.perform((done) => {
-        client.url((res) => {
-          request(res.value, (error, response, body) => {
-            const $ = cheerio.load(body);
-
-            client.assert.equal(response.statusCode, 200);
-            client.assert.equal($(richTextSelector).length, 0);
-
-            done();
-          });
-        });
-      });
-    }
-  },
+    client.assert.equal($(richTextSelector).length, 0);
+  }),
 );

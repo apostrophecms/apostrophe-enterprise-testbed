@@ -1,4 +1,4 @@
-const adminMenu = require('../helpers/adminMenu');
+const openAdminBar = require('./openAdminBar');
 
 let counter = 0;
 
@@ -27,7 +27,7 @@ module.exports = (articleName) => {
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
       client.waitForElementNotPresent(blackoutSelector);
-      adminMenu.open(client);
+      openAdminBar.method(client);
       client.useXpath();
       client.waitForElementVisible(articleXPathSelector);
       client.click(articleXPathSelector);
