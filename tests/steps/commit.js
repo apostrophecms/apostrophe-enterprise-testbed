@@ -19,6 +19,7 @@ module.exports = (itemsCount = 1) => {
         client.waitForElementVisible(modalDialogSelector);
         client.waitForElementVisible(confirmBtnSelector);
         client.click(confirmBtnSelector);
+        client.pause(200);
         client.waitForElementVisible(skipExportBtnSelector);
         client.click(skipExportBtnSelector);
       }

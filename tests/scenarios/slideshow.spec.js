@@ -1,3 +1,5 @@
+const cheerio = require('cheerio');
+const request = require('request');
 const path = require('path');
 const server = require('../server');
 const steps = require('../steps');
@@ -58,16 +60,46 @@ module.exports = Object.assign(
   steps.submitChanges(),
   steps.checkSubmitted(['slide1', 'slide2',]),
   steps.commitAndExport(3),
-  steps.switchToLiveMode(),
   {
-    'check images': function(client) {
+    'check images in "en" locale incognito mode': function(client) {
       const slideshowSelector = '.apos-slideshow';
       const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
 
-      client.waitForElementVisible(slideshowSelector, 50000);
+      client.perform((done) => {
+        client.url((res) => {
+          request(res.value, (error, response, body) => {
+            const $ = cheerio.load(body);
 
-      client.expect.element(slideshowSelector).to.be.present;
-      client.expect.element(slideshow2nItemSelector).to.be.present;
+            client.assert.equal(response.statusCode, 200);
+            client.assert.ok($(slideshowSelector).length);
+            client.assert.ok($(slideshow2nItemSelector).length);
+
+            done();
+          });
+        });
+      });
     }
-  }
+  },
+  steps.switchLocale('fr'),
+  steps.commit(3),
+  {
+    'check images in "fr" locale incognito mode': function(client) {
+      const slideshowSelector = '.apos-slideshow';
+      const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
+
+      client.perform((done) => {
+        client.url((res) => {
+          request(res.value, (error, response, body) => {
+            const $ = cheerio.load(body);
+
+            client.assert.equal(response.statusCode, 200);
+            client.assert.ok($(slideshowSelector).length);
+            client.assert.ok($(slideshow2nItemSelector).length);
+
+            done();
+          });
+        });
+      });
+    }
+  },
 );

@@ -1,3 +1,5 @@
+const cheerio = require('cheerio');
+const request = require('request');
 const server = require('../../server');
 const steps = require('../../steps/index');
 
@@ -38,7 +40,9 @@ module.exports = Object.assign(
     'should show removed text in the commit preview': function(client) {
       const commitBtnSelector = '[data-apos-workflow-commit]';
       const modalDialogSelector = '.apos-workflow-commit-modal';
+      const skipExportBtnSelector = '.apos-workflow-export-modal [data-apos-cancel]';
       const deletedDiffSelector = '.apos-workflow-widget-diff--deleted';
+      const confirmBtnSelector = `[data-apos-save]`;
 
       client.pause(200);
       client.waitForElementVisible(commitBtnSelector);
@@ -48,6 +52,29 @@ module.exports = Object.assign(
 
       client.expect.element(deletedDiffSelector).to.be.visible;
       client.expect.element(deletedDiffSelector).text.to.equal('Rich Text Widget line');
+
+      client.frameParent();
+      client.click(confirmBtnSelector);
+      client.waitForElementVisible(skipExportBtnSelector);
+      client.click(skipExportBtnSelector);
     }
-  }
+  },
+  {
+    'check deleted text widget in incognito mode': function(client) {
+      const richTextSelector = '.demo-main [data-rich-text]';
+
+      client.perform((done) => {
+        client.url((res) => {
+          request(res.value, (error, response, body) => {
+            const $ = cheerio.load(body);
+
+            client.assert.equal(response.statusCode, 200);
+            client.assert.equal($(richTextSelector).length, 0);
+
+            done();
+          });
+        });
+      });
+    }
+  },
 );
