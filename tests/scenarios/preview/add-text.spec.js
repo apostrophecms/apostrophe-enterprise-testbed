@@ -1,3 +1,5 @@
+const cheerio = require('cheerio');
+const request = require('request');
 const server = require('../../server');
 const steps = require('../../steps/index');
 
@@ -21,21 +23,33 @@ module.exports = Object.assign(
   steps.switchLocale('es'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.addTextWidgetToPage('Rich Text Widget line'),
+  steps.addTextWidgetTo({selector: '.demo-main', text: 'Rich Text Widget line'}),
   {
     'should show added text in the commit preview': function(client) {
       const commitBtnSelector = '[data-apos-workflow-commit]';
       const modalDialogSelector = '.apos-workflow-commit-modal';
+      const skipExportBtnSelector = '.apos-workflow-export-modal [data-apos-cancel]';
       const newDiffSelector = '.apos-workflow-widget-diff--new';
+      const confirmBtnSelector = `[data-apos-save]`;
 
-      client.pause(200);
       client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
       client.waitForElementVisible(modalDialogSelector);
       client.frame(0);
 
-      client.expect.element(newDiffSelector).to.be.visible;
+      client.expect.element(newDiffSelector).to.be.visible.before(10000);
       client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line').before(0);
+
+      client.frameParent();
+      client.click(confirmBtnSelector);
+      client.waitForElementVisible(skipExportBtnSelector);
+      client.click(skipExportBtnSelector);
     }
-  }
+  },
+  steps.makeIncognitoRequestByRelativeUrl((client, $) => {
+    const richTextSelector = '.demo-main [data-rich-text]';
+
+    client.assert.ok($(richTextSelector).length);
+    client.assert.equal($(richTextSelector).text(), 'Rich Text Widget line\n');
+  }),
 );

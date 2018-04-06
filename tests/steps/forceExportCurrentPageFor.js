@@ -20,7 +20,7 @@ module.exports = (locale) => {
       client.waitForElementVisible(menuItemsSelector);
       client.click(forceExportBtnSelector);
       client.waitForElementVisible(modalDialogSelector);
-      client.pause(100);
+      client.pause(1000);
       client.click(workflowMenuBtnSelector);
       client.waitForElementVisible(workflowMenuItemsSelector);
       client.click(workflowForceExportBtnSelector);

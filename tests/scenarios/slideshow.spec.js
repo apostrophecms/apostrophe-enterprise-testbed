@@ -1,8 +1,12 @@
+const cheerio = require('cheerio');
+const request = require('request');
 const path = require('path');
 const server = require('../server');
 const steps = require('../steps');
 
 const fixturesPath = path.resolve(__dirname, '..', 'fixtures');
+const slideshowSelector = '.apos-slideshow';
+const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
 
 module.exports = Object.assign(
   {
@@ -58,16 +62,32 @@ module.exports = Object.assign(
   steps.submitChanges(),
   steps.checkSubmitted(['slide1', 'slide2',]),
   steps.commitAndExport(3),
-  steps.switchToLiveMode(),
+  steps.makeIncognitoRequestByRelativeUrl((client, $) => {
+    client.assert.ok($(slideshowSelector).length);
+    client.assert.ok($(slideshow2nItemSelector).length);
+  }),
+  steps.switchLocale('fr'),
+  steps.commit(3),
+  steps.makeIncognitoRequestByRelativeUrl((client, $) => {
+    client.assert.ok($(slideshowSelector).length);
+    client.assert.ok($(slideshow2nItemSelector).length);
+  }),
+  steps.changePageTypeTo('Alternate Page'),
   {
-    'check images': function(client) {
-      const slideshowSelector = '.apos-slideshow';
-      const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
-
+    'check that images are present': function (client) {
       client.waitForElementVisible(slideshowSelector, 50000);
 
       client.expect.element(slideshowSelector).to.be.present;
       client.expect.element(slideshow2nItemSelector).to.be.present;
-    }
-  }
+    },
+  },
+  steps.changePageTypeTo('Default Page'),
+  {
+    'check that images are still present': function (client) {
+      client.waitForElementVisible(slideshowSelector, 50000);
+
+      client.expect.element(slideshowSelector).to.be.present;
+      client.expect.element(slideshow2nItemSelector).to.be.present;
+    },
+  },
 );
