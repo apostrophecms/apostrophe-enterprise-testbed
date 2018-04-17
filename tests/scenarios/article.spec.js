@@ -88,8 +88,6 @@ module.exports = Object.assign(
       const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
       const masterLocaleBtnSelector = '[for*=master] span';
       const notificationSelector = '.apos-notification-container';
-      const finishBtnSelector = '[data-apos-cancel]';
-      const blackoutSelector = '.apos-modal-blackout';
 
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(masterLocaleBtnSelector);
@@ -97,19 +95,29 @@ module.exports = Object.assign(
       client.click(notificationSelector);
       client.click(exportBtnSelector);
       client.waitForElementNotPresent(modalExportSelector);
+    }
+  },
+  steps.checkNotification('Successfully exported to: master, fr, es'),
+  {
+    'close export dialog': (client) => {
+      const finishBtnSelector = '[data-apos-cancel]';
+      const blackoutSelector = '.apos-modal-blackout';
+
       client.waitForElementVisible(finishBtnSelector);
       client.pause(1000);
       client.click(finishBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
-    }
+    },
   },
-  steps.checkNotification('Successfully exported to: master, fr, es'),
   steps.switchLocale('es'),
+  steps.openAdminBar(),
   {
     'article can be found under "Articles" in draft mode for the es locale': (client) => {
       const workflowXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[8]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+
+      client.saveScreenshot('./look-at-me.png');
 
       client.useXpath();
       client.click(workflowXPathSelector);

@@ -17,6 +17,8 @@ module.exports = (type) => {
       client.click(pageMenuBtnSelector);
       client.waitForElementVisible(pageSettingsSelector);
       client.click(pageSettingsSelector);
+      // Timed out while waiting for element <.apos-modal.apos-modal-slideable>
+      // to be present for 5000 milliseconds.  - expected "visible" but got: "not found"
       client.waitForElementVisible(modalDialogSelector);
       client.useXpath();
       client.setValue(selectTypeSelector, type);

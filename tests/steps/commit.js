@@ -11,6 +11,8 @@ module.exports = (itemsCount = 1) => {
       const confirmBtnSelector = `${modalDialogSelector} [data-apos-save]`;
 
       client.pause(200);
+      // Timed out while waiting for element <[data-apos-workflow-commit]>
+      // to be present for 5000 milliseconds.  - expected "visible" but got: "not found"
       client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
 

@@ -52,6 +52,8 @@ module.exports = Object.assign(
       client.waitForElementVisible(fileInputSelector, 7000);
       client.setValue(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
       client.setValue(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
+      // Timed out while waiting for element <.apos-manage-grid-image>
+      // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
       client.waitForElementPresent(loadedImagesSelector, 50000);
       client.pause(400); // paranja
       client.click(selectImagesBtnSelector);

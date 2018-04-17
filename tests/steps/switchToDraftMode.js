@@ -13,6 +13,8 @@ module.exports = () => {
       client.click(modeSwithcerBtnSelector);
       client.click(requiredModeBtnSelector);
 
+      // Timed out while waiting for element <li[data-apos-workflow-mode=live]> to be
+      // present for 5000 milliseconds.  - expected "found" but got: "not found"
       client.waitForElementPresent(listItemToBeChangedSelector);
 
       const labelSelector = '.apos-dropdown--button.apos-workflow-state .apos-button-label';

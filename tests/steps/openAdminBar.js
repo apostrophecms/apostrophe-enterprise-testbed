@@ -13,10 +13,15 @@ function method(client) {
   const btnMenuSelector = '[data-apos-actionable=data-apos-admin-bar]';
   const openedMenuSelector = '.apos-admin-bar.apos-active';
 
-  client.isVisible(openedMenuSelector, (result) => {
-    if (!result.value) {
-      client.click(btnMenuSelector);
-    }
+  client.execute(function(a) {
+    $("[data-apos-actionable=data-apos-admin-bar]").click();
+
+    setTimeout(function() {
+      if ($(".apos-admin-bar.apos-active").length === 0) {
+        $("[data-apos-actionable=data-apos-admin-bar]").click();
+      }
+    }, 5000);
   });
+
   client.waitForElementPresent(openedMenuSelector, 9000);
 }

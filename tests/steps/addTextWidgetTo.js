@@ -18,6 +18,9 @@ module.exports = ({selector, text} = {}) => {
       client.getLocationInView(selector);
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
+      // Timed out while waiting for element
+      // <.demo-main [data-apos-add-item=apostrophe-rich-text]> to be
+      // visible for 5000 milliseconds.  - expected "visible" but got: "not visible"
       client.waitForElementVisible(richTextBtnSelector);
       client.pause(200);
       client.click(richTextBtnSelector);
