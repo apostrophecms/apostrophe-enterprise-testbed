@@ -28,8 +28,8 @@ module.exports = Object.assign(
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
-      const workflowModalBtnXPathSelector =
-        '(//*[contains(@class, "apos-modal-controls apos-workflow-committable")]/div[@data-apos-actionable])[2]';
+      const workflowModalBtnSelector =
+        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
 
       client.waitForElementVisible(modalBlogSelector);
@@ -38,8 +38,7 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalEditArticleSelector);
       client.waitForElementVisible(controlSelector);
       client.pause(1000);
-      client.useXpath();
-      client.click(workflowModalBtnXPathSelector);
+      client.click(workflowModalBtnSelector);
       client.useCss();
       client.waitForElementVisible(submitWorkflowBtnSelector);
       client.click(submitWorkflowBtnSelector);
@@ -55,8 +54,8 @@ module.exports = Object.assign(
       const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const workflowModalBtnXPathSelector =
-        '(//*[contains(@class, "apos-modal-controls apos-workflow-committable")]/div[@data-apos-actionable])[2]';
+      const workflowModalBtnSelector =
+        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
       const noPreviewSelector = '.apos-workflow-no-preview';
       const saveBtnSelector = `${modalCommitSelector} [data-apos-save]`;
@@ -68,8 +67,7 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalEditArticleSelector);
       client.waitForElementVisible(controlSelector);
       client.pause(200);
-      client.useXpath();
-      client.click(workflowModalBtnXPathSelector);
+      client.click(workflowModalBtnSelector);
       client.useCss();
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
@@ -107,12 +105,11 @@ module.exports = Object.assign(
   steps.switchLocale('es'),
   {
     'article can be found under "Articles" in draft mode for the es locale': (client) => {
-      const workflowXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[8]';
+      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
-      client.useXpath();
-      client.click(workflowXPathSelector);
+      client.click(blogButtonSelector);
       client.useCss();
       client.waitForElementVisible(modalBlogSelector);
 

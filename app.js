@@ -61,6 +61,15 @@ function run(config, ready) {
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
+        'apostrophe-admin-bar': {
+          groups: [
+            {
+              label: 'Media',
+              items: [ 'apostrophe-images', 'apostrophe-files' ]
+            }
+          ]
+        },
+
         // Apostrophe Sandbox (as-) specific modules
         'as-helpers': {},
         'as-two-column-block-widgets': {},

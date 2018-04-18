@@ -34,8 +34,8 @@ module.exports = Object.assign(
       const browseBtnSelector = '[data-apos-browse]';
       const articleCheckboxSelector = '.apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator';
       const busyLayerSelector = '.apos-global-busy.active';
-      const saveChoicesBtnSelector = '(//a[@data-apos-save])[2]';
-      const saveBlogBtnSelector = '(//a[@data-apos-save])[1]';
+      const saveChoicesBtnSelector = '[data-apos-modal-depth="1"] [data-apos-save]';
+      const saveBlogBtnSelector = '[data-apos-modal-depth="0"] [data-apos-save]';
       const blogArticleTitleSelector = '.blog-card-title-container';
 
       client.click(finishBtnSelector);
@@ -52,8 +52,7 @@ module.exports = Object.assign(
       client.click(browseBtnSelector);
       client.waitForElementVisible(articleCheckboxSelector);
       client.click(articleCheckboxSelector);
-      client.waitForElementNotPresent(busyLayerSelector);
-      client.useXpath();
+      client.waitForElementVisible(saveChoicesBtnSelector);
       client.click(saveChoicesBtnSelector);
       client.waitForElementVisible(saveBlogBtnSelector);
       client.click(saveBlogBtnSelector);

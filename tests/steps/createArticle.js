@@ -12,7 +12,7 @@ module.exports = (articleName) => {
   return {
     [`[${counter}] create an article`]: function(client) {
       const blackoutSelector = '.apos-modal-blackout';
-      const articleXPathSelector = '(//*[contains(@class, "apos-admin-bar-item-inner")])[8]';
+      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const addArticleBtnSelector = '[data-apos-create-apostrophe-blog]';
       const basicsBodySelector = '[data-apos-group=basic]';
@@ -28,9 +28,8 @@ module.exports = (articleName) => {
 
       client.waitForElementNotPresent(blackoutSelector);
       openAdminBar.method(client);
-      client.useXpath();
-      client.waitForElementVisible(articleXPathSelector);
-      client.click(articleXPathSelector);
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
       client.useCss();
       client.waitForElementVisible(modalBlogSelector);
       client.pause(200);
