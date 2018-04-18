@@ -66,6 +66,10 @@ function run(config, ready) {
             {
               label: 'Media',
               items: [ 'apostrophe-images', 'apostrophe-files' ]
+            },
+            {
+              label: 'Workflow',
+              items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
             }
           ]
         },
