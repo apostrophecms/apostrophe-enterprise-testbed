@@ -50,15 +50,15 @@ module.exports = Object.assign(
         $('.apos-modal-controls input').css({display: 'block'});
       });
       client.waitForElementVisible(fileInputSelector, 7000);
-      client.setValue(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
-      client.setValue(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
-      // Timed out while waiting for element <.apos-manage-grid-image>
-      // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
+      client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
+      client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
       client.waitForElementPresent(loadedImagesSelector, 50000);
-      client.pause(400); // paranja
+      client.pause(2000); // paranja
       client.click(selectImagesBtnSelector);
-      client.waitForElementPresent(resultDraftSliderSelector, 50000);
-      client.pause(400); // paranja
+      // Timed out while waiting for element <[data-slideshow-item]>
+      // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
+      client.waitForElementPresent(resultDraftSliderSelector, 80000);
+      client.pause(1000); // paranja
     }
   },
   steps.submitChanges(),

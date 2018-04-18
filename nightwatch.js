@@ -2,6 +2,7 @@ module.exports = {
   src_folders: ["tests/scenarios"],
   output_folder: "tests/reports",
   globals_path: "tests/setup.js",
+  custom_commands_path: "tests/commands",
 
   selenium: {
     start_process: false

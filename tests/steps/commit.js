@@ -13,7 +13,8 @@ module.exports = (itemsCount = 1) => {
       client.pause(200);
       // Timed out while waiting for element <[data-apos-workflow-commit]>
       // to be present for 5000 milliseconds.  - expected "visible" but got: "not found"
-      client.waitForElementVisible(commitBtnSelector);
+      client.saveScreenshot('./look-at-me.png');
+      client.waitForElementVisible(commitBtnSelector, 15000);
       client.click(commitBtnSelector);
 
       for (let i = 0; i < itemsCount; i++) {

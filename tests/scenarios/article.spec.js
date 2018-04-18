@@ -117,8 +117,6 @@ module.exports = Object.assign(
       const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
-      client.saveScreenshot('./look-at-me.png');
-
       client.useXpath();
       client.click(workflowXPathSelector);
       client.useCss();
