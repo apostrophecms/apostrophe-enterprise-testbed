@@ -8,7 +8,7 @@ module.exports = () => {
     [`[${counter}] main`]: function(client) {
       client
         .url(server.URL)
-        .pause(1000);
+        .pause(2000);
 
       client.expect.element('body.home-page').to.be.present;
     }

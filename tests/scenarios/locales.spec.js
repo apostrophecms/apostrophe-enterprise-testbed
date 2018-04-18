@@ -32,8 +32,8 @@ const server = require('../server');
    steps.confirm404ByRelativeUrl('regression-test'),
    steps.navigateToHome(),
    steps.switchLocale('fr'),
-   steps.navigateToRelativeUrl('en/regression-test'),
+   steps.navigateToRelativeUrl('regression-test'),
    steps.commit(),
    steps.navigateToHome(),
-   steps.confirm200ByRelativeUrl('en/regression-test'),
+   steps.confirm200ByRelativeUrl('regression-test'),
  );

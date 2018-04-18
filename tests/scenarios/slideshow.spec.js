@@ -53,12 +53,12 @@ module.exports = Object.assign(
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
       client.waitForElementPresent(loadedImagesSelector, 50000);
-      client.pause(2000); // paranja
+      client.pause(2000); // TODO: rewrote to be able to wait for paranja
       client.click(selectImagesBtnSelector);
       // Timed out while waiting for element <[data-slideshow-item]>
       // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
       client.waitForElementPresent(resultDraftSliderSelector, 80000);
-      client.pause(1000); // paranja
+      client.pause(1000); // TODO: rewrote to be able to wait for close paranja
     }
   },
   steps.submitChanges(),

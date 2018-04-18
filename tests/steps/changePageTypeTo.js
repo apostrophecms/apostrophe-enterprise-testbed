@@ -17,21 +17,12 @@ module.exports = (type) => {
       client.click(pageMenuBtnSelector);
       client.waitForElementVisible(pageSettingsSelector);
       client.click(pageSettingsSelector);
-      // Timed out while waiting for element <.apos-modal.apos-modal-slideable>
-      // to be present for 5000 milliseconds.  - expected "visible" but got: "not found"
-      client.pause(5000);
-      client.saveScreenshot('./look-at-me.png');
-
       client.waitForElementVisible(modalDialogSelector);
       client.useXpath();
       client.setValue(selectTypeSelector, type);
       client.useCss();
-
-      client.saveScreenshot('./look-at-me.png');
-      // ✖ Timed out while waiting for element <.apos-global-busy.active> to be removed for 5000 milliseconds.
-      // - expected "not found" but got: "found"
       client.waitForElementNotPresent(busyLayerSelector, 15000);
-      client.pause(1000);
+      client.waitForElementNotPresent(saveBtnSelector, 15000);
       client.click(saveBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
 

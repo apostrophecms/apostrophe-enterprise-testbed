@@ -46,12 +46,6 @@ module.exports = Object.assign(
       client.waitForElementVisible(blogWidgetBtnSelector);
       client.pause(1000);
       client.click(blogWidgetBtnSelector);
-
-      // ✖ Timed out while waiting for element <.apos-modal.apos-modal-slideable>
-      // to be present for 5000 milliseconds.  - expected "visible" but got: "not found"
-
-      client.saveScreenshot('./look-at-me.png');
-
       client.waitForElementVisible(modalDialogSelector);
       client.setValue(selectBlogTypeSelector, 'Individually');
       client.waitForElementVisible(browseBtnSelector);

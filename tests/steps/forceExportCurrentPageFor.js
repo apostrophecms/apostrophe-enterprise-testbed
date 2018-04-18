@@ -19,8 +19,6 @@ module.exports = (locale) => {
       client.click(menuBtnSelector);
       client.waitForElementVisible(menuItemsSelector);
       client.click(forceExportBtnSelector);
-      // Timed out while waiting for element <.apos-modal-slideable> to be
-      // present for 5000 milliseconds.  - expected "visible" but got: "not found"
       client.waitForElementVisible(modalDialogSelector);
       client.pause(1000);
       client.click(workflowMenuBtnSelector);
