@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- stable
+- lts/*
+sudo: false
+services:
+- docker
+- mongodb
+branches:
+  only:
+  - master
+env:
+  global:
+    SAUCE_USERNAME: boutell
+    secure: tNwicHOghpKQBRqVSujwO4nfxum8952Q060xHp1nnG1+2sY94yzxRDfuuNDsntdpi5wlk90kOTb7lwIVQaBIs2kyAM2DZ4XIHHH6hOdWlDlaFLngSH2AtOiO3gXhsjRhsWuFlvH4PaXmdGtSzTpuNXbQ2S9jJLW5sWsWKpQQOY5oo/rKpOFjWHHGD0YIIU5B4KKYMGTaq7RW+HaOqvitNVMbCK3q6rstmBSWkQbbZSRdPAxuoYHqna9EKiTHHc8NWUIIoyPN5aaOZyt//DkSdV5ttilOSawo5550+rpsYaLpAKMB3zwl4Q6LF8xo4T1GelP1/iTyErWkzt9RhiVBYGNeOTyiRTvIevmwFfyT8d76Q4TpZZwGb9evqj/bq+eLVPMCmT3z5LWWLrJsPwc2bAGfsgP+LS9RCvCukzlkrBth83x8HYj73x6RZNAim2o88sWiunCAn7R+n5TamEbh3LvicxAHeSpb3hCRoGnNOexhX2bMY9NOTELkekgDtnSc+YCAcsdsBeFLmyaKu9GKr7avoT3GohVtmS6qyDE6qn1VUfUxIMl1MIUNjnQWG7cd9FFXJKgTIOEEafbiXKb/qShvDcKbZVQCbV4ms5mv6BtgxbxtPUt6eBX3MqpQ8eAuLSooGs3cKIUQcQuKsnmZTzLJUMZPt4HZIuImeLP2z0k=
