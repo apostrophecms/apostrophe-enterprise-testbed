@@ -37,7 +37,7 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalDialogSelector);
       client.frame(0);
 
-      client.expect.element(newDiffSelector).to.be.visible.before(10000);
+      client.expect.element(newDiffSelector).to.be.visible.before(15000);
       client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line').before(0);
 
       client.frameParent();

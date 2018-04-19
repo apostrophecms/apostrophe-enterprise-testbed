@@ -15,7 +15,7 @@ module.exports = ({selector, text} = {}) => {
       const richTextBtnSelector = `${selector} [data-apos-add-item=apostrophe-rich-text]`;
 
       client.waitForElementNotPresent(blackoutSelector);
-      client.getLocationInView(selector);
+      client.getLocationInView('footer');
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
       client.waitForElementVisible(richTextBtnSelector);

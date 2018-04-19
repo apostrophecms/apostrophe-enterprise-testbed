@@ -42,9 +42,9 @@ module.exports = Object.assign(
       client.waitForElementNotPresent(blackoutSelector);
       client.waitForElementVisible(addContentBtnSelector);
       client.click(addContentBtnSelector);
-      client.getLocationInView(mainBlockSelector);
+      client.getLocationInView('footer');
       client.waitForElementVisible(blogWidgetBtnSelector);
-      client.pause(200);
+      client.pause(1000);
       client.click(blogWidgetBtnSelector);
       client.waitForElementVisible(modalDialogSelector);
       client.setValue(selectBlogTypeSelector, 'Individually');
