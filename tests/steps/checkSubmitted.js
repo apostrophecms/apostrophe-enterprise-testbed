@@ -17,15 +17,15 @@ module.exports = (documentNames) => {
           $('[data-apos-actionable=data-apos-admin-bar]').click();
         }
       });
-      client.waitForElementPresent(openedMenuSelector, 9000);
+      client.waitForElementPresent(openedMenuSelector);
       client.execute(function() {
         setTimeout(function() {
           $(".apos-admin-bar-item-inner:contains(Workflow)").click();
         }, 300);
       });
-      client.waitForElementPresent(subMenuSelector, 9000);
+      client.waitForElementPresent(subMenuSelector);
       client.click(submissionsBtnSelector);
-      client.waitForElementPresent(modalDialogSelector, 9000);
+      client.waitForElementPresent(modalDialogSelector);
 
       documentNames.forEach((name) => {
         client.expect.element(listItemsSelector).text.to.contain(name);
