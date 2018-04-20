@@ -9,7 +9,7 @@ module.exports = () => {
       const submittedLabelSelector = '[data-apos-workflow-submitted]';
       const notiSelector = '.apos-notification-container';
 
-      client.pause(1000);
+      client.pause(10000);
       client.waitForElementVisible(submitBtnSelector);
       client.pause(200);
       client.click(submitBtnSelector);
