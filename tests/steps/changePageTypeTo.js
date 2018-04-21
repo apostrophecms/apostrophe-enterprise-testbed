@@ -21,7 +21,7 @@ module.exports = (type) => {
       client.useXpath();
       client.setValue(selectTypeSelector, type);
       client.useCss();
-      client.waitForElementNotPresent(busyLayerSelector, 15000);
+      client.waitForElementNotPresent(busyLayerSelector);
       client.pause(1000);
       client.click(saveBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);

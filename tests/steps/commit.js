@@ -11,7 +11,7 @@ module.exports = (itemsCount = 1) => {
       const confirmBtnSelector = `${modalDialogSelector} [data-apos-save]`;
 
       client.pause(200);
-      client.waitForElementVisible(commitBtnSelector, 15000);
+      client.waitForElementVisible(commitBtnSelector);
       client.click(commitBtnSelector);
 
       for (let i = 0; i < itemsCount; i++) {

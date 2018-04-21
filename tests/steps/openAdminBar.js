@@ -23,5 +23,5 @@ function method(client) {
     }, 5000);
   });
 
-  client.waitForElementPresent(openedMenuSelector, 9000);
+  client.waitForElementPresent(openedMenuSelector);
 }

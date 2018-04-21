@@ -46,7 +46,7 @@ module.exports = {
   after: function(done) {
     clean(done);
   },
-  waitForConditionTimeout : 5000,
+  waitForConditionTimeout : 50000,
 };
 
 function isLocalRunning() {

@@ -39,21 +39,23 @@ module.exports = Object.assign(
       const loadedImagesSelector = '.apos-manage-grid-image';
       const selectImagesBtnSelector = '.apos-apostrophe-image-manager [data-apos-save]';
       const resultDraftSliderSelector = '[data-slideshow-item]';
+      const busyLayerSelector = '.apos-global-busy.active';
 
       client.pause(200);
       client.click('body');
       client.click(contextBtnSelector);
       client.waitForElementVisible(contextSubMenuSelector);
       client.click(contextSubMenuImageSelector);
-      client.waitForElementVisible(modalDialogSelector, 7000);
+      client.waitForElementVisible(modalDialogSelector);
       client.execute(function() {
         $('.apos-modal-controls input').css({display: 'block'});
       });
-      client.waitForElementVisible(fileInputSelector, 7000);
+      client.waitForElementVisible(fileInputSelector);
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
-      client.waitForElementPresent(loadedImagesSelector, 50000);
+      client.waitForElementPresent(loadedImagesSelector);
       client.pause(2000); // TODO: rewrote to be able to wait for paranja
+      client.waitForElementNotPresent(busyLayerSelector)
       client.click(selectImagesBtnSelector);
       // Timed out while waiting for element <[data-slideshow-item]>
       // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
@@ -77,7 +79,7 @@ module.exports = Object.assign(
   steps.changePageTypeTo('Alternate Page'),
   {
     'check that images are present': function (client) {
-      client.waitForElementVisible(slideshowSelector, 50000);
+      client.waitForElementVisible(slideshowSelector);
 
       client.expect.element(slideshowSelector).to.be.present;
       client.expect.element(slideshow2nItemSelector).to.be.present;
@@ -86,7 +88,7 @@ module.exports = Object.assign(
   steps.changePageTypeTo('Default Page'),
   {
     'check that images are still present': function (client) {
-      client.waitForElementVisible(slideshowSelector, 50000);
+      client.waitForElementVisible(slideshowSelector);
 
       client.expect.element(slideshowSelector).to.be.present;
       client.expect.element(slideshow2nItemSelector).to.be.present;
