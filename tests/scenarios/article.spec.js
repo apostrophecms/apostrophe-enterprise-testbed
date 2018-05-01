@@ -21,65 +21,20 @@ module.exports = Object.assign(
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
-  {
-    'submit the article, via the "Workflow" menu in the dialog box': (client) => {
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
-      const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
-
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.waitForElementVisible(controlSelector);
-      client.pause(1000);
-      client.click(workflowModalBtnSelector);
-      client.useCss();
-      client.waitForElementVisible(submitWorkflowBtnSelector);
-      client.click(submitWorkflowBtnSelector);
-      client.waitForElementNotPresent(modalEditArticleSelector);
-    }
-  },
+  steps.workflowSubmitArticle(),
   steps.checkNotification('Your submission will be reviewed.'),
-  {
-    'reopen the article. Commit the article.': (client) => {
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
-      const modalCommitSelector = '.apos-workflow-commit-modal';
-      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
-      const noPreviewSelector = '.apos-workflow-no-preview';
-      const saveBtnSelector = `${modalCommitSelector} [data-apos-save]`;
-      const notificationSelector = '.apos-notification-message';
-
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.waitForElementVisible(controlSelector);
-      client.pause(200);
-      client.click(workflowModalBtnSelector);
-      client.useCss();
-      client.waitForElementVisible(commitWorkflowBtnSelector);
-      client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(noPreviewSelector);
-
-      client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
-
-      client.waitForElementNotPresent(notificationSelector);
-      client.click(saveBtnSelector);
-    }
-  },
+  steps.workflowCommitArticle(),
   steps.checkNotification('New Article Title was committed successfully.'),
+  steps.pause(),
+
+  // new commit
+  // checknotification
+  // open history model
+  // select old commit
+  // press revert
+  // checknotification
+  // load article
+  // check that title matches commit
   {
     'export the article to all other locales.': (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
