@@ -57,6 +57,10 @@ function run(config, ready) {
           jQuery: 3
         },
         'apostrophe-blog': {},
+        'products': {
+          extend: 'apostrophe-pieces',
+          name: 'product'
+        },
         'apostrophe-blog-pages': {},
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
@@ -78,58 +82,74 @@ function run(config, ready) {
         'as-helpers': {},
         'as-two-column-block-widgets': {},
 
+        'mixed-widgets': {
+          extend: 'apostrophe-widgets',
+          label: 'Mixed',
+          addFields: [
+            {
+              name: '_items',
+              type: 'joinByArray',
+              withType: [ 'apostrophe-blog', 'product', 'apostrophe-page' ]
+            }
+          ]
+        },
+        'pages-widgets': {
+          extend: 'apostrophe-widgets',
+          label: 'Pages',
+          addFields: [
+            {
+              name: '_items',
+              type: 'joinByArray',
+              withType: 'apostrophe-page'
+            }
+          ]
+        },
+
         'apostrophe-workflow': {
           alias: 'workflow',
           locales: [
             {
-              name: 'master',
-              label: 'Master',
-              private: true,
-              children: [
-                {
-                  name: 'en',
-                  label: 'en',
-                },
-                {
-                  name: 'fr',
-                  label: 'fr'
-                },
-                {
-                  name: 'es',
-                  label: 'es'
-                }
-              ].concat(process.env.EXTRA_LOCALES ? [
-                {
-                  name: 'be',
-                  label: 'Belgium'
-                },
-                {
-                  name: 'de',
-                  label: 'Germany'
-                },
-                {
-                  name: 'au',
-                  label: 'Australia'
-                },
-                {
-                  name: 'nl',
-                  label: 'Netherlands'
-                },
-                {
-                  name: 'ru',
-                  label: 'Russia'
-                },
-                {
-                  name: 'hu',
-                  label: 'Hungary'
-                },
-                {
-                  name: 'th',
-                  label: 'Thailand'
-                }
-              ] : [])
+              name: 'en',
+              label: 'en',
             },
-          ],
+            {
+              name: 'fr',
+              label: 'fr'
+            },
+            {
+              name: 'es',
+              label: 'es'
+            }
+          ].concat(process.env.EXTRA_LOCALES ? [
+            {
+              name: 'be',
+              label: 'Belgium'
+            },
+            {
+              name: 'de',
+              label: 'Germany'
+            },
+            {
+              name: 'au',
+              label: 'Australia'
+            },
+            {
+              name: 'nl',
+              label: 'Netherlands'
+            },
+            {
+              name: 'ru',
+              label: 'Russia'
+            },
+            {
+              name: 'hu',
+              label: 'Hungary'
+            },
+            {
+              name: 'th',
+              label: 'Thailand'
+            }
+          ] : []),
           defaultLocale: 'en',
           prefixes: prefixes
         },
