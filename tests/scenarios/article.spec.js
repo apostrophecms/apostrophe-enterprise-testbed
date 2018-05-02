@@ -46,9 +46,13 @@ module.exports = Object.assign(
       const notificationSelector = '.apos-notification-message';
       const modalCommitSelector = '.apos-workflow-commit-modal';
       const aposCommitBtnSelector = `${modalCommitSelector} [data-apos-save]`;
+      const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`
 
+      // bail out from last commit's export window
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
+
+      // edit article and update title
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector);
@@ -60,6 +64,8 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(editModalSelector);
       client.waitForElementNotPresent(notificationSelector);
+
+      // commit the updated article
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.click(workflowModalBtnSelector);
@@ -73,6 +79,23 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
+      // TODO assert title = Artile Title 1
+
+      // now revert to previous version
+      client.waitForElementNotPresent(modalExportSelector);
+      client.waitForElementVisible(modalBlogSelector);
+      client.waitForElementVisible(manageTableRowSelector);
+      client.click(editArticleBtnSelector);
+      client.waitForElementVisible(modalEditArticleSelector);
+      client.click(workflowModalBtnSelector);
+      client.waitForElementVisible(workflowHistoryBtnSelector);
+      client.click(workflowHistoryBtnSelector);
+      client.waitForElementVisible('.apos-manage-table');
+      // TODO assert there are two rows
+      client.click('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
+
+      client.pause();
+
     }
   },
   {
