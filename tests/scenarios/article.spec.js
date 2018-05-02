@@ -33,22 +33,26 @@ module.exports = Object.assign(
       const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
+
       const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
+      const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
+      const editTitleField = `${editModalSelector} input[name=title]`;
 
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
+      client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector, () => {
-        console.log('visible')
         client.pause(1200);
         client.click(editArticleBtnSelector);
-        console.log('clicked')
+        client.waitForElementVisible(editModalSelector);
+        client.clearValue(editTitleField);
+        client.setValue(editTitleField, 'Article Title 1');
         client.pause()
       });
-      client.waitForElementVisible(modalEditArticleSelector);
       //client.waitForElementVisible(controlSelector);
     }
   },
