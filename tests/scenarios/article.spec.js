@@ -25,16 +25,33 @@ module.exports = Object.assign(
   steps.checkNotification('Your submission will be reviewed.'),
   steps.workflowCommitArticle(),
   steps.checkNotification('New Article Title was committed successfully.'),
-  steps.pause(),
+  {
+    "change title and commit": (client) => {
+      const modalExportSelector = '.apos-workflow-export-modal';
+      const exportSkipSelector = `${modalExportSelector} [data-apos-cancel]`;
+      const modalBlogSelector = '.apostrophe-blog-manager';
+      const modalEditArticleSelector = '.apos-pieces-editor';
+      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const editArticleBtnSelector = `${manageTableRowSelector} a`;
+      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
+      const workflowModalBtnSelector =
+        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
+      const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
 
-  // new commit
-  // checknotification
-  // open history model
-  // select old commit
-  // press revert
-  // checknotification
-  // load article
-  // check that title matches commit
+      client.waitForElementVisible(exportSkipSelector);
+      client.click(exportSkipSelector);
+      client.waitForElementVisible(modalBlogSelector);
+      client.waitForElementVisible(manageTableRowSelector, () => {
+        console.log('visible')
+        client.pause(1200);
+        client.click(editArticleBtnSelector);
+        console.log('clicked')
+        client.pause()
+      });
+      client.waitForElementVisible(modalEditArticleSelector);
+      //client.waitForElementVisible(controlSelector);
+    }
+  },
   {
     'export the article to all other locales.': (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
