@@ -40,6 +40,7 @@ module.exports = Object.assign(
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
       const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
       const editTitleField = `${editModalSelector} input[name=title]`;
+      const saveBtnSelector = '[data-apos-save]';
 
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
@@ -51,6 +52,7 @@ module.exports = Object.assign(
         client.waitForElementVisible(editModalSelector);
         client.clearValue(editTitleField);
         client.setValue(editTitleField, 'Article Title 1');
+        client.click(saveBtnSelector);
         client.pause()
       });
       //client.waitForElementVisible(controlSelector);
