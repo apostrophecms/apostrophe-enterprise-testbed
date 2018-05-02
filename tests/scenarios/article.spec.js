@@ -41,23 +41,36 @@ module.exports = Object.assign(
       const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
       const editTitleField = `${editModalSelector} input[name=title]`;
       const saveBtnSelector = '[data-apos-save]';
+      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
+      const noPreviewSelector = '.apos-workflow-no-preview';
+      const notificationSelector = '.apos-notification-message';
+      const modalCommitSelector = '.apos-workflow-commit-modal';
+      const aposCommitBtnSelector = `${modalCommitSelector} [data-apos-save]`;
 
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector, () => {
-      client.pause(1200);
+      client.waitForElementVisible(manageTableRowSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(editModalSelector);
       client.clearValue(editTitleField);
       client.setValue(editTitleField, 'Article Title 1');
       client.click(saveBtnSelector);
       client.waitForElementVisible(modalBlogSelector);
+      client.waitForElementVisible(editModalSelector);
+      client.waitForElementNotPresent(notificationSelector);
       client.click(editArticleBtnSelector);
-        client.pause()
-      });
-      //client.waitForElementVisible(controlSelector);
+      client.waitForElementVisible(modalEditArticleSelector);
+      client.click(workflowModalBtnSelector);
+      client.waitForElementVisible(commitWorkflowBtnSelector);
+      client.click(commitWorkflowBtnSelector);
+      client.waitForElementVisible(noPreviewSelector);
+      client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
+      client.waitForElementVisible(aposCommitBtnSelector);
+      client.pause(200);
+      client.click(aposCommitBtnSelector);
+      client.pause();
     }
   },
   {
