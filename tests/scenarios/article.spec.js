@@ -33,8 +33,6 @@ module.exports = Object.assign(
       const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
-
-      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
@@ -79,8 +77,22 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
+      client.waitForElementNotPresent(notificationSelector);
       // TODO assert title = Artile Title 1
-
+    }
+  },
+  {
+    'revert to initial version': (client) => {
+      const modalExportSelector = '.apos-workflow-export-modal';
+      const modalBlogSelector = '.apostrophe-blog-manager';
+      const modalEditArticleSelector = '.apos-pieces-editor';
+      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const editArticleBtnSelector = `${manageTableRowSelector} a`;
+      const workflowModalBtnSelector =
+        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
+      const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
+      const notificationSelector = '.apos-notification-container';
+      const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`
       // now revert to previous version
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
@@ -91,20 +103,19 @@ module.exports = Object.assign(
       client.waitForElementVisible(workflowHistoryBtnSelector);
       client.click(workflowHistoryBtnSelector);
       client.waitForElementVisible('.apos-manage-table');
+      client.waitForElementVisible('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
       // TODO assert there are two rows
       client.click('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
-
-      client.pause();
-
+      client.waitForElementVisible(notificationSelector);
     }
   },
+  steps.checkNotification('Document reverted to commit!'),
   {
     'export the article to all other locales.': (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
       const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
       const masterLocaleBtnSelector = '[for*=master] span';
       const notificationSelector = '.apos-notification-container';
-
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(masterLocaleBtnSelector);
       client.click(masterLocaleBtnSelector);
