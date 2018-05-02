@@ -68,12 +68,8 @@
     <div class="inner">
       {% block footerContent %}
         <div class="inline-middle width-50">
-          {{ apos.area(data.global, 'footer', {
-            widgets: {
-              'apostrophe-rich-text': {
-                controls: [ 'Bold', 'Italic' ]
-              }
-            }
+          {{ apos.singleton(data.global, 'footer', 'apostrophe-rich-text', {
+            controls: [ 'Bold', 'Italic' ]
           }) }}
         </div>{#
       #}<div class="inline-middle width-50 align-right">

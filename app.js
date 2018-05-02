@@ -149,7 +149,9 @@ function run(config, ready) {
               apikey: 'XYZ'
             }
           ]
-        }
+        },
+
+        // 'test-widgets': {}
       },
 
       afterListen: function(err) {
