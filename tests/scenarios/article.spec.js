@@ -72,13 +72,25 @@ module.exports = Object.assign(
       client.waitForElementVisible(noPreviewSelector);
       client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
       client.waitForElementVisible(aposCommitBtnSelector);
-      client.pause(200);
       client.click(aposCommitBtnSelector);
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
       client.waitForElementNotPresent(notificationSelector);
       // TODO assert title = Artile Title 1
+    }
+  },
+  {
+    'article can be found under "Articles" in draft mode with new title': (client) => {
+      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
+      const modalBlogSelector = '.apostrophe-blog-manager';
+      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      client.keys(client.Keys.ESCAPE);
+      client.click(blogButtonSelector);
+      client.waitForElementVisible(modalBlogSelector);
+
+      client.expect.element(manageTableRowSelector).text.to.contain('Article Title 1');
+      client.expect.element(manageTableRowSelector).text.to.contain('Published');
     }
   },
   {
@@ -106,48 +118,19 @@ module.exports = Object.assign(
       client.waitForElementVisible('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
       // TODO assert there are two rows
       client.click('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
-      client.waitForElementVisible(notificationSelector);
+      client.waitForNotElementVisible(notificationSelector);
     }
   },
-  steps.checkNotification('Document reverted to commit!'),
   {
-    'export the article to all other locales.': (client) => {
-      const modalExportSelector = '.apos-workflow-export-modal';
-      const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
-      const masterLocaleBtnSelector = '[for*=master] span';
-      const notificationSelector = '.apos-notification-container';
-      client.waitForElementVisible(modalExportSelector);
-      client.waitForElementVisible(masterLocaleBtnSelector);
-      client.click(masterLocaleBtnSelector);
-      client.click(notificationSelector);
-      client.click(exportBtnSelector);
-      client.waitForElementNotPresent(modalExportSelector);
-    }
-  },
-  steps.checkNotification('Successfully exported to: master, fr, es'),
-  {
-    'close export dialog': (client) => {
-      const finishBtnSelector = '[data-apos-cancel]';
-      const blackoutSelector = '.apos-modal-blackout';
-
-      client.waitForElementVisible(finishBtnSelector);
-      client.pause(1000);
-      client.click(finishBtnSelector);
-      client.waitForElementNotPresent(blackoutSelector);
-    },
-  },
-  steps.switchLocale('es'),
-  steps.openAdminBar(),
-  {
-    'article can be found under "Articles" in draft mode for the es locale': (client) => {
+    'article can be found under "Articles" in draft mode with new title': (client) => {
       const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-
+      client.keys(client.Keys.ESCAPE);
+      client.pause(200);
+      client.waitForElementVisible(blogButtonSelector);
       client.click(blogButtonSelector);
-      client.useCss();
       client.waitForElementVisible(modalBlogSelector);
-
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
     }
