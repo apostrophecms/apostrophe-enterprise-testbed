@@ -47,12 +47,14 @@ module.exports = Object.assign(
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector, () => {
-        client.pause(1200);
-        client.click(editArticleBtnSelector);
-        client.waitForElementVisible(editModalSelector);
-        client.clearValue(editTitleField);
-        client.setValue(editTitleField, 'Article Title 1');
-        client.click(saveBtnSelector);
+      client.pause(1200);
+      client.click(editArticleBtnSelector);
+      client.waitForElementVisible(editModalSelector);
+      client.clearValue(editTitleField);
+      client.setValue(editTitleField, 'Article Title 1');
+      client.click(saveBtnSelector);
+      client.waitForElementVisible(modalBlogSelector);
+      client.click(editArticleBtnSelector);
         client.pause()
       });
       //client.waitForElementVisible(controlSelector);
