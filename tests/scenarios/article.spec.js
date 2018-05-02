@@ -70,7 +70,9 @@ module.exports = Object.assign(
       client.waitForElementVisible(aposCommitBtnSelector);
       client.pause(200);
       client.click(aposCommitBtnSelector);
-      client.pause();
+      client.waitForElementVisible(modalExportSelector);
+      client.waitForElementVisible(exportSkipSelector);
+      client.click(exportSkipSelector);
     }
   },
   {
