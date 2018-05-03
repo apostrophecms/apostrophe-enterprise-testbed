@@ -54,6 +54,7 @@ module.exports = Object.assign(
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(editModalSelector);
       client.clearValue(editTitleField);
@@ -77,20 +78,21 @@ module.exports = Object.assign(
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
       client.waitForElementNotPresent(notificationSelector);
-      // TODO assert title = Artile Title 1
     }
   },
   {
-    'article can be found under "Articles" in draft mode with new title': (client) => {
-      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
+    'article can be found under "Articles" in draft mode with title: Article Title 1': (client) => {
+      const blogBtnSelector= '[data-apos-admin-bar-item="apostrophe-blog"]';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
+      const modalBlogSelector = '.apostrophe-blog-manager';
       client.keys(client.Keys.ESCAPE);
-      client.click(blogButtonSelector);
-      client.waitForElementVisible(modalBlogSelector);
-
-      client.expect.element(manageTableRowSelector).text.to.contain('Article Title 1');
-      client.expect.element(manageTableRowSelector).text.to.contain('Published');
+      client.keys(client.Keys.ESCAPE);
+      client.waitForElementVisible(blogBtnSelector);
+      client.pause(200);
+      client.click(blogBtnSelector);
+      client.waitForElementVisible(blogTitleSelector);
+      client.expect.element(blogTitleSelector).text.to.equal('Article Title 1');
     }
   },
   {
@@ -123,13 +125,12 @@ module.exports = Object.assign(
   },
   {
     'article can be found under "Articles" in draft mode with new title': (client) => {
-      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
+      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       client.keys(client.Keys.ESCAPE);
       client.pause(200);
-      client.waitForElementVisible(blogButtonSelector);
-      client.click(blogButtonSelector);
+      client.click(blogBtnSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
