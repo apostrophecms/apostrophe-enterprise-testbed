@@ -14,7 +14,7 @@ module.exports = Object.assign(
       client.end(() => {
         this._server.stop(done);
       });
-    },
+    }
   },
   steps.main(),
   steps.login(),
@@ -35,7 +35,6 @@ module.exports = Object.assign(
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
       const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
       const editTitleField = `${editModalSelector} input[name=title]`;
       const saveBtnSelector = '[data-apos-save]';
@@ -44,7 +43,6 @@ module.exports = Object.assign(
       const notificationSelector = '.apos-notification-message';
       const modalCommitSelector = '.apos-workflow-commit-modal';
       const aposCommitBtnSelector = `${modalCommitSelector} [data-apos-save]`;
-      const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`
 
       // bail out from last commit's export window
       client.waitForElementVisible(exportSkipSelector);
@@ -82,10 +80,9 @@ module.exports = Object.assign(
   },
   {
     'article can be found under "Articles" in draft mode with title: Article Title 1': (client) => {
-      const blogBtnSelector= '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
-      const modalBlogSelector = '.apostrophe-blog-manager';
+
       client.keys(client.Keys.ESCAPE);
       client.keys(client.Keys.ESCAPE);
       client.waitForElementVisible(blogBtnSelector);
@@ -99,15 +96,15 @@ module.exports = Object.assign(
       const modalExportSelector = '.apos-workflow-export-modal';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
+      const managerSelector = '.apos-manage-table';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
       const notificationSelector = '.apos-notification-container';
-      const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`
-      const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]')
-      // now revert to previous version
+      const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`;
+      const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
+
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector);
@@ -117,20 +114,18 @@ module.exports = Object.assign(
       client.pause(200);
       client.waitForElementVisible(workflowHistoryBtnSelector);
       client.click(workflowHistoryBtnSelector);
-      client.waitForElementVisible('.apos-manage-table');
+      client.waitForElementVisible(managerSelector);
       client.waitForElementVisible(workflowRevertBtnSelector);
-      // TODO assert there are two rows
       client.click(workflowRevertBtnSelector);
       client.waitForElementNotVisible(notificationSelector);
     }
   },
   {
     'article can be found under "Articles" in draft mode with title: New Article Title': (client) => {
-      const blogBtnSelector= '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
-      const modalBlogSelector = '.apostrophe-blog-manager';
       const notificationSelector = '.apos-notification-container';
+
       client.keys(client.Keys.ESCAPE);
       client.keys(client.Keys.ESCAPE);
       client.pause(500);
@@ -143,5 +138,5 @@ module.exports = Object.assign(
       client.waitForElementVisible(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
-  },
+  }
 );
