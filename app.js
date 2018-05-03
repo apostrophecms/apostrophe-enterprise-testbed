@@ -42,6 +42,12 @@ function run(config, ready) {
           perLocale: true
         },
 
+        'products' : {
+          extend: 'apostrophe-pieces',
+          name: 'product',
+          label: 'Product',
+        },
+
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
         'apostrophe-express': {
           session: {
