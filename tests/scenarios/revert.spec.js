@@ -89,7 +89,6 @@ module.exports = Object.assign(
       client.keys(client.Keys.ESCAPE);
       client.keys(client.Keys.ESCAPE);
       client.waitForElementVisible(blogBtnSelector);
-      client.pause(200);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('Article Title 1');
@@ -107,6 +106,7 @@ module.exports = Object.assign(
       const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
       const notificationSelector = '.apos-notification-container';
       const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`
+      const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]')
       // now revert to previous version
       client.waitForElementNotPresent(modalExportSelector);
       client.waitForElementVisible(modalBlogSelector);
@@ -114,26 +114,34 @@ module.exports = Object.assign(
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.click(workflowModalBtnSelector);
+      client.pause(200);
       client.waitForElementVisible(workflowHistoryBtnSelector);
       client.click(workflowHistoryBtnSelector);
       client.waitForElementVisible('.apos-manage-table');
-      client.waitForElementVisible('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
+      client.waitForElementVisible(workflowRevertBtnSelector);
       // TODO assert there are two rows
-      client.click('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
-      client.waitForNotElementVisible(notificationSelector);
+      client.click(workflowRevertBtnSelector);
+      client.waitForElementNotVisible(notificationSelector);
     }
   },
   {
-    'article can be found under "Articles" in draft mode with new title': (client) => {
-      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
+    'article can be found under "Articles" in draft mode with title: New Article Title': (client) => {
+      const blogBtnSelector= '[data-apos-admin-bar-item="apostrophe-blog"]';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
+      const modalBlogSelector = '.apostrophe-blog-manager';
+      const notificationSelector = '.apos-notification-container';
       client.keys(client.Keys.ESCAPE);
+      client.keys(client.Keys.ESCAPE);
+      client.pause(500);
+      client.acceptAlert();
+      client.waitForElementVisible(notificationSelector);
+      client.click(notificationSelector);
       client.pause(200);
+      client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
-      client.waitForElementVisible(modalBlogSelector);
-      client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
-      client.expect.element(manageTableRowSelector).text.to.contain('Published');
+      client.waitForElementVisible(blogTitleSelector);
+      client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
   },
 );
