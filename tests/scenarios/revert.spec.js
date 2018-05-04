@@ -111,7 +111,6 @@ module.exports = Object.assign(
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.click(workflowModalBtnSelector);
-      client.pause(200);
       client.waitForElementVisible(workflowHistoryBtnSelector);
       client.click(workflowHistoryBtnSelector);
       client.waitForElementVisible(managerSelector);
@@ -132,7 +131,7 @@ module.exports = Object.assign(
       client.acceptAlert();
       client.waitForElementVisible(notificationSelector);
       client.click(notificationSelector);
-      client.pause(200);
+      client.waitForElementNotVisible(notificationSelector);
       client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);
