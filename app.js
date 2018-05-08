@@ -1,5 +1,4 @@
 var _ = require('lodash');
-
 var locales;
 var prefixes;
 
@@ -41,13 +40,6 @@ function run(config, ready) {
           excludeTypes: [],
           perLocale: true
         },
-
-        'products' : {
-          extend: 'apostrophe-pieces',
-          name: 'product',
-          label: 'Product',
-        },
-
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
         'apostrophe-express': {
           session: {
@@ -64,6 +56,25 @@ function run(config, ready) {
         },
         'apostrophe-blog': {},
         'apostrophe-blog-pages': {},
+        'apostrophe-blog-widgets': {
+          extend: 'apostrophe-pieces-widgets'
+        },
+        'apostrophe-pages': {
+          types: [
+            {
+              name: 'apostrophe-blog-page',
+              label: 'Blog'
+            }
+          ],
+          park: [
+            {
+              title: 'Blog',
+              type: 'apostrophe-blog-page',
+              slug: '/blog',
+              published: true
+            }
+          ]
+        },
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
@@ -139,6 +150,7 @@ function run(config, ready) {
           defaultLocale: 'en',
           prefixes: prefixes
         },
+
 
         'apostrophe-review-and-deploy': {
           deployTo: [

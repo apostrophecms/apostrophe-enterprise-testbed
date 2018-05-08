@@ -79,6 +79,11 @@ module.exports = Object.assign(
     }
   },
   {
+    'pause': (client) => {
+      client.pause()
+    }
+  },
+  {
     'article can be found under "Articles" in draft mode with title: Article Title 1': (client) => {
       const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
