@@ -54,6 +54,11 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
+        'products' : {
+          extend: 'apostrophe-pieces',
+          name: 'product',
+          label: 'Product',
+        },
         'apostrophe-blog': {},
         'apostrophe-blog-pages': {},
         'apostrophe-blog-widgets': {
