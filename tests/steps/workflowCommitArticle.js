@@ -4,7 +4,7 @@ module.exports = () => {
   counter++;
 
  return {
-    [`[{$counter}] reopen the article. Commit the article.`]: (client) => {
+    [`[${counter}] reopen the article. Commit the article.`]: (client) => {
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
       const modalCommitSelector = '.apos-workflow-commit-modal';
@@ -17,22 +17,22 @@ module.exports = () => {
       const noPreviewSelector = '.apos-workflow-no-preview';
       const saveBtnSelector = `${modalCommitSelector} [data-apos-save]`;
       const notificationSelector = '.apos-notification-message';
+      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
 
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.waitForElementVisible(controlSelector);
-      client.pause(200);
       client.click(workflowModalBtnSelector);
-      client.useCss();
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(noPreviewSelector);
+      client.waitForElementVisible(".demo-blog-header-wrapper h3");
 
-      client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
+      client.expect.element(".demo-blog-header-wrapper h3").text.to.equal('New Article Title');
 
-      client.waitForElementNotPresent(notificationSelector);
       client.click(saveBtnSelector);
     }
   };

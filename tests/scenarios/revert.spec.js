@@ -22,9 +22,7 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   steps.workflowSubmitArticle(),
-  steps.checkNotification('Your submission will be reviewed.'),
   steps.workflowCommitArticle(),
-  steps.checkNotification('New Article Title was committed successfully.'),
   {
     "change title and commit": (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
