@@ -14,10 +14,10 @@ module.exports = () => {
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
-      const noPreviewSelector = '.apos-workflow-no-preview';
-      const saveBtnSelector = `${modalCommitSelector} [data-apos-save]`;
+      const saveBtnSelector = `.apos-workflow-commit-modal [data-apos-save]`;
       const notificationSelector = '.apos-notification-message';
       const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
+      const titleWrapper = ".demo-blog-header-wrapper h3";
 
       client.waitForElementVisible(articleSelector);
       client.click(articleSelector);
@@ -29,11 +29,16 @@ module.exports = () => {
       client.click(workflowModalBtnSelector);
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(".demo-blog-header-wrapper h3");
+      client.waitForElementVisible(titleWrapper);
 
-      client.expect.element(".demo-blog-header-wrapper h3").text.to.equal('New Article Title');
+      client.expect.element(titleWrapper).text.to.equal('New Article Title');
 
+      client.waitForElementVisible(saveBtnSelector);
       client.click(saveBtnSelector);
+      client.waitForElementNotPresent(notificationSelector);
+        const exportSkipSelector = '.apos-workflow-commit-modal [data-apos-cancel]';
+      client.waitForElementVisible(exportSkipSelector)
+      client.keys(client.Keys.ESCAPE);
     }
   };
 };

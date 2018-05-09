@@ -26,10 +26,12 @@ module.exports = Object.assign(
   {
     "change title and commit": (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
-      const exportSkipSelector = `${modalExportSelector} [data-apos-cancel]`;
+      const exportSkipSelector = '.apos-workflow-commit-modal [data-apos-cancel]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const adminBarSelector = '[data-apos-admin-bar-logo]';
+      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
@@ -43,46 +45,52 @@ module.exports = Object.assign(
       const aposCommitBtnSelector = `${modalCommitSelector} [data-apos-save]`;
 
       // bail out from last commit's export window
-      client.waitForElementVisible(exportSkipSelector);
-      client.click(exportSkipSelector);
+       client.keys(client.Keys.ESCAPE);
 
       // edit article and update title
-      client.waitForElementNotPresent(modalExportSelector);
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementNotVisible(articleSelector);
+      client.waitForElementVisible(adminBarSelector);
+      client.click(adminBarSelector);
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
       client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
-      client.waitForElementVisible(editModalSelector);
+      client.waitForElementVisible(editTitleField);
       client.clearValue(editTitleField);
       client.setValue(editTitleField, 'Article Title 1');
       client.click(saveBtnSelector);
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(editModalSelector);
-      client.waitForElementNotPresent(notificationSelector);
+
+      client.waitForElementVisible(adminBarSelector);
+      client.click(adminBarSelector);
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
 
       // commit the updated article
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
       client.click(workflowModalBtnSelector);
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(noPreviewSelector);
-      client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
+      client.waitForElementVisible(".demo-blog-header-wrapper h3");
+      client.expect.element(".demo-blog-header-wrapper h3").text.to.equal('Article Title 1');
       client.waitForElementVisible(aposCommitBtnSelector);
       client.click(aposCommitBtnSelector);
       client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
-      client.waitForElementNotPresent(notificationSelector);
     }
   },
   {
     'article can be found under "Articles" in draft mode with title: Article Title 1': (client) => {
+      const adminBarSelector = '[data-apos-admin-bar-logo]';
       const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
 
       client.keys(client.Keys.ESCAPE);
       client.keys(client.Keys.ESCAPE);
+      client.waitForElementNotVisible(blogBtnSelector);
+      client.click(adminBarSelector);
       client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);
@@ -91,27 +99,30 @@ module.exports = Object.assign(
   },
   {
     'revert to initial version': (client) => {
+      const adminBarSelector = '[data-apos-admin-bar-logo]';
+      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalExportSelector = '.apos-workflow-export-modal';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
       const managerSelector = '.apos-manage-table';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
+      const workflowModalBtnSelector = '[data-apos-dropdown-name="workflow"]';
       const notificationSelector = '.apos-notification-container';
       const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`;
       const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
 
       client.waitForElementNotPresent(modalExportSelector);
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
+
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
+
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
+      client.waitForElementVisible(workflowModalBtnSelector);
       client.click(workflowModalBtnSelector);
       client.waitForElementVisible(workflowHistoryBtnSelector);
       client.click(workflowHistoryBtnSelector);
-      client.waitForElementVisible(managerSelector);
       client.waitForElementVisible(workflowRevertBtnSelector);
       client.click(workflowRevertBtnSelector);
       client.waitForElementNotVisible(notificationSelector);
@@ -127,9 +138,6 @@ module.exports = Object.assign(
       client.keys(client.Keys.ESCAPE);
       client.pause(500);
       client.acceptAlert();
-      client.waitForElementVisible(notificationSelector);
-      client.click(notificationSelector);
-      client.waitForElementNotVisible(notificationSelector);
       client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);
