@@ -8,7 +8,7 @@
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
     "e2e-local": "nightwatch tests/scenarios/* --config nightwatch.js --env local",
-   "revert-local": "node_modules/.bin/nightwatch --config nightwatch.js --env local tests/scenarios/revert.spec.js",
+    "revert-local": "node_modules/.bin/nightwatch --config nightwatch.js --env local tests/scenarios/revert.spec.js",
     "e2e-remote": "nightwatch tests/scenarios/* --config nightwatch.js --env remote",
     "test": "npm run e2e-remote"
   },
