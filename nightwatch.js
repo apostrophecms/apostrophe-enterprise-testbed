@@ -18,6 +18,8 @@ module.exports = {
       selenium_port: 4444,
       selenium_host: 'localhost',
       silent: true,
+      apos_address: 'localhost',
+      apos_port: 3333,
       screenshots: {
         enabled: true,
         path: './screenshots',

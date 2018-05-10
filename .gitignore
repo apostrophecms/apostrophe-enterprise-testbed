@@ -18,3 +18,4 @@ node_modules
 /scripts/sync-up
 /tests/reports
 /screenshots/
+.*.sw*
