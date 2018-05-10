@@ -21,6 +21,11 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
+ /* { */
+ /*    'pause': client => { */
+ /*      client.pause(); */
+ /*    } */
+ /*  }, */
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),

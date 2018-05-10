@@ -24,10 +24,12 @@ if (process.env.EXTRA_LOCALES) {
 }
 
 function run(config, ready) {
+  const baseUrl = `http://${process.env.ADDRESS}:${process.env.PORT}`;
+  console.log('APP', process.env.ADDRESS, process.env.PORT, baseUrl);
   var apos = require('apostrophe')(
     _.assign({
       shortName: 'apostrophe-enterprise-testbed',
-      baseUrl: 'http://localhost:3000',
+      baseUrl: baseUrl,
       root: module,
       // These are the modules we want to bring into the project.
       modules: {
