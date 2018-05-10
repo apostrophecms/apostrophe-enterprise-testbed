@@ -10,10 +10,8 @@ module.exports = () => {
       const port = client.globals.test_settings.apos_port;
       const url = `http://${address}:${port}`;
       console.log('MAIN', client.globals.test_settings, url);
-      client
-        .url(url)
-        .pause(2000);
-      client.expect.element('body.home-page').to.be.present;
+      client.url(url);
+      client.waitForElementVisible('body.home-page');
     }
   };
 };
