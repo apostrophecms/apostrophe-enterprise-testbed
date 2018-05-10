@@ -7,6 +7,7 @@ const onDeath = require('death')({
 const chromedriver = require('chromedriver');
 const sauceConnectLauncher = require('sauce-connect-launcher');
 const server = require('./server');
+const sauce = require('./sauce');
 
 const WEBDRIVER_PORT = 4444;
 const scOpts = {
@@ -42,6 +43,9 @@ module.exports = {
       console.log("Started Sauce Connect Process");
       done();
     });
+  },
+  afterEach: function(done) {
+    sauce(done); // report nightwatch results to saucelabs
   },
   after: function(done) {
     clean(done);

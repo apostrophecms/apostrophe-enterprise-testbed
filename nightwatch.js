@@ -35,12 +35,10 @@ module.exports = {
       selenium_port: 80,
       selenium_host: 'ondemand.saucelabs.com',
       username: process.env.SAUCE_USERNAME,
+      access_key: process.env.SAUCE_ACCESS_KEY,
       apos_address: 'localhost',
       apos_port: 3111,
-      access_key: process.env.SAUCE_ACCESS_KEY,
       silent: true,
-      startConnect: false,
-      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       screenshots: {
         enabled: true,
         path: './screenshots',
@@ -48,7 +46,8 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       },
     },
   }
