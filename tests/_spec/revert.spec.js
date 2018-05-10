@@ -4,8 +4,9 @@ const steps = require('../steps');
 module.exports = Object.assign(
   {
     before: (client, done) => {
-      var address = client.globals.test_settings.apos_address;
-      var port = client.globals.test_settings.apos_port;
+      const address = client.globals.test_settings.apos_address;
+      const port = client.globals.test_settings.apos_port;
+      console.log("REVERT", address, port);
       client.resizeWindow(1200, 800);
 
       this._server = server.create(address, port);
@@ -20,6 +21,11 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
+ /* { */
+ /*    'pause': client => { */
+ /*      client.pause(); */
+ /*    } */
+ /*  }, */
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),

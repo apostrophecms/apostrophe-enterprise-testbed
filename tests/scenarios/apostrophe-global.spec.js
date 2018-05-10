@@ -4,10 +4,11 @@ const steps = require('../steps/index');
 module.exports = Object.assign(
   {
     before: (client, done) => {
+      const address = client.globals.test_settings.apos_address;
+      const port = client.globals.test_settings.apos_port;
       client.resizeWindow(1200, 800);
-      console.log("APOS GLOBAL", client);
 
-      this._server = server.create();
+      this._server = server.create(address, port);
       this._server.start(done);
     },
 
