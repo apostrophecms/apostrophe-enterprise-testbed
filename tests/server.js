@@ -3,8 +3,6 @@ const once = require('once');
 
 const serverProcesses = [];
 
-exports.URL = 'http://localhost:3000';
-
 exports.clean = () => {
   serverProcesses.forEach((prc) => {
     if (!prc.killed) {
@@ -13,16 +11,15 @@ exports.clean = () => {
   });
 };
 
-exports.create = () => {
-  let server;
+exports.create = (address, port) => {
+  var server;
 
+  console.log('SERVER', address, port);
   return {
     start(cb) {
       restoreMongoDump();
 
-      process.argv = process.argv.slice(0, 2);
-
-      server = shell.exec('node app', {async: true,});
+      server = shell.exec(`ADDRESS=${address} PORT=${port} node app`, {async: true,});
       onceCb = once(cb);
 
       serverProcesses.push(server);

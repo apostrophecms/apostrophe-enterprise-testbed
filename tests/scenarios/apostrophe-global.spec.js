@@ -5,6 +5,7 @@ module.exports = Object.assign(
   {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
+      console.log("APOS GLOBAL", client);
 
       this._server = server.create();
       this._server.start(done);
