@@ -38,6 +38,11 @@ module.exports = {
       access_key: process.env.SAUCE_ACCESS_KEY,
       apos_address: 'localhost',
       apos_port: 3111,
+      globals: {
+        waitForConditionTimeout: 5000, // sometimes internet is slow so wait.
+        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+      },
+
       silent: true,
       screenshots: {
         enabled: true,
@@ -48,6 +53,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         extendedDebugging: true,
+        tunnelIdentifier
       },
     },
   }
