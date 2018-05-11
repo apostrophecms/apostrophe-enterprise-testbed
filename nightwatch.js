@@ -53,7 +53,6 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         extendedDebugging: true,
-        tunnelIdentifier
       },
     },
   }
