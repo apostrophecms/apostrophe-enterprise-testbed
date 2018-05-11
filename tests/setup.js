@@ -44,9 +44,9 @@ module.exports = {
       done();
     });
   },
-  afterEach: function(done) {
-    sauce(done); // report nightwatch results to saucelabs
-  },
+  /* afterEach: function(done) { */
+  /*   sauce(done); // report nightwatch results to saucelabs */
+  /* }, */
   after: function(done) {
     clean(done);
   },
