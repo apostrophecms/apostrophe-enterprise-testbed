@@ -38,7 +38,6 @@ module.exports = {
       access_key: process.env.SAUCE_ACCESS_KEY,
       apos_address: 'localhost',
       apos_port: 3111,
-      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       silent: true,
       screenshots: {
         enabled: true,

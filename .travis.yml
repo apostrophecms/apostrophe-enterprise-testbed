@@ -6,6 +6,8 @@ sudo: false
 services:
 - docker
 - mongodb
+addons:
+  sauce_connect: true
 branches:
   only:
   - master
