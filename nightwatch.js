@@ -6,7 +6,6 @@ module.exports = {
 
   selenium: {
     start_process: false,
-    port: 4444,
     cli_args: {
       "webdriver.chrome.driver" : "./node_modules/chromedriver/bin/chromedriver",
     }
