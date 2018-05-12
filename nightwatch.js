@@ -12,10 +12,6 @@ module.exports = {
     }
   },
 
-  test_workers: {
-    enabled: false
-  },
-
   test_settings: {
     local: {
       launch_url: 'http://localhost:8081',
