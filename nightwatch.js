@@ -34,7 +34,7 @@ module.exports = {
       username: process.env.SAUCE_USERNAME,
       access_key: process.env.SAUCE_ACCESS_KEY,
       apos_address: 'localhost',
-      apos_port: 3111,
+      apos_port: 3000,
       globals: {
         waitForConditionTimeout: 5000, // sometimes internet is slow so wait.
       },

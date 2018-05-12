@@ -6,8 +6,8 @@ module.exports = () => {
 
   return {
     [`[${counter}] main`]: function(client) {
-      const address = client.globals.test_settings.apos_address;
-      const port = client.globals.test_settings.apos_port;
+      const address = client.globals.test_settings.apos_address || 'localhost';
+      const port = client.globals.test_settings.apos_port || 3000;
       const url = `http://${address}:${port}`;
       console.log('MAIN', client.globals.test_settings, url);
       client.url(url);
