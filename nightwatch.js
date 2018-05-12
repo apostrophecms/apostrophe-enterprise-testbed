@@ -48,7 +48,10 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         extendedDebugging: true,
-        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER,
+        build: process.env.TRAVIS_BUILD_NUMBER,
+        username: process.env.SAUCE_USERNAME,
+        accessKey: process.env.SAUCE_ACCESS_KEY
       },
     },
   }
