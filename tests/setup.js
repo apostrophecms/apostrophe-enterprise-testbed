@@ -37,7 +37,8 @@ module.exports = {
     checkVenvs();
     sauceConnectLauncher(scOpts, (err) => {
       if (err) {
-        throw new Error('Unable to connect to SauceLabs.\n' + err);
+        console.error('Unable to connect to SauceLabs.\n', err);
+        process.exit(1);
       }
 
       console.log("Started Sauce Connect Process");
