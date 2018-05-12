@@ -1,11 +1,15 @@
-module.exports = {
+eodule.exports = {
   src_folders: ["tests/scenarios"],
   output_folder: "tests/reports",
   globals_path: "tests/setup.js",
   custom_commands_path: "tests/commands",
 
   selenium: {
-    start_process: false
+    start_process: false,
+    port: 4444,
+    cli_args: {
+      "webdriver.chrome.driver" : "./node_modules/chromedriver/bin/chromedriver",
+    }
   },
 
   test_workers: {
@@ -32,17 +36,13 @@ module.exports = {
     },
     remote: {
       launch_url: 'http://ondemand.saucelabs.com:80',
-      selenium_port: 80,
-      selenium_host: 'ondemand.saucelabs.com',
       username: process.env.SAUCE_USERNAME,
       access_key: process.env.SAUCE_ACCESS_KEY,
       apos_address: 'localhost',
       apos_port: 3111,
       globals: {
         waitForConditionTimeout: 5000, // sometimes internet is slow so wait.
-        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
       },
-
       silent: true,
       screenshots: {
         enabled: true,
@@ -53,6 +53,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         extendedDebugging: true,
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
       },
     },
   }

@@ -1,13 +1,14 @@
 language: node_js
 node_js:
 - stable
-- lts/*
 sudo: false
 services:
 - docker
 - mongodb
 addons:
   sauce_connect: true
+  jwt:
+    secure: "j1ueXkriP391gnDegREDOPHSnpcky8zeSMDs/Pjj4I15BNfZ6NRtjbSf/yc22VI8EDzx4y2Zd4UKM9b7YuBkuY4JMqOWny06huedzSn9wQXbr92Q8ET9EgHZ1rPnLtLPqh5zaka2MdBJ0lygVTwb4TbA8fCE++aSH4LbfnePwyW5AvEoXP8Qdo2pCxg49JV4gKy+AfJS3S6PvH5tIhuw6tEt3I5WZmMFcF+PyBdWVvAO6uZO0cYe7hr6LDHOe8Kt4i3UYm2zAI81X2tTh0LrldzQuOEY927zwhNmxWjROiz+kM0hy3u0zinbt2SYfo11uZ2rSsKL1OVKxnsQ9eb1/cKOKM8axhsRgMfCxV/fGu4OLIW+DmJrDgEZgjTfAQUQBSMe7h8g1NOhwd0M43aS6ari9B/pDG7iWOBBwKuS0XiVWW+vp+iJTJidARYInzG5BsRCZJldDcXFAV5ydCFry8I2MVA6M6qI22nzXmhJ2oJfudTEPaogARoCGFp6NqPee1vwra04tnzQRgUwBsDo21ga4CdKlpVjWSIfZ3B8l4e0L+Fmp+1mFo/tiRt6ii8vsFtE2qxvQNgfM+eXkoxagzejDbMBD3fquQiN+SjtJqGsUm6rqPKz+isCdgDHnoyXUFeVOTABwLBl9uiSL0f5X+ysdpUqT1atW453P6pSt/I="
 branches:
   only:
   - master

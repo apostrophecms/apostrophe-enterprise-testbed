@@ -27,13 +27,12 @@
     "chromedriver": "^2.37.0",
     "html2plaintext": "^1.0.1",
     "lodash": "^3.10.1",
-    "moment": "^2.21.0"
-  },
-  "devDependencies": {
+    "moment": "^2.21.0",
     "archiver": "^2.1.1",
     "cheerio": "^1.0.0-rc.2",
     "death": "^1.1.0",
     "nightwatch": "^0.9.20",
+    "selenium-server-standalone-jar": "3.8.1",
     "once": "^1.4.0",
     "sauce-connect-launcher": "^1.2.3",
     "shelljs": "^0.8.1"
