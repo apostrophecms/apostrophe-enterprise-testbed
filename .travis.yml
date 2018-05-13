@@ -1,16 +1,12 @@
 language: node_js
-node_js:
-- stable
-sudo: false
-services:
-- docker
-- mongodb
 addons:
   sauce_connect: true
-branches:
-  only:
-  - master
 env:
   global:
   - secure: FIWV+wHoXfJdGj4vyqMAvOnfg1nxQ5ZaUhGEzzdPWoI08NsFlY6rFQXoJEULVoqnUeeIPKKPGBzTr7eNuuRqB54NRI+qa5k6hpCQD2akoiNv5cUsyXgWc4jrYBIzdfUGpa3NnNejmGpXIw/zkZWyUHT8CrxajDruVIIwaHaqFgD9O3a+12+9iv94WpjTUCZP6tdGZcUp1KY2VVyMdt7rdz7Mvwh+bobKGBxzWT/rxY+CZ1D3GzdM1ktYpG+YPxg4UvZjoAXPFrwy/uPWeNpd/sGJETDhm3DMY2dVmK4SKkTDvPa69z7Bjg9NaH3TuILrOOPKdvGRdtzXc8eKrpbkDR7s3gTebJ/F/sGHTuemg5klCRbYn/HIwRnoa1fM2wT3SjzGcdqzV5Gkwrwacd988/3gSHGiyA4EsI1q2X9DDDlPHofhiD3byUwv/nRhlqO01jLwbHbBqdTD4dWiA8MzMbO7+Jow16UpkKmyRJYuAYPnsHp4cyixinbOdtcVZdY2Ue84nUwaXFhAKOd3xT+Vw9BQQTmCsPIaWS9niQzY6YlSHZzbP1AwBmjJ2NyXnYO9aMlSj3aBsNtoG1eEIcb+fvJB1K7sCqi9CyyxzlyMJbwaj2M/EdU/X4npMb3w7p53yuNeLdM0ODVp6dPNcRbhiht4emiZqoh9h8vUixckKt4=
   - secure: EJ98L9R31yBVcKmvU/IiBhhBdoC3ZYWH9zOGDAs7gqbmHwuyHH390SBCb2+H3FH8l0HrkJBfHaQdYilLssap+5a0vFwkmhLwU+wg/xcLBFWDQmmOk8iBeF/gy9NgWYccRu+T3RwRIWgsuEgEy/5s8+olngb+V6phODVZQZQFQVBFKUKXkhpSJGdgDmg/TNk5l6Kaur8a53/ZFfdnoXqvQFywetc9GhwpSe40oqpj330/yuhxVnL0YjptgzCiEB8lti73VWtvn184U7qKiZWSRGXJlx6VaCrQkN+L+wq1xWimaiykuT07HhWsJc1fuDR0uOpbY3b6mvrlCtBLeXozGVLJETeLk9xdOfRj4Lyp6UXtJ72Chl9MMh/iuA1pbLP4eK9r0N2DvWCuIN/YrZD/ICW3sWqyqKD2L/GLnRAoPxGnAJNGxTrTs89nNYAtk4oj5hhmMAHHsX10TBE90RD/U2qP+/1c/ZVt+oS8QzGmt3cspOKyakU7Ejh0ocXgyAARMiOPBtuuNUghaN52NZISh1iY5zvTZZoBf6NgCOtO7DgDkfLu6C9v1S0KMuX1O/3O0XkMGw07r53Rkd2oIhV0t0/lWjqcasiv7FIGSMWKRoIi+jxX/QtlrpT3Rye4LnRnlRk7fG7xqx40GinxohzR/8g/543wpUrzNeVoVwHPNf0=
+before_script:
+  - python -m SimpleHTTPServer &
+  - sleep 2
+node_js:
+    - "0.12"

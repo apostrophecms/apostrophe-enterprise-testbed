@@ -1,40 +1,9 @@
 {
-  "name": "apostrophe-enterprise-testbed",
-  "version": "2.0.0",
-  "description": "Testbed for browser-based functional testing of apostrophe, apostrophe-workflow and related modules common in an enterprise setting.",
-  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dump": "mongodump -d apostrophe-enterprise-testbed",
-    "restore": "mongorestore --noIndexRestore mongodump/ --drop",
-    "e2e-local": "nightwatch tests/scenarios/* --config nightwatch.js --env local",
-    "revert-local": "node_modules/.bin/nightwatch --config nightwatch.js --env local tests/scenarios/revert.spec.js",
-    "e2e-remote": "nightwatch tests/scenarios/* --config nightwatch.js --env remote",
-    "test": "npm run e2e-remote"
+    "test": "mocha --timeout 10000"
   },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "author": "P'unk Avenue",
-  "license": "MIT",
-  "dependencies": {
-    "apostrophe": "github:apostrophecms/apostrophe",
-    "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
-    "apostrophe-review-and-deploy": "github:apostrophecms/apostrophe-review-and-deploy",
-    "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
-    "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
-    "chromedriver": "^2.37.0",
-    "html2plaintext": "^1.0.1",
-    "lodash": "^3.10.1",
-    "moment": "^2.21.0",
-    "archiver": "^2.1.1",
-    "cheerio": "^1.0.0-rc.2",
-    "death": "^1.1.0",
-    "nightwatch": "^0.9.20",
-    "selenium-server-standalone-jar": "3.8.1",
-    "once": "^1.4.0",
-    "sauce-connect-launcher": "^1.2.3",
-    "shelljs": "^0.8.1"
+  "devDependencies": {
+    "mocha": "^2.2.1",
+    "selenium-webdriver": "^2.45.1"
   }
 }

@@ -1,7 +1,0 @@
-{% import 'macros/blogMacros.html' as blog %}
-
-<div class="apostrophe-blog-widget">
-  {%- for piece in data.widget._pieces -%}
-    {{ blog.blogCard(piece) }}
-  {%- endfor -%}
-</div>
