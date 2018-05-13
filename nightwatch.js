@@ -8,10 +8,6 @@ module.exports = {
     start_process: false
   },
 
-  test_workers: {
-    enabled: false
-  },
-
   test_settings: {
     local: {
       launch_url: 'http://localhost:8081',

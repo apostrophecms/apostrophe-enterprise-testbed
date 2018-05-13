@@ -1,5 +1,6 @@
 const server = require('../server');
 const steps = require('../steps/index');
+const sauce = require('../sauce');
 
 module.exports = Object.assign(
   {
@@ -11,12 +12,16 @@ module.exports = Object.assign(
       this._server = server.create(address, port);
       this._server.start(done);
     },
-
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);
+        sauce(client, done);
       });
     },
+    afterEach: (client, done) => {
+      console.log("AFTER Ea", client);
+      return sauce(client, done);
+    }
   },
   steps.main(),
   steps.login(),
