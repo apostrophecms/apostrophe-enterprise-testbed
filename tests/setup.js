@@ -57,6 +57,7 @@ function clean(cb) {
   chromedriver.stop();
   server.clean();
   sauceConnectLauncher.kill(cb);
+  process.exit(0);
 }
 
 onDeath((signal, err) => {
