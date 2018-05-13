@@ -1,0 +1,111 @@
+{% extends data.outerLayout %}
+{% import 'macros/nav.html' as nav %}
+{% import 'global/svg/toolbox.html' as tool %}
+
+
+{% block beforeMain %}
+  {% if data.user %}
+    <div style="right: 0px; position: absolute; padding: 24px; background-color: #def; color: black; border-radius: 6px; margin: 4px;">
+      {{ data.user.username }}
+    </div>
+  {% endif %}
+  {#
+  <div class="demo-modal">
+    <div class="demo-modal-content">
+      <img src="/images/demo-computer.svg" alt="ApostropheCMS Demo Site">
+      <h4>Welcome to the Apostrophe Demo</h4>
+      <p><strong>Just click on text to edit it.</strong> There is no save button because <strong>your edits are saved automatically.</strong></p>
+      <p>To add images, slideshow and more <strong>click the "+" icons</strong> that appear when you hover the mouse over the page.</p>
+      <p>Be sure to visit the "blog" and "default" pages, and try clicking "Page Menu" to create new subpages.</p>
+      <p>Have fun!</p>
+      <button>Let's Get Started</button>
+    </div>
+  </div>
+  #}
+  <div class="off-canvas-container">
+    {{ nav.nav(data, {classes: 'off-canvas-nav hide-desktop', logo: true, showChildren: true}) }}
+  </div>
+  <div class="block top">
+      <div class="inner demo-inner">
+        <header>
+          <div class="demo-header bg-red">
+            <h5>{% block headerMessage %}
+              You are using the Apostrophe enterprise testbed site.
+            {% endblock %}</h5>
+            {%- if not data.user and not data.user._permissions.admin -%}
+              <h5 class="demo-login-button"><a href="/login"><span>&#xf090;</span>Login</a></h5>
+            {%- endif -%}
+            <p><strong>Just click on text to edit it.</strong> There is no save button because <strong>your edits are saved automatically.</strong></p>
+            <p>To add images, slideshow and more <strong>click the "+" icons</strong> that appear when you hover the mouse over the page.</p>
+            <p>Be sure to visit the "blog" and "default" pages, and try clicking "Page Menu" to create new subpages.</p>
+            <p>Have fun!</p>
+          </div>
+          {{ nav.nav(data, {classes: 'hide-mobile'}) }}
+          <a href="#" class="off-canvas-trigger hide-desktop">
+            <svg class="a-toolbox">
+              {{ tool.icon() }}
+            </svg>
+          </a>
+
+        </header>
+      {% block headerContent %}
+      {% endblock %}
+    </div>
+  </div>
+  <div class="block header {% block upperClass %}{% endblock %}">
+    {% block headerBackground %}{% endblock %}
+
+  </div>
+{% endblock %}
+
+{% block main %}
+  {% block mainContent %}
+  {% endblock %}
+{% endblock %}
+
+{% block afterMain %}
+  <footer class="block footer">
+    <div class="inner">
+      {% block footerContent %}
+        <div class="inline-middle width-50">
+          {{ apos.area(data.global, 'footer', {
+            widgets: {
+              'apostrophe-rich-text': {
+                controls: [ 'Bold', 'Italic' ]
+              }
+            }
+          }) }}
+        </div>{#
+      #}<div class="inline-middle width-50 align-right">
+          <a class="inline-top footer-logo" href="http://punkave.com">
+            <img src="/images/demo_logo_punk.png" class="" alt="P'unk Avenue" width="150" height="32" />
+          </a>
+        </div>
+      {% endblock %}
+    </div>
+    <div class="inner">
+      <div class="linode-credit">
+        Generously hosted by <a href="http://linode.com">linode</a>.
+      </div>
+    </div>
+    <div class="locale-switcher">
+      <ul>
+        {% for localization in apos.workflow.localizations() %}
+          {% if localization._url %}
+            <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </footer>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-496991-33', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+{% endblock %}

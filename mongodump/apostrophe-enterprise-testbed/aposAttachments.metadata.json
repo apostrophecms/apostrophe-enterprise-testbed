@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"apostrophe-enterprise-testbed.aposAttachments"},{"v":2,"key":{"docIds":1},"name":"docIds_1","ns":"apostrophe-enterprise-testbed.aposAttachments"},{"v":2,"key":{"trashDocIds":1},"name":"trashDocIds_1","ns":"apostrophe-enterprise-testbed.aposAttachments"}],"uuid":"49b6327f47f245a48257460fc709fd33"}
