@@ -9,4 +9,4 @@ before_script:
   - python -m SimpleHTTPServer &
   - sleep 2
 node_js:
-    - "0.12"
+    - "stable"
