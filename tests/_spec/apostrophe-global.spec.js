@@ -1,5 +1,6 @@
-const server = require('../server');
 const steps = require('../steps/index');
+const server = require('../server');
+const setup = require('../specSetup');
 
 module.exports = Object.assign(
   {
@@ -33,5 +34,5 @@ module.exports = Object.assign(
 
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
     }
-  },
-);
+  } */
+  );
