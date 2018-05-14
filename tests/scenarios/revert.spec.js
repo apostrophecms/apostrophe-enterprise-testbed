@@ -21,7 +21,7 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
+/*  steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   steps.workflowSubmitArticle(),
   steps.workflowCommitArticle(),
@@ -130,7 +130,7 @@ module.exports = Object.assign(
       client.waitForElementNotVisible(notificationSelector);
     }
   },
-  {
+ {
     'article can be found under "Articles" in draft mode with title: New Article Title': (client) => {
       const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
@@ -145,5 +145,5 @@ module.exports = Object.assign(
       client.waitForElementVisible(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
-  }
+  } */
 );

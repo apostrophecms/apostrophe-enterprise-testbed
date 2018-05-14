@@ -20,7 +20,7 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
-  steps.switchLocale('en'),
+/*  steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   {
@@ -125,4 +125,5 @@ module.exports = Object.assign(
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
     }
   },
+  */
 );
