@@ -4,9 +4,11 @@ const steps = require('../steps/index');
 module.exports = Object.assign(
   {
     before: (client, done) => {
+      console.log('client', client.globals.test_settings);
+      const { apos_address, apos_port } = client.globals.test_settings;
       client.resizeWindow(1200, 800);
 
-      this._server = server.create();
+      this._server = server.create(apos_address, apos_port);
       this._server.start(done);
     },
 

@@ -4,9 +4,11 @@ const steps = require('../steps');
 module.exports = Object.assign(
   {
     before: (client, done) => {
+      console.log('client', client.globals.test_settings);
+      const { apos_address, apos_port } = client.globals.test_settings;
       client.resizeWindow(1200, 800);
 
-      this._server = server.create();
+      this._server = server.create(apos_address, apos_port);
       this._server.start(done);
     },
 
@@ -45,7 +47,7 @@ module.exports = Object.assign(
       client.waitForElementNotPresent(modalEditArticleSelector);
     }
   },
-  steps.checkNotification('Your submission will be reviewed.'),
+  //steps.checkNotification('Your submission will be reviewed.'),
   {
     'reopen the article. Commit the article.': (client) => {
       const modalBlogSelector = '.apostrophe-blog-manager';

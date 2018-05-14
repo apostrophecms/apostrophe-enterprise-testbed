@@ -50,8 +50,10 @@ module.exports = (articleName) => {
 
       client.setValue(inputPublicationDateSelector, publicationDate);
       client.click(saveBtnSelector);
-      client.waitForElementVisible(modalBlogSelector);
-
+      client.waitForElementNotPresent(blackoutSelector);
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
+      client.waitForElementVisible(manageTableRowSelector);
       client.expect.element(manageTableRowSelector).text.to.contain(articleName);
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
       client.expect.element(manageTableRowSelector).text.to.contain(publicationDate);

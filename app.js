@@ -1,5 +1,4 @@
 var _ = require('lodash');
-
 var locales;
 var prefixes;
 
@@ -25,10 +24,12 @@ if (process.env.EXTRA_LOCALES) {
 }
 
 function run(config, ready) {
+  const baseUrl = `http://${process.env.ADDRESS}:${process.env.PORT}`;
+  console.log('APP', process.env.ADDRESS, process.env.PORT, baseUrl);
   var apos = require('apostrophe')(
     _.assign({
       shortName: 'apostrophe-enterprise-testbed',
-      baseUrl: 'http://localhost:3000',
+      baseUrl: baseUrl,
       root: module,
       // These are the modules we want to bring into the project.
       modules: {
@@ -41,7 +42,6 @@ function run(config, ready) {
           excludeTypes: [],
           perLocale: true
         },
-
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
         'apostrophe-express': {
           session: {
@@ -56,8 +56,32 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
+        'products' : {
+          extend: 'apostrophe-pieces',
+          name: 'product',
+          label: 'Product',
+        },
         'apostrophe-blog': {},
         'apostrophe-blog-pages': {},
+        'apostrophe-blog-widgets': {
+          extend: 'apostrophe-pieces-widgets'
+        },
+        'apostrophe-pages': {
+          types: [
+            {
+              name: 'apostrophe-blog-page',
+              label: 'Blog'
+            }
+          ],
+          park: [
+            {
+              title: 'Blog',
+              type: 'apostrophe-blog-page',
+              slug: '/blog',
+              published: true
+            }
+          ]
+        },
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
@@ -133,6 +157,7 @@ function run(config, ready) {
           defaultLocale: 'en',
           prefixes: prefixes
         },
+
 
         'apostrophe-review-and-deploy': {
           deployTo: [
