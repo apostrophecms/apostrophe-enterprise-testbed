@@ -1,15 +1,28 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const path = require('path');
+const server = require('../server');
 const steps = require('../steps');
-const setup = require('../specSetup');
 
 const fixturesPath = path.resolve(__dirname, '..', 'fixtures');
 const slideshowSelector = '.apos-slideshow';
 const slideshow2nItemSelector = `${slideshowSelector} .apos-slideshow-item:nth-child(2)`;
 
 module.exports = Object.assign(
-  setup,
+  {
+    before: (client, done) => {
+      client.resizeWindow(1200, 800);
+
+      this._server = server.create();
+      this._server.start(done);
+    },
+
+    after: (client, done) => {
+      client.end(() => {
+        this._server.stop(done);
+      });
+    },
+  },
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
