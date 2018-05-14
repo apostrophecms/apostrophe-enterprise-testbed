@@ -1,29 +1,10 @@
-const server = require('../server');
 const steps = require('../steps/index');
-const sauce = require('../sauce');
+const server = require('../server');
+const setup = require('../specSetup');
 
 module.exports = Object.assign(
-  {
-    before: (client, done) => {
-      const address = client.globals.test_settings.apos_address;
-      const port = client.globals.test_settings.apos_port;
-      client.resizeWindow(1200, 800);
-
-      this._server = server.create(address, port);
-      this._server.start(done);
-    },
-    after: (client, done) => {
-      client.end(() => {
-        this._server.stop(done);
-        sauce(client, done);
-      });
-    },
-    afterEach: (client, done) => {
-      console.log("AFTER Ea", client);
-      return sauce(client, done);
-    }
-  },
-  steps.main(),
+  setup,
+  steps.main(), /*
   steps.login(),
   steps.switchLocale('es'),
   steps.switchToDraftMode(),
@@ -38,5 +19,5 @@ module.exports = Object.assign(
 
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
     }
-  },
-);
+  } */
+  );

@@ -1,5 +1,5 @@
-const server = require('../server');
 const steps = require('../steps');
+const setup = require('../specSetup');
 
 const firstTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(1)';
 const sendTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(2)';
@@ -28,20 +28,7 @@ function dragAndDrop(client, draggable, droppable) {
 }
 
 module.exports = Object.assign(
-  {
-    before: (client, done) => {
-      client.resizeWindow(1200, 800);
-
-      this._server = server.create();
-      this._server.start(done);
-    },
-
-    after: (client, done) => {
-      client.end(() => {
-        this._server.stop(done);
-      });
-    },
-  },
+  setup,
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),

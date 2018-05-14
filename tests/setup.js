@@ -24,6 +24,7 @@ const checkVenvs = () => {
 
 module.exports = {
   before: function(done) {
+    console.log('I - SETUP');
     if (isLocalRunning.call(this)) {
       chromedriver.start([
         `--port=${WEBDRIVER_PORT}`,
@@ -44,6 +45,7 @@ module.exports = {
     });
   },
   after: function(done) {
+    console.log('I - SETUP AFTER');
     clean(done);
   },
   waitForConditionTimeout : 50000,
@@ -54,6 +56,7 @@ function isLocalRunning() {
 }
 
 function clean(cb) {
+  console.log('I - SETUP CLEAN');
   chromedriver.stop();
   server.clean();
   sauceConnectLauncher.kill(cb);
@@ -61,6 +64,7 @@ function clean(cb) {
 }
 
 onDeath((signal, err) => {
+  console.log('I - SETUP DEATH', signal, err)
   if (err) {
     console.log(err);
   }

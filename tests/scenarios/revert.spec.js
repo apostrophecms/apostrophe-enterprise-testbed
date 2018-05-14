@@ -1,31 +1,10 @@
-const server = require('../server');
 const steps = require('../steps');
+const setup = require('../specSetup')
 
 module.exports = Object.assign(
-  {
-    before: (client, done) => {
-      const address = client.globals.test_settings.apos_address;
-      const port = client.globals.test_settings.apos_port;
-      console.log("REVERT", address, port);
-      client.resizeWindow(1200, 800);
-
-      this._server = server.create(address, port);
-      this._server.start(done);
-    },
-
-    after: (client, done) => {
-      client.end(() => {
-        this._server.stop(done);
-      });
-    }
-  },
+  setup,
   steps.main(),
-  steps.login(),
- /* { */
- /*    'pause': client => { */
- /*      client.pause(); */
- /*    } */
- /*  }, */
+/*  steps.login(),
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
@@ -152,4 +131,5 @@ module.exports = Object.assign(
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
   }
+    */
 );

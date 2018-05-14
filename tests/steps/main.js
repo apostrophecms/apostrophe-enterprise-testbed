@@ -9,7 +9,6 @@ module.exports = () => {
       const address = client.globals.test_settings.apos_address;
       const port = client.globals.test_settings.apos_port;
       const url = `http://${address}:${port}`;
-      console.log('MAIN', client.globals.test_settings, url);
       client
         .url(url)
         .pause(2000);
