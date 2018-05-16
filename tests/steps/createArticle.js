@@ -54,6 +54,8 @@ module.exports = (articleName) => {
       openAdminBar.method(client);
       client.waitForElementVisible(articleSelector);
       client.click(articleSelector);
+      client.pause(200);
+      client.screenshot();
       client.waitForElementVisible(manageTableRowSelector);
       client.expect.element(manageTableRowSelector).text.to.contain(articleName);
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
