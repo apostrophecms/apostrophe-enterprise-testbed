@@ -1,5 +1,6 @@
 const steps = require('../steps');
 const server = require('../server');
+const sauce = require('../sauce');
 
 module.exports = Object.assign(
   {
@@ -12,6 +13,7 @@ module.exports = Object.assign(
       this._server.start(done);
     },
 
+    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);
