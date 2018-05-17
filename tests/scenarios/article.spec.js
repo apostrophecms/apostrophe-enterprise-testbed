@@ -1,7 +1,7 @@
 const server = require('../server');
 const steps = require('../steps');
 const sauce = require('../sauce');
-
+debugger;
 module.exports = Object.assign(
     {
     before: (client, done) => {
@@ -89,7 +89,7 @@ module.exports = Object.assign(
 
       client.waitForElementVisible(blogButtonSelector);
       client.click(blogButtonSelector);
-      client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(workflowModalBtnSelector);
       client.click(workflowModalBtnSelector);

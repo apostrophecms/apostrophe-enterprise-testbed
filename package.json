@@ -8,6 +8,7 @@
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
     "e2e-local": "nightwatch tests/scenarios/* --config nightwatch.js --env local",
+    "e2e-debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js tests/scenarios/* --config nightwatch.js --env local --inspect-brk",
     "e2e-remote": "nightwatch tests/scenarios/* --config nightwatch.js --env remote",
     "test": "npm run e2e-remote"
   },

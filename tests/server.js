@@ -3,13 +3,7 @@ const once = require('once');
 
 const serverProcesses = [];
 
-exports.clean = () => {
-  serverProcesses.forEach((prc) => {
-    if (!prc.killed) {
-      prc.kill();
-    }
-  });
-};
+exports.clean = clean;
 
 exports.create = (address, port) => {
   var server;
@@ -26,11 +20,19 @@ exports.create = (address, port) => {
       server.stdout.on('data', onceCb);
     },
     stop(cb) {
-      server.kill();
-      cb();
+      clean();
+      setTimeout(cb, 1500)
     }
   };
 };
+
+function clean() {
+  serverProcesses.forEach((prc) => {
+    if (!prc.killed) {
+      prc.kill();
+    }
+  });
+}
 
 function restoreMongoDump() {
   const cmd = 'mongorestore --noIndexRestore mongodump/ --drop';
