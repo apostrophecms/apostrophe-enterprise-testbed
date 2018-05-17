@@ -21,7 +21,10 @@ exports.create = (address, port) => {
     },
     stop(cb) {
       clean();
-      setTimeout(cb, 1500)
+      setTimeout(() => {
+        console.log('Restart server');
+        return cb();
+      }, 5000);
     }
   };
 };
