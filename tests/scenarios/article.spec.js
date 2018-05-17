@@ -5,11 +5,9 @@ debugger;
 module.exports = Object.assign(
     {
     before: (client, done) => {
-      console.log('client', client.globals.test_settings);
-      const { apos_address, apos_port } = client.globals.test_settings;
       client.resizeWindow(1200, 800);
       if (!this._server) {
-        this._server = server.create(apos_address, apos_port);
+        this._server = server.create('localhost', 3112);
         this._server.start(done);
       }
     },
