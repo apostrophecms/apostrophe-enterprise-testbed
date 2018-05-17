@@ -20,21 +20,24 @@ exports.create = (address, port) => {
       server.stdout.on('data', onceCb);
     },
     stop(cb) {
-      clean();
-      setTimeout(() => {
-        console.log('Restart server');
-        return cb();
-      }, 5000);
+      server.kill();
+      clean(cb);
     }
   };
 };
 
-function clean() {
-  serverProcesses.forEach((prc) => {
+function clean(cb) {
+  serverProcesses.forEach(prc => {
+    console.log(prc)
     if (!prc.killed) {
       prc.kill();
     }
   });
+
+  setTimeout(() => {
+    console.log("Wait for processes to die.");
+    return cb();
+  }, 10000);
 }
 
 function restoreMongoDump() {
