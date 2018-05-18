@@ -1,6 +1,6 @@
 const shell = require('shelljs');
 const once = require('once');
-
+const kp = require('kill-port');
 const serverProcesses = [];
 
 exports.clean = clean;
@@ -21,23 +21,26 @@ exports.create = (address, port) => {
     },
     stop(cb) {
       server.kill();
-      clean(cb);
+      clean(port, cb);
     }
   };
 };
 
-function clean(cb) {
+function clean(port, cb) {
   serverProcesses.forEach(prc => {
-    console.log(prc)
     if (!prc.killed) {
       prc.kill();
     }
   });
-
-  setTimeout(() => {
-    console.log("Wait for processes to die.");
-    return cb();
-  }, 10000);
+  kp(port)
+    .then(msg => {
+      console.log('kp ok', msg);
+      cb(msg);
+    })
+    .catch(err => {
+      console.log('kp err', err);
+      cb(err);
+    });
 }
 
 function restoreMongoDump() {

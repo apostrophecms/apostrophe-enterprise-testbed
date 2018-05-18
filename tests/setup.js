@@ -58,8 +58,10 @@ function isLocalRunning() {
 function clean(cb) {
   console.log('I - SETUP CLEAN');
   chromedriver.stop();
-  server.clean();
-  sauceConnectLauncher.kill(cb);
+  sauceConnectLauncher.kill(msg => {
+    console.log('SAUCE CONNECT KILL', msg)
+    server.clean(cb);
+  });
   process.exit(0);
 }
 

@@ -7,7 +7,7 @@ module.exports = Object.assign(
     before: (client, done) => {
       client.resizeWindow(1200, 800);
       if (!this._server) {
-        this._server = server.create('localhost', 3112);
+        this._server = server.create('localhost', 3111);
         this._server.start(done);
       }
     },
@@ -19,6 +19,7 @@ module.exports = Object.assign(
     },
   },
   steps.main(),
+  /*
   steps.login(),
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
@@ -115,4 +116,5 @@ module.exports = Object.assign(
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
     }
   },
+  */
 );
