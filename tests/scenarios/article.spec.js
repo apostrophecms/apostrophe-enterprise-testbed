@@ -19,7 +19,6 @@ module.exports = Object.assign(
     },
   },
   steps.main(),
-  /*
   steps.login(),
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
@@ -116,5 +115,4 @@ module.exports = Object.assign(
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
     }
   },
-  */
 );

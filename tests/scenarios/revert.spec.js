@@ -21,7 +21,7 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-/*  steps.switchToDraftMode(),
+  steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   steps.workflowSubmitArticle(),
   steps.workflowCommitArticle(),
@@ -50,9 +50,7 @@ module.exports = Object.assign(
        client.keys(client.Keys.ESCAPE);
 
       // edit article and update title
-      client.waitForElementNotVisible(articleSelector);
-      client.waitForElementVisible(adminBarSelector);
-      client.click(adminBarSelector);
+      steps.openAdminBar.method(client);
       client.waitForElementVisible(articleSelector);
       client.click(articleSelector);
       client.waitForElementVisible(editArticleBtnSelector);
@@ -60,14 +58,11 @@ module.exports = Object.assign(
       client.waitForElementVisible(editTitleField);
       client.clearValue(editTitleField);
       client.setValue(editTitleField, 'Article Title 1');
+      client.waitForElementVisible(saveBtnSelector);
       client.click(saveBtnSelector);
-
-      client.waitForElementVisible(adminBarSelector);
-      client.click(adminBarSelector);
+      steps.openAdminBar.method(client);
       client.waitForElementVisible(articleSelector);
       client.click(articleSelector);
-
-      // commit the updated article
       client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
       client.waitForElementVisible(modalEditArticleSelector);
@@ -78,7 +73,6 @@ module.exports = Object.assign(
       client.expect.element(".demo-blog-header-wrapper h3").text.to.equal('Article Title 1');
       client.waitForElementVisible(aposCommitBtnSelector);
       client.click(aposCommitBtnSelector);
-      client.waitForElementVisible(modalExportSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
     }
@@ -127,7 +121,7 @@ module.exports = Object.assign(
       client.click(workflowHistoryBtnSelector);
       client.waitForElementVisible(workflowRevertBtnSelector);
       client.click(workflowRevertBtnSelector);
-      client.waitForElementNotVisible(notificationSelector);
+      client.waitForElementNotPresent(notificationSelector);
     }
   },
  {
@@ -145,5 +139,5 @@ module.exports = Object.assign(
       client.waitForElementVisible(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
-  } */
+  }
 );
