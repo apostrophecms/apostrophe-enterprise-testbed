@@ -28,7 +28,8 @@ function run(config, ready) {
   var apos = require('apostrophe')(
     _.assign({
       shortName: 'apostrophe-enterprise-testbed',
-      baseUrl: 'http://localhost:3000',
+      // baseUrl: 'http://localhost:3000',
+      // baseUrl: baseUrl,
       root: module,
       // These are the modules we want to bring into the project.
       modules: {
