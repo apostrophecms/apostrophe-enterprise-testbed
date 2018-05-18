@@ -34,6 +34,8 @@ function run(config, ready) {
       // These are the modules we want to bring into the project.
       modules: {
 
+        'apostrophe-pieces-orderings-bundle': {},
+
         'apostrophe-site-map': {
           // array of doc types you do NOT want
           // to include, even though they are
@@ -57,9 +59,18 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
-        'apostrophe-blog': {},
-        'apostrophe-blog-pages': {},
-        'apostrophe-blog-widgets': {},
+        'apostrophe-blog': {
+        },
+        'apostrophe-blog-orderings': {
+          extend: 'apostrophe-pieces-orderings'
+        },
+        'apostrophe-blog-pages': {
+          orderings: true
+        },
+        'apostrophe-blog-widgets': {
+          orderings: true
+        },
+        'mixed-widgets': {},
         'apostrophe-users': {},
 
         'apostrophe-admin-bar': {
