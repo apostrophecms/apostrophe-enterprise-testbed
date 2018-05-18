@@ -22,6 +22,7 @@ module.exports = Object.assign(
     },
   },
   steps.main(),
+  /*
   steps.login(),
   steps.switchLocale('es'),
   steps.switchToDraftMode(),
@@ -37,4 +38,5 @@ module.exports = Object.assign(
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
     }
   }
+  */
   );
