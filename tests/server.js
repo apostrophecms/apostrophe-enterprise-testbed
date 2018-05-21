@@ -27,12 +27,13 @@ exports.create = (address, port) => {
       // We found it very difficult to kill the child process, not just the shell,
       // created by shell.exec by any other means in a mac *and* Linux env. -Tom and Paul
       kp(port).then(function() {
+        return cb();
         attempt();
       }).catch(function(e) {
         console.error(e);
         process.exit(1);
       });
-      var lsofSucceeded = false;
+      var grepSucceeded = false;
       var attempts = 0;
       attempt();
       function attempt() {
@@ -42,12 +43,13 @@ exports.create = (address, port) => {
           process.exit(1);
         }
         try {
-          console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
-          lsofSucceeded = true;
+          // Same command used by kill-port, but here just to detect
+          console.log(require('child_process').execSync(`lsof -i tcp:${port} | grep LISTEN`, { encoding: 'utf8' }));
+          grepSucceeded = true;
         } catch (e) {
-          // Good, lsof did not find a listener (nonzero exit status throws exception)
+          // Good, lsof did not find a listener (grep is empty, nonzero exit status throws exception)
         }
-        if (lsofSucceeded) {
+         if (grepSucceeded) {
           console.log('lsof found a listener on the server port, waiting...');
           setTimeout(attempt, 50);
           return;
