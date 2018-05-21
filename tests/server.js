@@ -18,14 +18,25 @@ exports.create = (address, port) => {
     stop(cb) {
       server.kill('SIGKILL');
       var lsofSucceeded = false;
-      try {
-        console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
-        lsofSucceeded = true;
-      } catch (e) {
-        // Good, lsof did not find a listener (nonzero exit status throws exception)
-      }
-      if (lsofSucceeded) {
-        throw new Error('lsof found a listener');
+      var attempts = 0;
+      attempt();
+      function attempt() {
+        attempts++;
+        if (attempts > 200) {
+          throw new Error('waited 10 seconds for previous scenario server process to die, I give up');
+        }
+        try {
+          console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
+          lsofSucceeded = true;
+        } catch (e) {
+          // Good, lsof did not find a listener (nonzero exit status throws exception)
+        }
+        if (lsofSucceeded) {
+          console.log('lsof found a listener on the server port, waiting...');
+          setTimeout(attempt, 50);
+          return;
+        }
+        return cb(null);
       }
     }
   };
