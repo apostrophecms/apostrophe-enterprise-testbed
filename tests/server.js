@@ -33,7 +33,7 @@ function clean(port, cb) {
     }
   });
 
-  console.log(require('child_process').execSync('/bin/sh -c lsof -i tcp:3111', { encoding: 'utf8' }));
+  console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
 
   kp(port)
     .then(msg => {
