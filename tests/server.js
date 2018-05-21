@@ -2,8 +2,6 @@ const shell = require('shelljs');
 const once = require('once');
 const kp = require('kill-port');
 
-exports.clean = clean;
-
 exports.create = (address, port) => {
   var server;
 

@@ -60,7 +60,6 @@ function clean(cb) {
   chromedriver.stop();
   sauceConnectLauncher.kill(msg => {
     console.log('SAUCE CONNECT KILL', msg)
-    server.clean(cb);
   });
   process.exit(0);
 }
