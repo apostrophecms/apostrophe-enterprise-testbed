@@ -32,6 +32,9 @@ function clean(port, cb) {
       prc.kill();
     }
   });
+
+  console.log(require('child_process').execSync('/bin/sh -c lsof -i tcp:3111'));
+
   kp(port)
     .then(msg => {
       console.log('kp ok', msg);
