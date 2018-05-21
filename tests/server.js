@@ -52,6 +52,7 @@ exports.create = (address, port) => {
           setTimeout(attempt, 50);
           return;
         }
+        instances--;
         return cb(null);
       }
     }
