@@ -17,7 +17,16 @@ exports.create = (address, port) => {
     },
     stop(cb) {
       server.kill('SIGKILL');
-      console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
+      var lsofSucceeded = false;
+      try {
+        console.log(require('child_process').execSync('lsof -i tcp:3111', { encoding: 'utf8' }));
+        lsofSucceeded = true;
+      } catch (e) {
+        // Good, lsof did not find a listener (nonzero exit status throws exception)
+      }
+      if (lsofSucceeded) {
+        throw new Error('lsof found a listener');
+      }
     }
   };
 };
