@@ -2,6 +2,7 @@
 /locales
 /npm-debug.log
 /data
+/public/sitemaps
 /public/uploads
 /public/apos-minified
 /data/temp/uploadfs
@@ -18,3 +19,4 @@ node_modules
 /scripts/sync-up
 /tests/reports
 /screenshots/
+.*.sw*

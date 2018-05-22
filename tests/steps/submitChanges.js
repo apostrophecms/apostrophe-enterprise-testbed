@@ -11,9 +11,9 @@ module.exports = () => {
 
       client.pause(10000);
       client.waitForElementVisible(submitBtnSelector);
-      client.pause(200);
+      client.pause(1000);
       client.click(submitBtnSelector);
-      client.waitForElementVisible(notiSelector, 15000);
+      client.waitForElementVisible(notiSelector);
       client.click(notiSelector);
       client.waitForElementNotVisible(notiSelector);
       client.waitForElementVisible(submittedLabelSelector);

@@ -1,15 +1,17 @@
 const server = require('../server');
 const steps = require('../steps');
-
+const sauce = require('../sauce');
+debugger;
 module.exports = Object.assign(
-  {
+    {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
-
-      this._server = server.create();
-      this._server.start(done);
+      if (!this._server) {
+        this._server = server.create('localhost', 3111);
+        this._server.start(done);
+      }
     },
-
+    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);
@@ -25,87 +27,77 @@ module.exports = Object.assign(
     'submit the article, via the "Workflow" menu in the dialog box': (client) => {
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
+      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
+      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
 
       client.waitForElementVisible(modalBlogSelector);
       client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.waitForElementVisible(controlSelector);
-      client.pause(1000);
+      client.waitForElementVisible(workflowModalBtnSelector);
       client.click(workflowModalBtnSelector);
-      client.useCss();
       client.waitForElementVisible(submitWorkflowBtnSelector);
       client.click(submitWorkflowBtnSelector);
       client.waitForElementNotPresent(modalEditArticleSelector);
     }
   },
-  steps.checkNotification('Your submission will be reviewed.'),
+  steps.openAdminBar(),
   {
     'reopen the article. Commit the article.': (client) => {
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
+      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalCommitSelector = '.apos-workflow-commit-modal';
-      const controlSelector = `${modalEditArticleSelector} .apos-modal-controls .apos-dropdown`;
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const editArticleBtnSelector = `${manageTableRowSelector} a`;
+      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
+      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const workflowModalBtnSelector =
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
+      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-save]`;
       const noPreviewSelector = '.apos-workflow-no-preview';
-      const saveBtnSelector = `${modalCommitSelector} [data-apos-save]`;
       const notificationSelector = '.apos-notification-message';
 
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementVisible(blogButtonSelector);
+      client.click(blogButtonSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
       client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.waitForElementVisible(controlSelector);
-      client.pause(200);
+      client.waitForElementVisible(workflowModalBtnSelector);
       client.click(workflowModalBtnSelector);
-      client.useCss();
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(noPreviewSelector);
-
-      client.expect.element(noPreviewSelector).text.to.equal('No preview available.');
-
-      client.waitForElementNotPresent(notificationSelector);
-      client.click(saveBtnSelector);
+      client.waitForElementNotPresent(commitWorkflowBtnSelector);
     }
   },
-  steps.checkNotification('New Article Title was committed successfully.'),
+    steps.openAdminBar(),
   {
     'export the article to all other locales.': (client) => {
+      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
+      const modalBlogSelector = '.apostrophe-blog-manager';
       const modalExportSelector = '.apos-workflow-export-modal';
       const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
+      const workflowModalBtnSelector =
+        `[data-apos-dropdown-name="workflow"]`;
       const masterLocaleBtnSelector = '[for*=master] span';
+      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
+      const editArticleBtnSelector = `${manageTableRowSelector} a`;
+      const forceExportBtnSelector = `[data-apos-workflow-force-export]`;
       const notificationSelector = '.apos-notification-container';
 
-      client.waitForElementVisible(modalExportSelector);
+      client.waitForElementVisible(blogButtonSelector);
+      client.click(blogButtonSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
+      client.click(editArticleBtnSelector);
+      client.waitForElementVisible(workflowModalBtnSelector);
+      client.click(workflowModalBtnSelector);
+      client.waitForElementVisible(forceExportBtnSelector);
+      client.click(forceExportBtnSelector);
       client.waitForElementVisible(masterLocaleBtnSelector);
       client.click(masterLocaleBtnSelector);
-      client.click(notificationSelector);
       client.click(exportBtnSelector);
       client.waitForElementNotPresent(modalExportSelector);
     }
-  },
-  steps.checkNotification('Successfully exported to: master, fr, es'),
-  {
-    'close export dialog': (client) => {
-      const finishBtnSelector = '[data-apos-cancel]';
-      const blackoutSelector = '.apos-modal-blackout';
-
-      client.waitForElementVisible(finishBtnSelector);
-      client.pause(1000);
-      client.click(finishBtnSelector);
-      client.waitForElementNotPresent(blackoutSelector);
-    },
   },
   steps.switchLocale('es'),
   steps.openAdminBar(),

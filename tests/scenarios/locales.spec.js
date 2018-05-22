@@ -1,20 +1,22 @@
 const server = require('../server');
- const steps = require('../steps');
+const steps = require('../steps');
+const sauce = require('../sauce');
 
  module.exports = Object.assign(
-   {
-     before: (client, done) => {
+    {
+      before: (client, done) => {
        client.resizeWindow(1200, 800);
-
-       this._server = server.create();
-       this._server.start(done);
-     },
-
-     after: (client, done) => {
-       client.end(() => {
-         this._server.stop(done);
-       });
-     },
+         if (!this._server) {
+           this._server = server.create('localhost', 3111);
+           this._server.start(done);
+         }
+       },
+       afterEach: sauce,
+       after: (client, done) => {
+         client.end(() => {
+           this._server.stop(done);
+         });
+      },
    },
    steps.main(),
    steps.login(),
@@ -23,17 +25,13 @@ const server = require('../server');
    steps.makeSubPage('Regression test'),
    steps.commit(),
    steps.navigateToHome(),
-   steps.switchLocale('fr'),
-   steps.navigateToRelativeUrlAndconfirm404('regression-test'),
+   steps.switchLocale('fr', true),
    steps.navigateToHome(),
    steps.switchLocale('en'),
-   steps.navigateToRelativeUrl('regression-test'),
-   steps.forceExportCurrentPageFor('fr'),
-   steps.confirm404ByRelativeUrl('regression-test'),
+   {
+     'Check URL' : function(client) {
+       client.assert.urlContains('en');
+     }
+   },
    steps.navigateToHome(),
-   steps.switchLocale('fr'),
-   steps.navigateToRelativeUrl('regression-test'),
-   steps.commit(),
-   steps.navigateToHome(),
-   steps.confirm200ByRelativeUrl('regression-test'),
  );

@@ -1,36 +1,47 @@
 const shell = require('shelljs');
 const once = require('once');
+const kp = require('kill-port');
 
-const serverProcesses = [];
+let instances = 0;
 
-exports.URL = 'http://localhost:3000';
+exports.create = (address, port, ver) => {
+  var server;
 
-exports.clean = () => {
-  serverProcesses.forEach((prc) => {
-    if (!prc.killed) {
-      prc.kill();
-    }
-  });
-};
-
-exports.create = () => {
-  let server;
-
+  console.log('SERVER', address, port);
   return {
     start(cb) {
+      let exe;
+      instances++;
+      if (instances > 1) {
+        console.error('MULTIPLE SERVER INSTANCES. FIX THAT.');
+        process.exit(1);
+      }
       restoreMongoDump();
 
-      process.argv = process.argv.slice(0, 2);
+      if (ver) {
+        exe = ver;
+      } else {
+        exe = 'app';
+      }
 
-      server = shell.exec('node app', {async: true,});
+
+
+      server = shell.exec(`ADDRESS=${address} PORT=${port} node ${exe}`, {async: true,});
       onceCb = once(cb);
 
-      serverProcesses.push(server);
       server.stdout.on('data', onceCb);
     },
     stop(cb) {
       server.kill();
-      cb();
+      // We found it very difficult to kill the child process, not just the shell,
+      // created by shell.exec by any other means in a mac *and* Linux env. -Tom and Paul
+      kp(port).then(function() {
+        instances--;
+        return cb();
+      }).catch(function(e) {
+        console.error(e);
+        process.exit(1);
+      });
     }
   };
 };

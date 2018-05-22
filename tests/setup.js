@@ -24,6 +24,7 @@ const checkVenvs = () => {
 
 module.exports = {
   before: function(done) {
+    console.log('I - SETUP');
     if (isLocalRunning.call(this)) {
       chromedriver.start([
         `--port=${WEBDRIVER_PORT}`,
@@ -36,7 +37,7 @@ module.exports = {
     checkVenvs();
     sauceConnectLauncher(scOpts, (err) => {
       if (err) {
-        throw new Error('Unable to connect to SauceLabs.\n' + err);
+        console.log("ERROR connecting to sauce labs", err);
       }
 
       console.log("Started Sauce Connect Process");
@@ -44,9 +45,10 @@ module.exports = {
     });
   },
   after: function(done) {
+    console.log('I - SETUP AFTER');
     clean(done);
   },
-  waitForConditionTimeout : 5000,
+  waitForConditionTimeout : 50000,
 };
 
 function isLocalRunning() {
@@ -54,12 +56,16 @@ function isLocalRunning() {
 }
 
 function clean(cb) {
+  console.log('I - SETUP CLEAN');
   chromedriver.stop();
-  server.clean();
-  sauceConnectLauncher.kill(cb);
+  sauceConnectLauncher.kill(msg => {
+    console.log('SAUCE CONNECT KILL', msg)
+  });
+  process.exit(0);
 }
 
 onDeath((signal, err) => {
+  console.log('I - SETUP DEATH', signal, err)
   if (err) {
     console.log(err);
   }

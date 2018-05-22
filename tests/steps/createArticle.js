@@ -11,7 +11,7 @@ module.exports = (articleName) => {
 
   return {
     [`[${counter}] create an article`]: function(client) {
-      const blackoutSelector = '.apos-modal-blackout';
+      const blackoutSelector = '.apos-modal-blackout:first-child';
       const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const addArticleBtnSelector = '[data-apos-create-apostrophe-blog]';
@@ -50,8 +50,13 @@ module.exports = (articleName) => {
 
       client.setValue(inputPublicationDateSelector, publicationDate);
       client.click(saveBtnSelector);
-      client.waitForElementVisible(modalBlogSelector);
-
+      client.waitForElementNotPresent(blackoutSelector);
+      openAdminBar.method(client);
+      client.waitForElementVisible(articleSelector);
+      client.click(articleSelector);
+      client.pause(200);
+      client.screenshot();
+      client.waitForElementVisible(manageTableRowSelector);
       client.expect.element(manageTableRowSelector).text.to.contain(articleName);
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
       client.expect.element(manageTableRowSelector).text.to.contain(publicationDate);

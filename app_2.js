@@ -1,4 +1,5 @@
 var _ = require('lodash');
+
 var locales;
 var prefixes;
 
@@ -45,8 +46,7 @@ function run(config, ready) {
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
         'apostrophe-express': {
           session: {
-            secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',
-            cookie: {
+            secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',            cookie: {
               // domain: 'workflow.com'
             }
           }
@@ -56,36 +56,8 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
-        'products' : {
-          extend: 'apostrophe-pieces',
-          name: 'product',
-          label: 'Product',
-        },
         'apostrophe-blog': {},
-        'products': {
-          extend: 'apostrophe-pieces',
-          name: 'product'
-        },
         'apostrophe-blog-pages': {},
-        'apostrophe-blog-widgets': {
-          extend: 'apostrophe-pieces-widgets'
-        },
-        'apostrophe-pages': {
-          types: [
-            {
-              name: 'apostrophe-blog-page',
-              label: 'Blog'
-            }
-          ],
-          park: [
-            {
-              title: 'Blog',
-              type: 'apostrophe-blog-page',
-              slug: '/blog',
-              published: true
-            }
-          ]
-        },
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
@@ -106,78 +78,61 @@ function run(config, ready) {
         'as-helpers': {},
         'as-two-column-block-widgets': {},
 
-        'mixed-widgets': {
-          extend: 'apostrophe-widgets',
-          label: 'Mixed',
-          addFields: [
-            {
-              name: '_items',
-              type: 'joinByArray',
-              withType: [ 'apostrophe-blog', 'product', 'apostrophe-page' ]
-            }
-          ]
-        },
-        'pages-widgets': {
-          extend: 'apostrophe-widgets',
-          label: 'Pages',
-          addFields: [
-            {
-              name: '_items',
-              type: 'joinByArray',
-              withType: 'apostrophe-page'
-            }
-          ]
-        },
-
         'apostrophe-workflow': {
           alias: 'workflow',
           locales: [
             {
-              name: 'en',
-              label: 'en',
+              name: 'master',
+              label: 'Master',
+              private: true,
+              children: [
+                {
+                  name: 'en',
+                  label: 'en',
+                },
+                {
+                  name: 'fr',
+                  label: 'fr'
+                },
+                {
+                  name: 'es',
+                  label: 'es'
+                }
+              ].concat(process.env.EXTRA_LOCALES ? [
+                {
+                  name: 'be',
+                  label: 'Belgium'
+                },
+                {
+                  name: 'de',
+                  label: 'Germany'
+                },
+                {
+                  name: 'au',
+                  label: 'Australia'
+                },
+                {
+                  name: 'nl',
+                  label: 'Netherlands'
+                },
+                {
+                  name: 'ru',
+                  label: 'Russia'
+                },
+                {
+                  name: 'hu',
+                  label: 'Hungary'
+                },
+                {
+                  name: 'th',
+                  label: 'Thailand'
+                }
+              ] : [])
             },
-            {
-              name: 'fr',
-              label: 'fr'
-            },
-            {
-              name: 'es',
-              label: 'es'
-            }
-          ].concat(process.env.EXTRA_LOCALES ? [
-            {
-              name: 'be',
-              label: 'Belgium'
-            },
-            {
-              name: 'de',
-              label: 'Germany'
-            },
-            {
-              name: 'au',
-              label: 'Australia'
-            },
-            {
-              name: 'nl',
-              label: 'Netherlands'
-            },
-            {
-              name: 'ru',
-              label: 'Russia'
-            },
-            {
-              name: 'hu',
-              label: 'Hungary'
-            },
-            {
-              name: 'th',
-              label: 'Thailand'
-            }
-          ] : []),
+          ],
           defaultLocale: 'en',
           prefixes: prefixes
         },
-
 
         'apostrophe-review-and-deploy': {
           deployTo: [

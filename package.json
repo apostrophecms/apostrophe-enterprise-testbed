@@ -8,6 +8,7 @@
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
     "e2e-local": "nightwatch tests/scenarios/* --config nightwatch.js --env local",
+    "e2e-debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js tests/scenarios/* --config nightwatch.js --env local --inspect-brk",
     "e2e-remote": "nightwatch tests/scenarios/* --config nightwatch.js --env remote",
     "test": "npm run e2e-remote"
   },
@@ -32,6 +33,7 @@
     "archiver": "^2.1.1",
     "cheerio": "^1.0.0-rc.2",
     "death": "^1.1.0",
+    "kill-port": "^1.2.0",
     "nightwatch": "^0.9.20",
     "once": "^1.4.0",
     "sauce-connect-launcher": "^1.2.3",
