@@ -4,12 +4,13 @@ const kp = require('kill-port');
 
 let instances = 0;
 
-exports.create = (address, port) => {
+exports.create = (address, port, ver) => {
   var server;
 
   console.log('SERVER', address, port);
   return {
     start(cb) {
+      let exe;
       instances++;
       if (instances > 1) {
         console.error('MULTIPLE SERVER INSTANCES. FIX THAT.');
@@ -17,7 +18,15 @@ exports.create = (address, port) => {
       }
       restoreMongoDump();
 
-      server = shell.exec(`ADDRESS=${address} PORT=${port} node app`, {async: true,});
+      if (ver) {
+        exe = ver;
+      } else {
+        exe = 'app';
+      }
+
+
+
+      server = shell.exec(`ADDRESS=${address} PORT=${port} node ${exe}`, {async: true,});
       onceCb = once(cb);
 
       server.stdout.on('data', onceCb);
