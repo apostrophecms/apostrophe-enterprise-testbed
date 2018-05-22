@@ -70,22 +70,6 @@ function run(config, ready) {
         'apostrophe-blog-widgets': {
           extend: 'apostrophe-pieces-widgets'
         },
-        'apostrophe-pages': {
-          types: [
-            {
-              name: 'apostrophe-blog-page',
-              label: 'Blog'
-            }
-          ],
-          park: [
-            {
-              title: 'Blog',
-              type: 'apostrophe-blog-page',
-              slug: '/blog',
-              published: true
-            }
-          ]
-        },
         'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
