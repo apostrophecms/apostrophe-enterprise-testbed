@@ -6,7 +6,8 @@ module.exports = () => {
 
   return {
     [`[${counter}] navigate to home page`]: function(client) {
-      client.url(server.URL);
+      const URL = `http://${client.globals.test_settings.apos_address}:${client.globals.test_settings.apos_port}`;
+      client.url(URL);
       client.waitForElementVisible('body');
     }
   };
