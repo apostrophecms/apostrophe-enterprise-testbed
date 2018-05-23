@@ -24,9 +24,6 @@ module.exports = {
         browserName: 'chrome',
         javascriptEnabled: true,
         acceptSslCerts: true,
-        chromeOptions: {
-          'args': ['auto-open-devtools-for-tabs']
-        }
       }
     },
     remote: {
