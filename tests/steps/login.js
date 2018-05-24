@@ -11,6 +11,7 @@ module.exports = () => {
       const submitBtnSelector = '.apos-login-submit input';
 
       client.click(loginBtnSelector);
+      client.waitForElementVisible(usernameInputSelector);
       client.setValue(usernameInputSelector, 'admin');
       client.setValue(passInputSelector, 'demo');
       client.click(submitBtnSelector);

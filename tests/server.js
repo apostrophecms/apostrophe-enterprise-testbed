@@ -28,8 +28,11 @@ exports.create = (address, port, ver) => {
 
       server = shell.exec(`ADDRESS=${address} PORT=${port} node ${exe}`, {async: true,});
       onceCb = once(cb);
-
-      server.stdout.on('data', onceCb);
+      server.stdout.on('data', function() {
+        // Not sure why but without this intermediate
+        // anonymous function, we never fire. -Tom
+        onceCb();
+      });
     },
     stop(cb) {
       server.kill();
@@ -42,6 +45,22 @@ exports.create = (address, port, ver) => {
         console.error(e);
         process.exit(1);
       });
+    },
+    // Run command line task. Not intended to sanitize sneaky input.
+    // Synchronous.
+    task(args) {
+      if (Array.isArray(args)) {
+        args = args.join(' ');
+      }
+      let exe;
+
+      if (ver) {
+        exe = ver;
+      } else {
+        exe = 'app';
+      }
+      console.log('running task: ', args);
+      shell.exec(`node ${exe} ${args}`, {async: false});
     }
   };
 };
