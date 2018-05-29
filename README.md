@@ -1,6 +1,6 @@
 # apostrophe-enterprise-testbed
 
-This project is intended as a tested for browser-based functional tests. It is not intended as a sample website.
+This project is intended as a testbed for browser-based functional tests. It is not intended as a sample website.
 
 Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm. 
 
@@ -18,7 +18,7 @@ Sign-up on [saucelabs](saucelabs.com).
 Retrive name and access key, then subtitute it into command below:
 
 ```sh
-SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> run e2e-remote
+SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> npm run e2e-remote
 ```
 
 ## Testing the site
