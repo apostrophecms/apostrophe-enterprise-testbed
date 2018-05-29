@@ -24,16 +24,20 @@ if (process.env.EXTRA_LOCALES) {
 }
 
 function run(config, ready) {
-  const baseUrl = `http://${process.env.ADDRESS}:${process.env.PORT}`;
-  console.log('APP', process.env.ADDRESS, process.env.PORT, baseUrl);
+  var address = process.env.ADDRESS || 'localhost';
+  var port = process.env.PORT || '3000';
+
+  const baseUrl = `http://${address}:${port}`;
+  console.log('APP', address, port, baseUrl);
+
   var apos = require('apostrophe')(
     _.assign({
       shortName: 'apostrophe-enterprise-testbed',
       baseUrl: baseUrl,
       root: module,
+
       // These are the modules we want to bring into the project.
       modules: {
-
         'apostrophe-site-map': {
           // array of doc types you do NOT want
           // to include, even though they are
