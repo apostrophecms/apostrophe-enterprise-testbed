@@ -30,8 +30,12 @@ exports.create = (address, port, ver) => {
       var data = '';
       server.stdout.on('data', function(moreData) {
         data += moreData;
+        console.log('<', data, '>');
         if (data.match(/Listening on/)) {
-          return onceCb(null);
+          // Still not quite ready sometimes. -Tom
+          setTimeout(function() {
+            return onceCb(null);
+          }, 1000);
         }
       });
     },
