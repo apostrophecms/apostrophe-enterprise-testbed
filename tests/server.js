@@ -1,6 +1,5 @@
 const shell = require('shelljs');
 const once = require('once');
-const kp = require('kill-port');
 
 let instances = 0;
 
@@ -40,13 +39,17 @@ exports.create = (address, port, ver) => {
       server.kill();
       // We found it very difficult to kill the child process, not just the shell,
       // created by shell.exec by any other means in a mac *and* Linux env. -Tom and Paul
-      kp(port).then(function() {
-        instances--;
-        return cb();
-      }).catch(function(e) {
+
+      // This command line is borrowed from that built by the kill-port module
+      // but tweaked not to throw an error if the port is already available. -Tom
+      try {
+        shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk \'{print $2}\' | xargs -r kill -9`);
+      } catch (e) {
         console.error(e);
         process.exit(1);
-      });
+      }
+      instances--;
+      return cb();
     }
   };
 };
