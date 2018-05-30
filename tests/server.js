@@ -28,8 +28,13 @@ exports.create = (address, port, ver) => {
 
       server = shell.exec(`ADDRESS=${address} PORT=${port} node ${exe}`, {async: true,});
       onceCb = once(cb);
-
-      server.stdout.on('data', onceCb);
+      var data = '';
+      server.stdout.on('data', function(moreData) {
+        data += moreData;
+        if (data.match(/Listening on/)) {
+          return onceCb(null);
+        }
+      });
     },
     stop(cb) {
       server.kill();
