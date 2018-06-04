@@ -1,15 +1,17 @@
 const server = require('../server');
 const steps = require('../steps');
+const sauce = require('../sauce');
 
 module.exports = Object.assign(
   {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
-
-      this._server = server.create();
-      this._server.start(done);
+      if (!this._server) {
+        this._server = server.create('localhost', 3111, 'app_2');
+        this._server.start(done);
+      }
     },
-
+    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);
@@ -23,14 +25,17 @@ module.exports = Object.assign(
   steps.makeSubPage('Regression test'),
   steps.submitChanges(),
   steps.checkSubmitted(['Regression test']),
+  {
+    'confirm regression-test page url': client => {
+      client.assert.urlEquals('http://localhost:3111/en/regression-test');
+    }
+  },
   steps.switchToLiveMode(),
-  steps.confirm404ByRelativeUrl('regression-test'),
   steps.switchToDraftMode(),
   steps.navigateToPage('regression-test'),
   steps.commitAndExport(),
   steps.navigateToHome(),
   steps.switchToLiveMode(),
-  steps.confirm200ByRelativeUrl('regression-test'),
   steps.switchToDraftMode(),
   steps.navigateToPage('regression-test'),
   steps.changePageTypeTo('Alternate Page'),

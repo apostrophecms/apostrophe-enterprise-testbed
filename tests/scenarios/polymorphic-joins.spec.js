@@ -45,7 +45,9 @@ module.exports = Object.assign(
       const mixedWidgetBtnSelector = `${mainBlockSelector} [data-apos-add-item=mixed]`;
       const modalDialogSelector = '.apos-modal.apos-modal-slideable';
       const browseBtnSelector = '[data-apos-browse]';
-      // const articleCheckboxSelector = '.apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator';
+      const articleCheckboxSelector = '.apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator:first';
+      const productCheckboxSelector = '.apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator:first';
+      const regressionTestPageCheckboxSelector = '[data-apos-reorganize-depth="2"] input[type="checkbox"]:first';
       // const busyLayerSelector = '.apos-global-busy.active';
       // const saveChoicesBtnSelector = '[data-apos-modal-depth="1"] [data-apos-save]';
       // const saveBlogBtnSelector = '[data-apos-modal-depth="0"] [data-apos-save]';
@@ -58,9 +60,13 @@ module.exports = Object.assign(
       client.waitForElementVisible(modalDialogSelector);
       client.waitForElementVisible(browseBtnSelector);
       client.click(browseBtnSelector);
-      client.pause(20000);
-      // client.waitForElementVisible(articleCheckboxSelector);
-      // client.click(articleCheckboxSelector);
+      client.waitForElementVisible(articleCheckboxSelector);
+      client.click(articleCheckboxSelector);
+      client.click('[data-tab-button="product"]');
+      client.click(productCheckboxSelector);
+      client.click('[data-tab-button="apostrophe-page"]');
+      client.waitForElementVisible(regressionTestPageCheckboxSelector);
+      client.click(regressionTestPageCheckboxSelector);
       // client.waitForElementVisible(saveChoicesBtnSelector);
       // client.click(saveChoicesBtnSelector);
       // client.waitForElementVisible(saveBlogBtnSelector);

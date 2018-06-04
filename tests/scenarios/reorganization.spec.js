@@ -1,5 +1,6 @@
 const server = require('../server');
 const steps = require('../steps');
+const sauce = require('../sauce');
 
 const firstTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(1)';
 const sendTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(2)';
@@ -31,11 +32,12 @@ module.exports = Object.assign(
   {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
-
-      this._server = server.create();
-      this._server.start(done);
+      if (!this._server) {
+        this._server = server.create('localhost', 3111, 'app_2');
+        this._server.start(done);
+      }
     },
-
+    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);

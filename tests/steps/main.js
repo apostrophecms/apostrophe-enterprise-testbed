@@ -11,8 +11,7 @@ module.exports = () => {
       const url = `http://${address}:${port}`;
       client
         .url(url)
-        .pause(2000);
-      client.expect.element('body.home-page').to.be.present;
+        .waitForElementVisible('body.home-page', 10000);
     }
   };
 };

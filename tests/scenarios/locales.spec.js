@@ -25,7 +25,7 @@ const sauce = require('../sauce');
    steps.makeSubPage('Regression test'),
    steps.commit(),
    steps.navigateToHome(),
-   steps.switchLocale('fr', true),
+   steps.switchLocale('fr'),
    steps.navigateToHome(),
    steps.switchLocale('en'),
    {

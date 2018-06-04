@@ -1,6 +1,5 @@
 const shell = require('shelljs');
 const once = require('once');
-const kp = require('kill-port');
 
 let instances = 0;
 
@@ -28,23 +27,34 @@ exports.create = (address, port, ver) => {
 
       server = shell.exec(`ADDRESS=${address} PORT=${port} node ${exe}`, {async: true,});
       onceCb = once(cb);
-      server.stdout.on('data', function() {
-        // Not sure why but without this intermediate
-        // anonymous function, we never fire. -Tom
-        onceCb();
+      var data = '';
+      server.stdout.on('data', function(moreData) {
+        data += moreData;
+        console.log('<', data, '>');
+        if (data.match(/Listening on/)) {
+          // Still not quite ready sometimes. -Tom
+          setTimeout(function() {
+            return onceCb(null);
+          }, 1000);
+        }
       });
     },
     stop(cb) {
       server.kill();
       // We found it very difficult to kill the child process, not just the shell,
       // created by shell.exec by any other means in a mac *and* Linux env. -Tom and Paul
-      kp(port).then(function() {
-        instances--;
-        return cb();
-      }).catch(function(e) {
+
+      // This command line is borrowed from that built by the kill-port module
+      // but tweaked not to throw an error if the port is already available.
+      // Portable to Mac and Linux. -Tom
+      try {
+        var pids = shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | while IFS= read -r -d '' pid; do kill -9 "$pid"; done`);
+      } catch (e) {
         console.error(e);
         process.exit(1);
-      });
+        instances--;
+        return cb();
+      }
     },
     // Run command line task. Not intended to sanitize sneaky input.
     // Synchronous.
