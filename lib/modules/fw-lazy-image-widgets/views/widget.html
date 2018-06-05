@@ -1,0 +1,5 @@
+{% set obj = module.getSrcObject(data.widget.image_1x, data.widget.image_2x, apos) %}
+
+<img class="lazy-image {{ data.options.image_classes }}" data-src="{{ obj.src }}" data-srcset="{{ obj.srcset }}" src="{{ obj.placeholder_src }}" srcset="{{ obj.placeholder_srcset }}"
+/>
+<img class="original-image fadeIn {{ data.options.image_classes }}" alt="{{ data.widget.alt }}" title="{{ data.widget.title }}" src="" srcset=""/>

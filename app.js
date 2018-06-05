@@ -102,6 +102,10 @@ function run(config, ready) {
         'as-helpers': {},
         'as-two-column-block-widgets': {},
 
+        // Issue Demo Widgets
+        'fw-lazy-image-widgets': {},
+        'issue-demo-widgets': {},
+
         'apostrophe-workflow': {
           alias: 'workflow',
           locales: [
