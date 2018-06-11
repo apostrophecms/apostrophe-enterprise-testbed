@@ -49,11 +49,11 @@ exports.create = (address, port, ver) => {
       // Portable to Mac and Linux. -Tom
       try {
         var pids = shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | while IFS= read -r -d '' pid; do kill -9 "$pid"; done`);
+        instances--;
+        return cb();
       } catch (e) {
         console.error(e);
         process.exit(1);
-        instances--;
-        return cb();
       }
     },
     // Run command line task. Not intended to sanitize sneaky input.

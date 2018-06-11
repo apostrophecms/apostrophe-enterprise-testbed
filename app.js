@@ -65,11 +65,10 @@ function run(config, ready) {
           name: 'product',
           label: 'Product',
         },
-        'apostrophe-blog': {},
-        'products': {
-          extend: 'apostrophe-pieces',
-          name: 'product'
+        'products-pages': {
+          extend: 'apostrophe-pieces-pages'
         },
+        'apostrophe-blog': {},
         'apostrophe-blog-pages': {},
         'apostrophe-blog-widgets': {
           extend: 'apostrophe-pieces-widgets'
