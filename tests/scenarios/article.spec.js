@@ -79,7 +79,7 @@ module.exports = Object.assign(
       const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
       const workflowModalBtnSelector =
         `[data-apos-dropdown-name="workflow"]`;
-      const masterLocaleBtnSelector = '[for*=master] span';
+      const masterLocaleBtnSelector = '[for*=en] span';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const forceExportBtnSelector = `[data-apos-workflow-force-export]`;
