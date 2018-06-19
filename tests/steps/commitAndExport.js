@@ -9,7 +9,7 @@ module.exports = (itemsCount = 1) => {
       const modalDialogSelector = '.apos-workflow-commit-modal';
       const confirmBtnSelector = `${modalDialogSelector} [data-apos-save]`;
       const exportBtnSelector = '.apos-workflow-export-modal [data-apos-save]';
-      const masterLocaleBtnSelector = '[for*=en] span';
+      const masterLocaleBtnSelector = '[for*=master] span';
 
       client.pause(200);
       client.waitForElementVisible(commitBtnSelector);

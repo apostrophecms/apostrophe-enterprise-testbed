@@ -28,7 +28,7 @@ module.exports = Object.assign(
   {
     "change title and commit": (client) => {
       const modalExportSelector = '.apos-workflow-export-modal';
-      const exportSkipSelector = '.apos-workflow-commit-modal [data-apos-cancel]';
+      const exportSkipSelector = '.apos-workflow-export-modal [data-apos-cancel]';
       const modalBlogSelector = '.apostrophe-blog-manager';
       const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
@@ -69,12 +69,12 @@ module.exports = Object.assign(
       client.click(workflowModalBtnSelector);
       client.waitForElementVisible(commitWorkflowBtnSelector);
       client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(".demo-blog-header-wrapper h3");
-      client.expect.element(".demo-blog-header-wrapper h3").text.to.equal('Article Title 1');
       client.waitForElementVisible(aposCommitBtnSelector);
       client.click(aposCommitBtnSelector);
       client.waitForElementVisible(exportSkipSelector);
       client.click(exportSkipSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
+      client.click('[data-apos-cancel]');
     }
   },
   {
@@ -83,14 +83,12 @@ module.exports = Object.assign(
       const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
 
-      client.keys(client.Keys.ESCAPE);
-      client.keys(client.Keys.ESCAPE);
-      client.waitForElementNotVisible(blogBtnSelector);
       client.click(adminBarSelector);
       client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('Article Title 1');
+      client.click('[data-apos-cancel]');
     }
   },
   {
@@ -103,7 +101,8 @@ module.exports = Object.assign(
       const managerSelector = '.apos-manage-table';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const workflowModalBtnSelector = '[data-apos-dropdown-name="workflow"]';
+      const workflowModalBtnSelector =
+        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const notificationSelector = '.apos-notification-container';
       const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`;
       const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
@@ -121,7 +120,11 @@ module.exports = Object.assign(
       client.click(workflowHistoryBtnSelector);
       client.waitForElementVisible(workflowRevertBtnSelector);
       client.click(workflowRevertBtnSelector);
-      client.waitForElementNotPresent(notificationSelector);
+      client.click('[data-apos-cancel]');
+      client.waitForElementVisible(articleSelector);
+      client.click('[data-apos-cancel]');
+      client.pause(1000);
+      client.acceptAlert();
     }
   },
  {
@@ -130,10 +133,6 @@ module.exports = Object.assign(
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
       const notificationSelector = '.apos-notification-container';
 
-      client.keys(client.Keys.ESCAPE);
-      client.keys(client.Keys.ESCAPE);
-      client.pause(1000);
-      client.acceptAlert();
       client.waitForElementVisible(blogBtnSelector);
       client.click(blogBtnSelector);
       client.waitForElementVisible(blogTitleSelector);

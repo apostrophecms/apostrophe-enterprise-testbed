@@ -4,7 +4,7 @@ module.exports = (locale, doExport) => {
   counter++;
 
   return {
-    [`[${counter}] switch local to "${locale}"`]: function(client) {
+    [`[${counter}] switch locale to "${locale}"`]: function(client) {
       const localeSwitcherBtnSelector = 'a[data-apos-admin-bar-item=apostrophe-workflow-locale-picker-modal]';
       const requiredLocaleBtnSelector = `a[data-apos-locale=${locale}]`;
       client.waitForElementVisible(localeSwitcherBtnSelector);
@@ -18,8 +18,8 @@ module.exports = (locale, doExport) => {
         client.click('[data-apos-save]');
       } else {
         const labelSelector = `${localeSwitcherBtnSelector} .apos-button-label`;
+        client.expect.element(labelSelector).text.to.contain(locale).before(60000);
         client.assert.urlContains(locale);
-        client.expect.element(labelSelector).text.to.contain(locale);
       }
     }
   };

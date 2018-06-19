@@ -97,6 +97,9 @@ module.exports = Object.assign(
       client.click(masterLocaleBtnSelector);
       client.click(exportBtnSelector);
       client.waitForElementNotPresent(modalExportSelector);
+      client.waitForElementVisible(editArticleBtnSelector);
+      client.click('[data-apos-cancel]');
+      client.waitForElementNotPresent(modalBlogSelector);
     }
   },
   steps.switchLocale('es'),
