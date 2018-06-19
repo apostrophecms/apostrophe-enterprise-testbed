@@ -10,11 +10,11 @@ module.exports = () => {
       const passInputSelector = '.apos-login-password input';
       const submitBtnSelector = '.apos-login-submit input';
 
-      client.click(loginBtnSelector);
-      client.waitForElementVisible(usernameInputSelector);
+      client.clickWhenReady(loginBtnSelector);
+      client.waitForElementReady(usernameInputSelector);
       client.setValue(usernameInputSelector, 'admin');
       client.setValue(passInputSelector, 'demo');
-      client.click(submitBtnSelector);
+      client.clickWhenReady(submitBtnSelector);
 
       const loggedInPageSelector = 'body.apos-workflow-live-page';
 

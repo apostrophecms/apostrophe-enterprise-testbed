@@ -51,30 +51,30 @@ module.exports = Object.assign(
 
       // edit article and update title
       steps.openAdminBar.method(client);
-      client.waitForElementVisible(articleSelector);
-      client.click(articleSelector);
-      client.waitForElementVisible(editArticleBtnSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(editTitleField);
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady(articleSelector);
+      client.waitForElementReady(editArticleBtnSelector);
+      client.clickWhenReady(editArticleBtnSelector);
+      client.waitForElementReady(editTitleField);
       client.clearValue(editTitleField);
       client.setValue(editTitleField, 'Article Title 1');
-      client.waitForElementVisible(saveBtnSelector);
-      client.click(saveBtnSelector);
+      client.waitForElementReady(saveBtnSelector);
+      client.clickWhenReady(saveBtnSelector);
       steps.openAdminBar.method(client);
-      client.waitForElementVisible(articleSelector);
-      client.click(articleSelector);
-      client.waitForElementVisible(editArticleBtnSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.click(workflowModalBtnSelector);
-      client.waitForElementVisible(commitWorkflowBtnSelector);
-      client.click(commitWorkflowBtnSelector);
-      client.waitForElementVisible(aposCommitBtnSelector);
-      client.click(aposCommitBtnSelector);
-      client.waitForElementVisible(exportSkipSelector);
-      client.click(exportSkipSelector);
-      client.waitForElementVisible(editArticleBtnSelector);
-      client.click('[data-apos-cancel]');
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady(articleSelector);
+      client.waitForElementReady(editArticleBtnSelector);
+      client.clickWhenReady(editArticleBtnSelector);
+      client.waitForElementReady(modalEditArticleSelector);
+      client.clickWhenReady(workflowModalBtnSelector);
+      client.waitForElementReady(commitWorkflowBtnSelector);
+      client.clickWhenReady(commitWorkflowBtnSelector);
+      client.waitForElementReady(aposCommitBtnSelector);
+      client.clickWhenReady(aposCommitBtnSelector);
+      client.waitForElementReady(exportSkipSelector);
+      client.clickWhenReady(exportSkipSelector);
+      client.waitForElementReady(editArticleBtnSelector);
+      client.clickWhenReady('[data-apos-cancel]');
     }
   },
   {
@@ -83,12 +83,12 @@ module.exports = Object.assign(
       const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
 
-      client.click(adminBarSelector);
-      client.waitForElementVisible(blogBtnSelector);
-      client.click(blogBtnSelector);
-      client.waitForElementVisible(blogTitleSelector);
+      client.clickWhenReady(adminBarSelector);
+      client.waitForElementReady(blogBtnSelector);
+      client.clickWhenReady(blogBtnSelector);
+      client.waitForElementReady(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('Article Title 1');
-      client.click('[data-apos-cancel]');
+      client.clickWhenReady('[data-apos-cancel]');
     }
   },
   {
@@ -109,20 +109,20 @@ module.exports = Object.assign(
 
       client.waitForElementNotPresent(modalExportSelector);
 
-      client.waitForElementVisible(articleSelector);
-      client.click(articleSelector);
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady(articleSelector);
 
-      client.waitForElementVisible(editArticleBtnSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(workflowModalBtnSelector);
-      client.click(workflowModalBtnSelector);
-      client.waitForElementVisible(workflowHistoryBtnSelector);
-      client.click(workflowHistoryBtnSelector);
-      client.waitForElementVisible(workflowRevertBtnSelector);
-      client.click(workflowRevertBtnSelector);
-      client.click('[data-apos-cancel]');
-      client.waitForElementVisible(articleSelector);
-      client.click('[data-apos-cancel]');
+      client.waitForElementReady(editArticleBtnSelector);
+      client.clickWhenReady(editArticleBtnSelector);
+      client.waitForElementReady(workflowModalBtnSelector);
+      client.clickWhenReady(workflowModalBtnSelector);
+      client.waitForElementReady(workflowHistoryBtnSelector);
+      client.clickWhenReady(workflowHistoryBtnSelector);
+      client.waitForElementReady(workflowRevertBtnSelector);
+      client.clickWhenReady(workflowRevertBtnSelector);
+      client.clickWhenReady('[data-apos-cancel]');
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady('[data-apos-cancel]');
       client.pause(1000);
       client.acceptAlert();
     }
@@ -133,9 +133,9 @@ module.exports = Object.assign(
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
       const notificationSelector = '.apos-notification-container';
 
-      client.waitForElementVisible(blogBtnSelector);
-      client.click(blogBtnSelector);
-      client.waitForElementVisible(blogTitleSelector);
+      client.waitForElementReady(blogBtnSelector);
+      client.clickWhenReady(blogBtnSelector);
+      client.waitForElementReady(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
     }
   }

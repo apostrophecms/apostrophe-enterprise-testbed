@@ -13,13 +13,13 @@ module.exports = (pageName) => {
       const saveBtnSelector = '[data-apos-save]';
 
       client.pause(200);
-      client.click(pageMenuBtnSelector);
-      client.waitForElementVisible(pageMenuDropdownSelector);
-      client.click(pageMenuCreatePageSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.clickWhenReady(pageMenuBtnSelector);
+      client.waitForElementReady(pageMenuDropdownSelector);
+      client.clickWhenReady(pageMenuCreatePageSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.clearValue(inputTitleSelector);
       client.setValue(inputTitleSelector, pageName);
-      client.click(saveBtnSelector);
+      client.clickWhenReady(saveBtnSelector);
     }
   };
 };

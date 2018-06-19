@@ -16,11 +16,11 @@ module.exports = ({selector, text} = {}) => {
 
       client.waitForElementNotPresent(blackoutSelector);
       client.getLocationInView('footer');
-      client.waitForElementVisible(addContentBtnSelector);
-      client.click(addContentBtnSelector);
-      client.waitForElementVisible(richTextBtnSelector);
+      client.waitForElementReady(addContentBtnSelector);
+      client.clickWhenReady(addContentBtnSelector);
+      client.waitForElementReady(richTextBtnSelector);
       client.pause(200);
-      client.click(richTextBtnSelector);
+      client.clickWhenReady(richTextBtnSelector);
       client.pause(2000);
       client.execute(function (content) {
           const ckeditorInstance = _.find(CKEDITOR.instances);

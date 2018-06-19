@@ -10,18 +10,18 @@ module.exports = (itemsCount = 1) => {
       const modalDialogSelector = '.apos-workflow-commit-modal';
       const confirmBtnSelector = `${modalDialogSelector} [data-apos-save]`;
 
-      client.waitForElementVisible(commitBtnSelector);
-      client.click(commitBtnSelector);
+      client.waitForElementReady(commitBtnSelector);
+      client.clickWhenReady(commitBtnSelector);
 
       for (let i = 0; i < itemsCount; i++) {
-        client.waitForElementVisible(modalDialogSelector);
-        client.waitForElementVisible(confirmBtnSelector);
-        client.click(confirmBtnSelector);
-        client.waitForElementVisible(skipExportBtnSelector);
-        client.click(skipExportBtnSelector);
+        client.waitForElementReady(modalDialogSelector);
+        client.waitForElementReady(confirmBtnSelector);
+        client.clickWhenReady(confirmBtnSelector);
+        client.waitForElementReady(skipExportBtnSelector);
+        client.clickWhenReady(skipExportBtnSelector);
       }
 
-      client.click(skipExportBtnSelector);
+      client.clickWhenReady(skipExportBtnSelector);
 
       client.waitForElementNotPresent(modalDialogSelector);
     }

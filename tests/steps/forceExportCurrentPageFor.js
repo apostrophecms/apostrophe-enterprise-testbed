@@ -16,17 +16,17 @@ module.exports = (locale) => {
       const localeInputSelector = `input[id="locales[${locale}]"]`;
       const confirmExportBtnSelector = '.apos-workflow-export-modal [data-apos-save]';
 
-      client.click(menuBtnSelector);
-      client.waitForElementVisible(menuItemsSelector);
-      client.click(forceExportBtnSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.clickWhenReady(menuBtnSelector);
+      client.waitForElementReady(menuItemsSelector);
+      client.clickWhenReady(forceExportBtnSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.pause(1000);
-      client.click(workflowMenuBtnSelector);
-      client.waitForElementVisible(workflowMenuItemsSelector);
-      client.click(workflowForceExportBtnSelector);
-      client.waitForElementVisible(modalDialogExportSelector);
-      client.click(localeInputSelector);
-      client.click(confirmExportBtnSelector);
+      client.clickWhenReady(workflowMenuBtnSelector);
+      client.waitForElementReady(workflowMenuItemsSelector);
+      client.clickWhenReady(workflowForceExportBtnSelector);
+      client.waitForElementReady(modalDialogExportSelector);
+      client.clickWhenReady(localeInputSelector);
+      client.clickWhenReady(confirmExportBtnSelector);
       client.waitForElementNotPresent(modalDialogExportSelector);
     }
   };

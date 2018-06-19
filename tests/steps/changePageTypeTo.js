@@ -14,16 +14,16 @@ module.exports = (type) => {
       const demoHeaderSelector = '.demo-header h5';
       const busyLayerSelector = '.apos-global-busy.active';
 
-      client.click(pageMenuBtnSelector);
-      client.waitForElementVisible(pageSettingsSelector);
-      client.click(pageSettingsSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.clickWhenReady(pageMenuBtnSelector);
+      client.waitForElementReady(pageSettingsSelector);
+      client.clickWhenReady(pageSettingsSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.useXpath();
       client.setValue(selectTypeSelector, type);
       client.useCss();
       client.waitForElementNotPresent(busyLayerSelector);
       client.pause(1000);
-      client.click(saveBtnSelector);
+      client.clickWhenReady(saveBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
 
       client.expect.element(demoHeaderSelector).text.to.contain(`You are on the "${type}" template`);

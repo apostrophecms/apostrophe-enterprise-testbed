@@ -28,19 +28,19 @@ module.exports = (articleName) => {
 
       client.waitForElementNotPresent(blackoutSelector);
       openAdminBar.method(client);
-      client.waitForElementVisible(articleSelector);
-      client.click(articleSelector);
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady(articleSelector);
       client.useCss();
-      client.waitForElementVisible(modalBlogSelector);
+      client.waitForElementReady(modalBlogSelector);
       client.pause(200);
-      client.click(addArticleBtnSelector);
-      client.waitForElementVisible(basicsBodySelector);
+      client.clickWhenReady(addArticleBtnSelector);
+      client.waitForElementReady(basicsBodySelector);
       client.setValue(inputTitleSelector, articleName);
-      client.click(metaTabSelector);
-      client.waitForElementVisible(metaBodySelector);
+      client.clickWhenReady(metaTabSelector);
+      client.waitForElementReady(metaBodySelector);
       client.setValue(selectPublishedSelector, 'Yes');
-      client.click(infoTabSelector);
-      client.waitForElementVisible(infoBodySelector);
+      client.clickWhenReady(infoTabSelector);
+      client.waitForElementReady(infoBodySelector);
 
       const currentDate = new Date();
       const day = castTwoDigits(currentDate.getDate());
@@ -49,14 +49,14 @@ module.exports = (articleName) => {
       const publicationDate = `${year}-${month}-${day}`;
 
       client.setValue(inputPublicationDateSelector, publicationDate);
-      client.click(saveBtnSelector);
+      client.clickWhenReady(saveBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
       openAdminBar.method(client);
-      client.waitForElementVisible(articleSelector);
-      client.click(articleSelector);
+      client.waitForElementReady(articleSelector);
+      client.clickWhenReady(articleSelector);
       client.pause(200);
       client.screenshot();
-      client.waitForElementVisible(manageTableRowSelector);
+      client.waitForElementReady(manageTableRowSelector);
       client.expect.element(manageTableRowSelector).text.to.contain(articleName);
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
       client.expect.element(manageTableRowSelector).text.to.contain(publicationDate);

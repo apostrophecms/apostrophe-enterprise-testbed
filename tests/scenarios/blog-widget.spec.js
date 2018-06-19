@@ -40,24 +40,24 @@ module.exports = Object.assign(
       const saveBlogBtnSelector = '[data-apos-modal-depth="0"] [data-apos-save]';
       const blogArticleTitleSelector = '.blog-card-title-container';
 
-      client.click(finishBtnSelector);
+      client.clickWhenReady(finishBtnSelector);
       client.waitForElementNotPresent(blackoutSelector);
-      client.waitForElementVisible(addContentBtnSelector);
-      client.click(addContentBtnSelector);
+      client.waitForElementReady(addContentBtnSelector);
+      client.clickWhenReady(addContentBtnSelector);
       client.getLocationInView('footer');
-      client.waitForElementVisible(blogWidgetBtnSelector);
+      client.waitForElementReady(blogWidgetBtnSelector);
       client.pause(1000);
-      client.click(blogWidgetBtnSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.clickWhenReady(blogWidgetBtnSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.setValue(selectBlogTypeSelector, 'Individually');
-      client.waitForElementVisible(browseBtnSelector);
-      client.click(browseBtnSelector);
-      client.waitForElementVisible(articleCheckboxSelector);
-      client.click(articleCheckboxSelector);
-      client.waitForElementVisible(saveChoicesBtnSelector);
-      client.click(saveChoicesBtnSelector);
-      client.waitForElementVisible(saveBlogBtnSelector);
-      client.click(saveBlogBtnSelector);
+      client.waitForElementReady(browseBtnSelector);
+      client.clickWhenReady(browseBtnSelector);
+      client.waitForElementReady(articleCheckboxSelector);
+      client.clickWhenReady(articleCheckboxSelector);
+      client.waitForElementReady(saveChoicesBtnSelector);
+      client.clickWhenReady(saveChoicesBtnSelector);
+      client.waitForElementReady(saveBlogBtnSelector);
+      client.clickWhenReady(saveBlogBtnSelector);
       client.useCss();
 
       client.expect.element(blogArticleTitleSelector).text.to.equal('New Blog Article Title');

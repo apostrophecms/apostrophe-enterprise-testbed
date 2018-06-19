@@ -24,14 +24,14 @@ module.exports = (documentNames) => {
         }, 300);
       });
       client.waitForElementPresent(subMenuSelector);
-      client.click(submissionsBtnSelector);
+      client.clickWhenReady(submissionsBtnSelector);
       client.waitForElementPresent(modalDialogSelector);
 
       documentNames.forEach((name) => {
         client.expect.element(listItemsSelector).text.to.contain(name);
       });
 
-      client.click(doneBtnSelector);
+      client.clickWhenReady(doneBtnSelector);
     }
   };
 };

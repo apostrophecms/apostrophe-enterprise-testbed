@@ -7,7 +7,7 @@ module.exports = (text) => {
     [`[${counter}] check notification`]: function(client) {
       const notificationSelector = '.apos-notification-container';
 
-      client.waitForElementVisible(notificationSelector);
+      client.waitForElementReady(notificationSelector);
       client.expect.element(notificationSelector).text.to.equal(text).before(0);
     }
   };

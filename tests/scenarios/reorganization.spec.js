@@ -23,7 +23,7 @@ function dragAndDrop(client, draggable, droppable) {
   );
   client.pause(500);
   client.mouseButtonUp(0);
-  client.click('[data-apos-save]');
+  client.clickWhenReady('[data-apos-save]');
   client.waitForElementNotPresent('.apos-modal');
   client.pause(500);
 }
@@ -99,7 +99,7 @@ module.exports = Object.assign(
       const trachTogglerSelector = '.apos-trash .jqtree-toggler';
       const firstItemInTrash = '.apos-trash ul li:nth-child(1)';
 
-      client.click(trachTogglerSelector);
+      client.clickWhenReady(trachTogglerSelector);
 
       dragAndDrop(
         client,

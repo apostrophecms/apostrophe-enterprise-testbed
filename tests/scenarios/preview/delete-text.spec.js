@@ -33,7 +33,7 @@ module.exports = Object.assign(
       const trashBtnSelector = `${contentMainBlockSelector} [data-apos-trash-item]`;
       const richTextSelector = `${contentMainBlockSelector} [data-rich-text]`;
 
-      client.click(trashBtnSelector);
+      client.clickWhenReady(trashBtnSelector);
 
       client.expect.element(richTextSelector).to.not.be.present;
     }
@@ -47,18 +47,18 @@ module.exports = Object.assign(
       const confirmBtnSelector = `[data-apos-save]`;
 
       client.pause(200);
-      client.waitForElementVisible(commitBtnSelector);
-      client.click(commitBtnSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.waitForElementReady(commitBtnSelector);
+      client.clickWhenReady(commitBtnSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.frame(0);
 
       client.expect.element(deletedDiffSelector).to.be.visible.before(15000);
       client.expect.element(deletedDiffSelector).text.to.equal('Rich Text Widget line');
 
       client.frameParent();
-      client.click(confirmBtnSelector);
-      client.waitForElementVisible(skipExportBtnSelector);
-      client.click(skipExportBtnSelector);
+      client.clickWhenReady(confirmBtnSelector);
+      client.waitForElementReady(skipExportBtnSelector);
+      client.clickWhenReady(skipExportBtnSelector);
     }
   },
   steps.makeIncognitoRequestByRelativeUrl('/', (client, $) => {

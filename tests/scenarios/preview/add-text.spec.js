@@ -34,18 +34,18 @@ module.exports = Object.assign(
       const newDiffSelector = '.apos-workflow-widget-diff--new';
       const confirmBtnSelector = `[data-apos-save]`;
 
-      client.waitForElementVisible(commitBtnSelector);
-      client.click(commitBtnSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.waitForElementReady(commitBtnSelector);
+      client.clickWhenReady(commitBtnSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.frame(0);
 
       client.expect.element(newDiffSelector).to.be.visible.before(15000);
       client.expect.element(newDiffSelector).text.to.equal('Rich Text Widget line').before(0);
 
       client.frameParent();
-      client.click(confirmBtnSelector);
-      client.waitForElementVisible(skipExportBtnSelector);
-      client.click(skipExportBtnSelector);
+      client.clickWhenReady(confirmBtnSelector);
+      client.waitForElementReady(skipExportBtnSelector);
+      client.clickWhenReady(skipExportBtnSelector);
     }
   },
   steps.makeIncognitoRequestByRelativeUrl((client, $) => {

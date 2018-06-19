@@ -14,16 +14,16 @@ module.exports = () => {
         `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
       const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
 
-      client.waitForElementVisible(modalBlogSelector);
-      client.waitForElementVisible(manageTableRowSelector);
-      client.click(editArticleBtnSelector);
-      client.waitForElementVisible(modalEditArticleSelector);
-      client.waitForElementVisible(controlSelector);
+      client.waitForElementReady(modalBlogSelector);
+      client.waitForElementReady(manageTableRowSelector);
+      client.clickWhenReady(editArticleBtnSelector);
+      client.waitForElementReady(modalEditArticleSelector);
+      client.waitForElementReady(controlSelector);
       client.pause(1000);
-      client.click(workflowModalBtnSelector);
+      client.clickWhenReady(workflowModalBtnSelector);
       client.useCss();
-      client.waitForElementVisible(submitWorkflowBtnSelector);
-      client.click(submitWorkflowBtnSelector);
+      client.waitForElementReady(submitWorkflowBtnSelector);
+      client.clickWhenReady(submitWorkflowBtnSelector);
       client.waitForElementNotPresent(modalEditArticleSelector);
     }
   };

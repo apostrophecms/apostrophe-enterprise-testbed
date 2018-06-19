@@ -10,12 +10,12 @@ module.exports = (menuItemText) => {
       const specifiedMenuItemSelector = `.apos-context-menu .apos-dropdown-items li:contains(${menuItemText})`;
       const modalDialogSelector = '.apos-modal';
 
-      client.click(menuBtnSelector);
-      client.waitForElementVisible(menuItemsSelector);
+      client.clickWhenReady(menuBtnSelector);
+      client.waitForElementReady(menuItemsSelector);
       client.execute(function(selector) {
         $(selector).click();
       }, [specifiedMenuItemSelector]);
-      client.waitForElementVisible(modalDialogSelector);
+      client.waitForElementReady(modalDialogSelector);
     }
   };
 };

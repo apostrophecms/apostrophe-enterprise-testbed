@@ -14,7 +14,7 @@ module.exports = Object.assign(
     before: (client, done) => {
       client.resizeWindow(1200, 800);
       if (!this._server) {
-        this._server = server.create('localhost', 3111, 'app_2');
+        this._server = server.create('localhost', 3111);
         this._server.start(done);
       }
     },
@@ -44,22 +44,22 @@ module.exports = Object.assign(
       const busyLayerSelector = '.apos-global-busy.active';
 
       client.keys(client.Keys.ESCAPE);
-      client.waitForElementVisible(contextBtnSelector);
-      client.click(contextBtnSelector);
-      client.waitForElementVisible('.apos-active ul.apos-dropdown-items');
-      client.waitForElementVisible(contextSubMenuImageSelector);
-      client.click(contextSubMenuImageSelector);
-      client.waitForElementVisible(modalDialogSelector);
+      client.waitForElementReady(contextBtnSelector);
+      client.clickWhenReady(contextBtnSelector);
+      client.waitForElementReady('.apos-active ul.apos-dropdown-items');
+      client.waitForElementReady(contextSubMenuImageSelector);
+      client.clickWhenReady(contextSubMenuImageSelector);
+      client.waitForElementReady(modalDialogSelector);
       client.execute(function() {
         $('.apos-modal-controls input').css({display: 'block'});
       });
-      client.waitForElementVisible(fileInputSelector);
+      client.waitForElementReady(fileInputSelector);
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide1.jpg'));
       client.uploadLocalFile(fileInputSelector, path.join(fixturesPath, 'slide2.jpg'));
       client.waitForElementPresent(loadedImagesSelector);
       client.pause(2000); // TODO: rewrote to be able to wait for paranja
       client.waitForElementNotPresent(busyLayerSelector)
-      client.click(selectImagesBtnSelector);
+      client.clickWhenReady(selectImagesBtnSelector);
       // Timed out while waiting for element <[data-slideshow-item]>
       // to be present for 50000 milliseconds.  - expected "found" but got: "not found"
       client.waitForElementPresent(resultDraftSliderSelector, 80000);
@@ -86,7 +86,7 @@ module.exports = Object.assign(
   steps.changePageTypeTo('Alternate Page'),
   {
     'check that images are present': function (client) {
-      client.waitForElementVisible(slideshowSelector);
+      client.waitForElementReady(slideshowSelector);
 
       client.expect.element(slideshowSelector).to.be.present;
       client.expect.element(slideshow2nItemSelector).to.be.present;
@@ -95,7 +95,7 @@ module.exports = Object.assign(
   steps.changePageTypeTo('Default Page'),
   {
     'check that images are still present': function (client) {
-      client.waitForElementVisible(slideshowSelector);
+      client.waitForElementReady(slideshowSelector);
 
       client.expect.element(slideshowSelector).to.be.present;
       client.expect.element(slideshow2nItemSelector).to.be.present;

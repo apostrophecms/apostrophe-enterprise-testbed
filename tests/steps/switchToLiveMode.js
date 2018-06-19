@@ -10,8 +10,8 @@ module.exports = () => {
       const listItemToBeChangedSelector = 'li[data-apos-workflow-mode=draft]';
 
       client.pause(200);
-      client.click(modeSwithcerBtnSelector);
-      client.click(requiredModeBtnSelector);
+      client.clickWhenReady(modeSwithcerBtnSelector);
+      client.clickWhenReady(requiredModeBtnSelector);
       client.waitForElementPresent(listItemToBeChangedSelector);
 
       const labelSelector = '.apos-dropdown--button.apos-workflow-state .apos-button-label';

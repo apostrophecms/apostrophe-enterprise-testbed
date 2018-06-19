@@ -10,13 +10,13 @@ module.exports = () => {
       const notiSelector = '.apos-notification-container';
 
       client.pause(10000);
-      client.waitForElementVisible(submitBtnSelector);
+      client.waitForElementReady(submitBtnSelector);
       client.pause(1000);
-      client.click(submitBtnSelector);
-      client.waitForElementVisible(notiSelector);
-      client.click(notiSelector);
+      client.clickWhenReady(submitBtnSelector);
+      client.waitForElementReady(notiSelector);
+      client.clickWhenReady(notiSelector);
       client.waitForElementNotVisible(notiSelector);
-      client.waitForElementVisible(submittedLabelSelector);
+      client.waitForElementReady(submittedLabelSelector);
     }
   };
 };
