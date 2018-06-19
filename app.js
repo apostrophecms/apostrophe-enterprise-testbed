@@ -120,47 +120,54 @@ function run(config, ready) {
           alias: 'workflow',
           locales: [
             {
-              name: 'en',
-              label: 'en',
-            },
-            {
-              name: 'fr',
-              label: 'fr'
-            },
-            {
-              name: 'es',
-              label: 'es'
+              name: 'master',
+              label: 'Master',
+              private: true,
+              children: [
+                {
+                  name: 'en',
+                  label: 'en',
+                },
+                {
+                  name: 'fr',
+                  label: 'fr'
+                },
+                {
+                  name: 'es',
+                  label: 'es'
+                }
+              ].concat(process.env.EXTRA_LOCALES ? [
+                {
+                  name: 'be',
+                  label: 'Belgium'
+                },
+                {
+                  name: 'de',
+                  label: 'Germany'
+                },
+                {
+                  name: 'au',
+                  label: 'Australia'
+                },
+                {
+                  name: 'nl',
+                  label: 'Netherlands'
+                },
+                {
+                  name: 'ru',
+                  label: 'Russia'
+                },
+                {
+                  name: 'hu',
+                  label: 'Hungary'
+                },
+                {
+                  name: 'th',
+                  label: 'Thailand'
+                }
+              ] : [])
             }
-          ].concat(process.env.EXTRA_LOCALES ? [
-            {
-              name: 'be',
-              label: 'Belgium'
-            },
-            {
-              name: 'de',
-              label: 'Germany'
-            },
-            {
-              name: 'au',
-              label: 'Australia'
-            },
-            {
-              name: 'nl',
-              label: 'Netherlands'
-            },
-            {
-              name: 'ru',
-              label: 'Russia'
-            },
-            {
-              name: 'hu',
-              label: 'Hungary'
-            },
-            {
-              name: 'th',
-              label: 'Thailand'
-            }
-          ] : []),
+          ],
           defaultLocale: 'en',
           prefixes: prefixes
         },

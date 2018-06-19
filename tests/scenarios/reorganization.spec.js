@@ -33,7 +33,7 @@ module.exports = Object.assign(
     before: (client, done) => {
       client.resizeWindow(1200, 800);
       if (!this._server) {
-        this._server = server.create('localhost', 3111, 'app_2');
+        this._server = server.create('localhost', 3111);
         this._server.start(done);
       }
     },
