@@ -33,6 +33,7 @@ module.exports = Object.assign(
       const trashBtnSelector = `${contentMainBlockSelector} [data-apos-trash-item]`;
       const richTextSelector = `${contentMainBlockSelector} [data-rich-text]`;
 
+      client.moveToElement(trashBtnSelector, 5, 5);
       client.clickWhenReady(trashBtnSelector);
 
       client.expect.element(richTextSelector).to.not.be.present;

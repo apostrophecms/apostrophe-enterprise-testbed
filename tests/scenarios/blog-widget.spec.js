@@ -26,7 +26,6 @@ module.exports = Object.assign(
   steps.createArticle('New Blog Article Title'),
   {
     'add a blog widget to the regression test page': (client) => {
-      const finishBtnSelector = '[data-apos-cancel]';
       const blackoutSelector = '.apos-modal-blackout';
       const mainBlockSelector = '.demo-main';
       const addContentBtnSelector = `${mainBlockSelector} [data-apos-add-content]`;
@@ -36,29 +35,20 @@ module.exports = Object.assign(
       const browseBtnSelector = '[data-apos-browse]';
       const articleCheckboxSelector = '.apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator';
       const busyLayerSelector = '.apos-global-busy.active';
-      const saveChoicesBtnSelector = '[data-apos-modal-depth="1"] [data-apos-save]';
-      const saveBlogBtnSelector = '[data-apos-modal-depth="0"] [data-apos-save]';
       const blogArticleTitleSelector = '.blog-card-title-container';
 
-      client.clickWhenReady(finishBtnSelector);
-      client.waitForElementNotPresent(blackoutSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
       client.waitForElementReady(addContentBtnSelector);
-      client.clickWhenReady(addContentBtnSelector);
+      client.click(addContentBtnSelector);
       client.getLocationInView('footer');
       client.waitForElementReady(blogWidgetBtnSelector);
-      client.pause(1000);
-      client.clickWhenReady(blogWidgetBtnSelector);
-      client.waitForElementReady(modalDialogSelector);
-      client.setValue(selectBlogTypeSelector, 'Individually');
-      client.waitForElementReady(browseBtnSelector);
-      client.clickWhenReady(browseBtnSelector);
-      client.waitForElementReady(articleCheckboxSelector);
-      client.clickWhenReady(articleCheckboxSelector);
-      client.waitForElementReady(saveChoicesBtnSelector);
-      client.clickWhenReady(saveChoicesBtnSelector);
-      client.waitForElementReady(saveBlogBtnSelector);
-      client.clickWhenReady(saveBlogBtnSelector);
-      client.useCss();
+      client.click(blogWidgetBtnSelector);
+      client.resetValueInModal('apostrophe-blog-widgets-editor', selectBlogTypeSelector, 'Individually');
+      client.clickInModal('apostrophe-blog-widgets-editor', browseBtnSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', articleCheckboxSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-save]');
+      client.clickInModal('apostrophe-blog-widgets-editor', '[data-apos-save]');
 
       client.expect.element(blogArticleTitleSelector).text.to.equal('New Blog Article Title');
     }

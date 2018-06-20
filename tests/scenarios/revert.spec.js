@@ -27,116 +27,72 @@ module.exports = Object.assign(
   steps.workflowCommitArticle(),
   {
     "change title and commit": (client) => {
-      const modalExportSelector = '.apos-workflow-export-modal';
-      const exportSkipSelector = '.apos-workflow-export-modal [data-apos-cancel]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const adminBarSelector = '[data-apos-admin-bar-logo]';
-      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const editModalSelector = `${modalEditArticleSelector} .apos-schema-group-inner`;
-      const editTitleField = `${editModalSelector} input[name=title]`;
+      const workflowModalBtnSelector = '[data-apos-dropdown-name="workflow"]';
+      const editTitleField = 'input[name=title]';
       const saveBtnSelector = '[data-apos-save]';
-      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-commit]`;
-      const noPreviewSelector = '.apos-workflow-no-preview';
-      const notificationSelector = '.apos-notification-message';
-      const modalCommitSelector = '.apos-workflow-commit-modal';
-      const aposCommitBtnSelector = `${modalCommitSelector} [data-apos-save]`;
-
-      // bail out from last commit's export window
-       client.keys(client.Keys.ESCAPE);
+      const commitWorkflowBtnSelector = '[data-apos-workflow-commit]';
 
       // edit article and update title
-      steps.openAdminBar.method(client);
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady(articleSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(editTitleField);
-      client.clearValue(editTitleField);
-      client.setValue(editTitleField, 'Article Title 1');
-      client.waitForElementReady(saveBtnSelector);
-      client.clickWhenReady(saveBtnSelector);
-      steps.openAdminBar.method(client);
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady(articleSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(modalEditArticleSelector);
-      client.clickWhenReady(workflowModalBtnSelector);
-      client.waitForElementReady(commitWorkflowBtnSelector);
-      client.clickWhenReady(commitWorkflowBtnSelector);
-      client.waitForElementReady(aposCommitBtnSelector);
-      client.clickWhenReady(aposCommitBtnSelector);
-      client.waitForElementReady(exportSkipSelector);
-      client.clickWhenReady(exportSkipSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady('[data-apos-cancel]');
+      client.openAdminBarItem('apostrophe-blog');
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.resetValueInModal('apostrophe-blog-editor-modal', editTitleField, 'Article Title 1');
+      client.clickInModal('apostrophe-blog-editor-modal', saveBtnSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.openAdminBarItem('apostrophe-blog');
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', commitWorkflowBtnSelector);
+      client.clickInModal('apostrophe-workflow-commit-modal', '[data-apos-save]');
+      client.clickInModal('apostrophe-workflow-export-modal', '[data-apos-cancel]');
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
     }
   },
   {
     'article can be found under "Articles" in draft mode with title: Article Title 1': (client) => {
-      const adminBarSelector = '[data-apos-admin-bar-logo]';
-      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
-
-      client.clickWhenReady(adminBarSelector);
-      client.waitForElementReady(blogBtnSelector);
-      client.clickWhenReady(blogBtnSelector);
+      client.openAdminBarItem('apostrophe-blog');
       client.waitForElementReady(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('Article Title 1');
-      client.clickWhenReady('[data-apos-cancel]');
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
     }
   },
   {
     'revert to initial version': (client) => {
-      const adminBarSelector = '[data-apos-admin-bar-logo]';
-      const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalExportSelector = '.apos-workflow-export-modal';
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
-      const managerSelector = '.apos-manage-table';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const notificationSelector = '.apos-notification-container';
+        `[data-apos-dropdown-name="workflow"]`;
       const workflowHistoryBtnSelector = `[data-apos-dropdown-name=workflow] [data-apos-workflow-history]`;
       const workflowRevertBtnSelector = ('.apos-manage-table tr:last-child td [data-apos-workflow-revert]');
 
-      client.waitForElementNotPresent(modalExportSelector);
+      client.openAdminBarItem('apostrophe-blog');
 
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady(articleSelector);
-
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(workflowModalBtnSelector);
-      client.clickWhenReady(workflowModalBtnSelector);
-      client.waitForElementReady(workflowHistoryBtnSelector);
-      client.clickWhenReady(workflowHistoryBtnSelector);
-      client.waitForElementReady(workflowRevertBtnSelector);
-      client.clickWhenReady(workflowRevertBtnSelector);
-      client.clickWhenReady('[data-apos-cancel]');
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady('[data-apos-cancel]');
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowHistoryBtnSelector);
+      client.clickInModal('apostrophe-workflow-history-modal', workflowRevertBtnSelector);
+      client.clickInModal('apostrophe-workflow-history-modal', '[data-apos-cancel]');
+      client.clickInModal('apostrophe-blog-editor-modal', '[data-apos-cancel]');
       client.pause(1000);
       client.acceptAlert();
+      client.pause(1000);
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
     }
   },
- {
+  {
     'article can be found under "Articles" in draft mode with title: New Article Title': (client) => {
-      const blogBtnSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
       const blogTitleSelector = '.apos-manage-apostrophe-blog-title a';
-      const notificationSelector = '.apos-notification-container';
 
-      client.waitForElementReady(blogBtnSelector);
-      client.clickWhenReady(blogBtnSelector);
+      client.openAdminBarItem('apostrophe-blog');
       client.waitForElementReady(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
     }
-  }
+  },
 );

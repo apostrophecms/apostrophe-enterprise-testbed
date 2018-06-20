@@ -13,11 +13,7 @@ module.exports = (articleName) => {
     [`[${counter}] create an article`]: function(client) {
       const blackoutSelector = '.apos-modal-blackout:first-child';
       const articleSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
       const addArticleBtnSelector = '[data-apos-create-apostrophe-blog]';
-      const basicsBodySelector = '[data-apos-group=basic]';
-      const metaBodySelector = '[data-apos-group=meta]';
-      const infoBodySelector = '[data-apos-group=default]';
       const inputTitleSelector = '.apos-field-title input';
       const selectPublishedSelector = '.apos-field-published select';
       const inputPublicationDateSelector = '.apos-field-date input';
@@ -26,21 +22,12 @@ module.exports = (articleName) => {
       const saveBtnSelector = '[data-apos-save]';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
-      client.waitForElementNotPresent(blackoutSelector);
-      openAdminBar.method(client);
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady(articleSelector);
-      client.useCss();
-      client.waitForElementReady(modalBlogSelector);
-      client.pause(200);
-      client.clickWhenReady(addArticleBtnSelector);
-      client.waitForElementReady(basicsBodySelector);
-      client.setValue(inputTitleSelector, articleName);
-      client.clickWhenReady(metaTabSelector);
-      client.waitForElementReady(metaBodySelector);
-      client.setValue(selectPublishedSelector, 'Yes');
-      client.clickWhenReady(infoTabSelector);
-      client.waitForElementReady(infoBodySelector);
+      client.openAdminBarItem('apostrophe-blog');
+      client.clickInModal('apostrophe-blog-manager-modal', addArticleBtnSelector);
+      client.resetValueInModal('apostrophe-blog-editor-modal', inputTitleSelector, articleName);
+      client.clickInModal('apostrophe-blog-editor-modal', metaTabSelector);
+      client.resetValueInModal('apostrophe-blog-editor-modal', selectPublishedSelector, 'Yes');
+      client.clickInModal('apostrophe-blog-editor-modal', infoTabSelector);
 
       const currentDate = new Date();
       const day = castTwoDigits(currentDate.getDate());
@@ -48,18 +35,16 @@ module.exports = (articleName) => {
       const year = currentDate.getFullYear();
       const publicationDate = `${year}-${month}-${day}`;
 
-      client.setValue(inputPublicationDateSelector, publicationDate);
-      client.clickWhenReady(saveBtnSelector);
-      client.waitForElementNotPresent(blackoutSelector);
-      openAdminBar.method(client);
-      client.waitForElementReady(articleSelector);
-      client.clickWhenReady(articleSelector);
-      client.pause(200);
-      client.screenshot();
+      client.resetValueInModal('apostrophe-blog-editor-modal', inputPublicationDateSelector, publicationDate);
+      client.clickInModal('apostrophe-blog-editor-modal', saveBtnSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
+      client.openAdminBarItem('apostrophe-blog');
       client.waitForElementReady(manageTableRowSelector);
       client.expect.element(manageTableRowSelector).text.to.contain(articleName);
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
       client.expect.element(manageTableRowSelector).text.to.contain(publicationDate);
+      client.screenshot();
     }
   };
 };

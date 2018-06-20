@@ -8,18 +8,12 @@ module.exports = (pageName) => {
       const pageMenuBtnSelector = '.apos-context-menu .apos-button';
       const pageMenuDropdownSelector = '.apos-context-menu .apos-dropdown-items';
       const pageMenuCreatePageSelector = '.apos-context-menu .apos-dropdown-items .apos-dropdown-item:first-child';
-      const modalDialogSelector = '.apos-modal.apos-modal-slideable';
-      const inputTitleSelector = '.apos-field-input';
-      const saveBtnSelector = '[data-apos-save]';
 
-      client.pause(200);
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageMenuDropdownSelector);
       client.clickWhenReady(pageMenuCreatePageSelector);
-      client.waitForElementReady(modalDialogSelector);
-      client.clearValue(inputTitleSelector);
-      client.setValue(inputTitleSelector, pageName);
-      client.clickWhenReady(saveBtnSelector);
+      client.resetValueInModal('apostrophe-pages-editor', '[name="title"]', pageName);
+      client.clickInModal('apostrophe-pages-editor', '[data-apos-save]');
     }
   };
 };

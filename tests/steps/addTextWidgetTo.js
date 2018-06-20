@@ -19,6 +19,9 @@ module.exports = ({selector, text} = {}) => {
       client.waitForElementReady(addContentBtnSelector);
       client.clickWhenReady(addContentBtnSelector);
       client.waitForElementReady(richTextBtnSelector);
+      // TODO kill the pauses, probably by enhancing the
+      // execute call below to wait for whatever is required
+      // and then set an attribute we can wait on
       client.pause(200);
       client.clickWhenReady(richTextBtnSelector);
       client.pause(2000);

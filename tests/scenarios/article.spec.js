@@ -25,58 +25,38 @@ module.exports = Object.assign(
   steps.createArticle('New Article Title'),
   {
     'submit the article, via the "Workflow" menu in the dialog box': (client) => {
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
       const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
       const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const submitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-workflow-submit]`;
+        `[data-apos-dropdown-name="workflow"]`;
+      const submitWorkflowBtnSelector = `[data-apos-workflow-submit]`;
 
-      client.waitForElementReady(modalBlogSelector);
-      client.waitForElementReady(manageTableRowSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(workflowModalBtnSelector);
-      client.clickWhenReady(workflowModalBtnSelector);
-      client.waitForElementReady(submitWorkflowBtnSelector);
-      client.clickWhenReady(submitWorkflowBtnSelector);
-      client.waitForElementNotPresent(modalEditArticleSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', submitWorkflowBtnSelector);
+      client.waitForModal('apostrophe-blog-manager-modal');
     }
   },
-  steps.openAdminBar(),
   {
     'reopen the article. Commit the article.': (client) => {
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalEditArticleSelector = '.apos-pieces-editor';
-      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalCommitSelector = '.apos-workflow-commit-modal';
       const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
       const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const workflowModalBtnSelector =
-        `${modalEditArticleSelector} [data-apos-dropdown-name="workflow"]`;
-      const commitWorkflowBtnSelector = `${modalEditArticleSelector} [data-apos-save]`;
-      const noPreviewSelector = '.apos-workflow-no-preview';
-      const notificationSelector = '.apos-notification-message';
+        `[data-apos-dropdown-name="workflow"]`;
+      const commitBtnSelector = `[data-apos-workflow-commit]`;
+      const commitWorkflowBtnSelector = `[data-apos-save]`;
 
-      client.waitForElementReady(blogButtonSelector);
-      client.clickWhenReady(blogButtonSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(workflowModalBtnSelector);
-      client.clickWhenReady(workflowModalBtnSelector);
-      client.waitForElementReady(commitWorkflowBtnSelector);
-      client.clickWhenReady(commitWorkflowBtnSelector);
-      client.waitForElementNotPresent(commitWorkflowBtnSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', commitBtnSelector);
+      client.clickInModal('apostrophe-workflow-commit-modal', commitWorkflowBtnSelector);
+      client.clickInModal('apostrophe-workflow-export-modal', '[data-apos-cancel]');
+      client.waitForModal('apostrophe-blog-manager-modal');
     }
   },
-    steps.openAdminBar(),
   {
-    'export the article to all other locales.': (client) => {
-      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
-      const modalExportSelector = '.apos-workflow-export-modal';
-      const exportBtnSelector = `${modalExportSelector} [data-apos-save]`;
+    'force export the article to all other locales.': (client) => {
+      const exportBtnSelector = `[data-apos-save]`;
       const workflowModalBtnSelector =
         `[data-apos-dropdown-name="workflow"]`;
       const masterLocaleBtnSelector = '[for*=master] span';
@@ -85,34 +65,23 @@ module.exports = Object.assign(
       const forceExportBtnSelector = `[data-apos-workflow-force-export]`;
       const notificationSelector = '.apos-notification-container';
 
-      client.waitForElementReady(blogButtonSelector);
-      client.clickWhenReady(blogButtonSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady(editArticleBtnSelector);
-      client.waitForElementReady(workflowModalBtnSelector);
-      client.clickWhenReady(workflowModalBtnSelector);
-      client.waitForElementReady(forceExportBtnSelector);
-      client.clickWhenReady(forceExportBtnSelector);
-      client.waitForElementReady(masterLocaleBtnSelector);
-      client.clickWhenReady(masterLocaleBtnSelector);
-      client.clickWhenReady(exportBtnSelector);
-      client.waitForElementNotPresent(modalExportSelector);
-      client.waitForElementReady(editArticleBtnSelector);
-      client.clickWhenReady('[data-apos-cancel]');
-      client.waitForElementNotPresent(modalBlogSelector);
+      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', forceExportBtnSelector);
+      client.clickInModal('apostrophe-workflow-force-export-modal', masterLocaleBtnSelector);
+      client.clickInModal('apostrophe-workflow-force-export-modal', exportBtnSelector);
+      client.waitForModal('apostrophe-blog-manager-modal');
+      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+      client.waitForNoModals();
     }
   },
   steps.switchLocale('es'),
-  steps.openAdminBar(),
   {
     'article can be found under "Articles" in draft mode for the es locale': (client) => {
-      const blogButtonSelector = '[data-apos-admin-bar-item="apostrophe-blog"]';
-      const modalBlogSelector = '.apostrophe-blog-manager';
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
 
-      client.clickWhenReady(blogButtonSelector);
-      client.useCss();
-      client.waitForElementReady(modalBlogSelector);
+      client.openAdminBarItem('apostrophe-blog');
+      client.waitForModal('apostrophe-blog-manager-modal');
 
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
