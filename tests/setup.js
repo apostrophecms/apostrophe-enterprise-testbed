@@ -23,6 +23,7 @@ const checkVenvs = () => {
 };
 
 module.exports = {
+
   before: function(done) {
     console.log('I - SETUP');
     if (isLocalRunning.call(this)) {
@@ -48,6 +49,9 @@ module.exports = {
     console.log('I - SETUP AFTER');
     clean(done);
   },
+  // More time to launch Chrome
+  asyncHookTimeout: 50000,
+  // More time for other condition tests
   waitForConditionTimeout : 50000,
 };
 

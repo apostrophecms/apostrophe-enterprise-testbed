@@ -24,6 +24,9 @@ module.exports = {
         browserName: 'chrome',
         javascriptEnabled: true,
         acceptSslCerts: true,
+        "chromeOptions": {
+          "args": [ "start-fullscreen" ]
+        }
       }
     },
     remote: {
