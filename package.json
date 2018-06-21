@@ -25,6 +25,7 @@
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
     "chromedriver": "^2.37.0",
+    "eslint": "^4.19.1",
     "html2plaintext": "^1.0.1",
     "lodash": "^3.10.1",
     "moment": "^2.21.0"

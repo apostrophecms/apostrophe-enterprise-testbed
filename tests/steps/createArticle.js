@@ -1,5 +1,3 @@
-const openAdminBar = require('./openAdminBar');
-
 let counter = 0;
 
 function castTwoDigits(val) {

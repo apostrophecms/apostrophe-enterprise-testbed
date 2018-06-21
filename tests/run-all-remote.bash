@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# Separate nightwatch invocations to stomp out disparities in behavior,
-# an experiment by Tom and Paul.
+# Separate nightwatch invocations to stomp out disparities in behavior
 
 for scenario in tests/scenarios/*; do
-  npx nightwatch $scenario --config nightwatch.js --env remote || FAIL=1
+  npx nightwatch $scenario --config nightwatch.js --env remote || exit 1
   # Let sockets go away? Sleeping dogs lie? Something?
   sleep 5
 done
 
-echo "FAIL flag is $FAIL"
-
-if [ "$FAIL" == "1" ]; then
-  exit 1
-fi
+echo "Tests PASSED"

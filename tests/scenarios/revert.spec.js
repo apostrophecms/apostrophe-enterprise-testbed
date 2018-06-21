@@ -34,8 +34,6 @@ module.exports = Object.assign(
       const saveBtnSelector = '[data-apos-save]';
       const commitWorkflowBtnSelector = '[data-apos-workflow-commit]';
 
-      // edit article and update title
-      client.openAdminBarItem('apostrophe-blog');
       client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
       client.resetValueInModal('apostrophe-blog-editor-modal', editTitleField, 'Article Title 1');
       client.clickInModal('apostrophe-blog-editor-modal', saveBtnSelector);

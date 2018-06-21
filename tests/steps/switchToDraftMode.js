@@ -5,12 +5,12 @@ module.exports = () => {
 
   return {
     [`[${counter}] switch mode to "draft"`]: function(client) {
-      const modeSwithcerBtnSelector = '.apos-dropdown--button.apos-workflow-state';
+      const modeSwitcherBtnSelector = '.apos-dropdown--button.apos-workflow-state';
       const requiredModeBtnSelector = `li[data-apos-workflow-mode=draft]`;
       const listItemToBeChangedSelector = 'li[data-apos-workflow-mode=live]';
 
       client.pause(200);
-      client.clickWhenReady(modeSwithcerBtnSelector);
+      client.clickWhenReady(modeSwitcherBtnSelector);
       client.clickWhenReady(requiredModeBtnSelector);
       client.waitForElementPresent(listItemToBeChangedSelector);
 

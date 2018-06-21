@@ -14,16 +14,11 @@ module.exports = (itemsCount = 1) => {
       client.clickWhenReady(commitBtnSelector);
 
       for (let i = 0; i < itemsCount; i++) {
-        client.waitForElementReady(modalDialogSelector);
-        client.waitForElementReady(confirmBtnSelector);
-        client.clickWhenReady(confirmBtnSelector);
-        client.waitForElementReady(skipExportBtnSelector);
-        client.clickWhenReady(skipExportBtnSelector);
+        client.clickInModal('apostrophe-workflow-commit-modal', '[data-apos-save]');
+        client.clickInModal('apostrophe-workflow-export-modal', '[data-apos-cancel]');
       }
 
-      client.clickWhenReady(skipExportBtnSelector);
-
-      client.waitForElementNotPresent(modalDialogSelector);
+      client.waitForNoModals();
     }
   };
 };

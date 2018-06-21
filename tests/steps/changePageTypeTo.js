@@ -7,8 +7,6 @@ module.exports = (type) => {
     [`[${counter}] change page type to ${type}`]: function(client) {
       const pageMenuBtnSelector = '.apos-context-menu .apos-button';
       const pageSettingsSelector = '[data-apos-update-page]';
-      const modalDialogSelector = '.apos-modal.apos-modal-slideable';
-      const selectTypeSelector = '//div[@class="apos-schema-group-inner"]/fieldset[@data-name="type"]/div/select';
       const saveBtnSelector = '[data-apos-save]';
       const blackoutSelector = '.apos-modal-blackout';
       const demoHeaderSelector = '.demo-header h5';
@@ -17,15 +15,9 @@ module.exports = (type) => {
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageSettingsSelector);
       client.clickWhenReady(pageSettingsSelector);
-      client.waitForElementReady(modalDialogSelector);
-      client.useXpath();
-      client.setValue(selectTypeSelector, type);
-      client.useCss();
-      client.waitForElementNotPresent(busyLayerSelector);
-      client.pause(1000);
-      client.clickWhenReady(saveBtnSelector);
-      client.waitForElementNotPresent(blackoutSelector);
-
+      client.resetValueInModal('apostrophe-pages-editor-update', 'select[name="type"]', type);
+      client.clickInModal('apostrophe-pages-editor-update', saveBtnSelector);
+      client.waitForNoModals();
       client.expect.element(demoHeaderSelector).text.to.contain(`You are on the "${type}" template`);
     }
   };

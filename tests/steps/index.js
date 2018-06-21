@@ -20,11 +20,8 @@ module.exports = {
   addTextWidgetTo: require('./addTextWidgetTo'),
   checkNotification: require('./checkNotification'),
   createArticle: require('./createArticle'),
-  forceExportCurrentPageFor: require('./forceExportCurrentPageFor'),
   makeIncognitoRequestByRelativeUrl: require('./makeIncognitoRequestByRelativeUrl'),
-  openAdminBar: require('./openAdminBar'),
   openContextMenu: require('./openContextMenu'),
   workflowSubmitArticle: require('./workflowSubmitArticle'),
-  workflowCommitArticle: require('./workflowCommitArticle'),
-  pause: require('./pause'),
+  workflowCommitArticle: require('./workflowCommitArticle')
 };

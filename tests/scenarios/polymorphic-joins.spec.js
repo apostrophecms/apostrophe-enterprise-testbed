@@ -51,7 +51,6 @@ module.exports = Object.assign(
       client.clickWhenReady(addContentBtnSelector);
       client.waitForElementReady(mixedWidgetBtnSelector);
       client.clickWhenReady(mixedWidgetBtnSelector);
-      client.waitForElementReady(modalDialogSelector);
       client.waitForElementReady(browseBtnSelector);
       client.clickWhenReady(browseBtnSelector);
       client.waitForElementReady(articleCheckboxSelector);
