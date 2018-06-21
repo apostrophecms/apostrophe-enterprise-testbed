@@ -25,7 +25,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         "chromeOptions": {
-          "args": [ "start-fullscreen" ]
+          "args": [ "start-maximized" ]
         }
       }
     },
