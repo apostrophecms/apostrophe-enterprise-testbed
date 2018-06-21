@@ -33,6 +33,7 @@ module.exports = Object.assign(
   steps.submitChanges(),
   {
     'upload images': function(client) {
+      throw new Error('TODO bring back this widget in default template, commented out temporarily because it pushed the mixed widget into the workflow buttons');
       const contextBtnSelector = '.demo-main [data-apos-add-content]';
       const contextSubMenuSelector = '.demo-main [data-apos-dropdown-items]';
       const contextSubMenuImageSelector = '.apos-active .apos-dropdown-items [data-apos-add-item=apostrophe-images]';
