@@ -61,20 +61,17 @@
               { name: 'Paragraph', element: 'p' }
             ]
           },
+          'apostrophe-images': {
+            minSize: [ 700, 350 ],
+            aspectRatio: [ 2, 1 ],
+            size: 'full'
+          },
+          'apostrophe-video': {},
           'apostrophe-blog': {},
           'mixed': {},
           'pages': {}
         }
       }) }}
-      {# removed for now for vertical height reasons: unable to click #}
-      {# "mixed" due to the workflow buttons. This is actually a legit #}
-      {# UX problem, a dropdown menu should beat those buttons. -Tom #}
-      {# 'apostrophe-images': {
-        minSize: [ 700, 350 ],
-        aspectRatio: [ 2, 1 ],
-        size: 'full'
-      },
-      'apostrophe-video': {}, #}
       </div>
       <div class="block content--bottom">
         {{ apos.area(data.page, 'block', {
