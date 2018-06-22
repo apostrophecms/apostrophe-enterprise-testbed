@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/apostrophecms/apostrophe-enterprise-testbed.svg?branch=master)](https://travis-ci.org/apostrophecms/apostrophe-enterprise-testbed)
+
 # apostrophe-enterprise-testbed
 
 This project is intended as a testbed for browser-based functional tests. It is not intended as a sample website.
