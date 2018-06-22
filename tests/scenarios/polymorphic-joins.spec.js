@@ -46,7 +46,13 @@ module.exports = Object.assign(
       const regressionTestPageCheckboxSelector = '[data-apos-reorganize-depth="2"] input[type="checkbox"]';
       const saveChoicesBtnSelector = '[data-apos-save]';
       const saveWidgetBtnSelector = '[data-apos-save]';
-
+      // Center the add content button vertically so there is no risk of
+      // it being under the context menu container. After we click it,
+      // the context menu container will hide itself, which will address
+      // any problems for clicking buttons within it
+      client.execute(function () {
+        $(window).scrollTop($('.demo-main [data-apos-add-content]').offset().top - ($(window).height() / 2));
+      }, []);
       client.clickWhenReady(addContentBtnSelector);
       client.clickWhenReady(mixedWidgetBtnSelector);
       client.clickInModal('mixed-widgets-editor', browseBtnSelector)
