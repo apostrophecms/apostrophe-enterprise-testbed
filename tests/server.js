@@ -48,7 +48,11 @@ exports.create = (address, port, ver) => {
       // but tweaked not to throw an error if the port is already available.
       // Portable to Mac and Linux. -Tom
       try {
-        var pids = shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | while IFS= read -r -d '' pid; do kill -9 "$pid"; done`);
+        if (process.platform.match(/darwin|bsd/)) {
+          shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | while IFS= read -r -d '' pid; do kill -9 "$pid"; done`);
+        } else {
+          shell.exec(`lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | xargs -r kill -9`);
+        }
         instances--;
         return cb();
       } catch (e) {
