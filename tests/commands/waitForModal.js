@@ -8,6 +8,5 @@
 exports.command = function waitForModal(modal) {
   selector = '[data-apos-modal-current="' + modal + '"]';
   return this
-    .waitForElementReady(selector)
-    .click(selector);
+    .waitForElementReady(selector);
 };
