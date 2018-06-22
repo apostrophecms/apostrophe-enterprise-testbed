@@ -44,27 +44,19 @@ module.exports = Object.assign(
       const articleCheckboxSelector = '.apos-apostrophe-blog-manager .apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator';
       const productCheckboxSelector = '.apos-product-manager .apos-manage-table tr[data-piece] .apos-field-input-checkbox-indicator';
       const regressionTestPageCheckboxSelector = '[data-apos-reorganize-depth="2"] input[type="checkbox"]';
-      const saveChoicesBtnSelector = '[data-apos-modal-depth="1"] [data-apos-save]';
-      const saveWidgetBtnSelector = '[data-apos-modal-depth="0"] [data-apos-save]';
+      const saveChoicesBtnSelector = '[data-apos-save]';
+      const saveWidgetBtnSelector = '[data-apos-save]';
 
-      client.waitForElementReady(addContentBtnSelector);
       client.clickWhenReady(addContentBtnSelector);
-      client.waitForElementReady(mixedWidgetBtnSelector);
       client.clickWhenReady(mixedWidgetBtnSelector);
-      client.waitForElementReady(browseBtnSelector);
-      client.clickWhenReady(browseBtnSelector);
-      client.waitForElementReady(articleCheckboxSelector);
-      client.clickWhenReady(articleCheckboxSelector);
-      client.waitForElementReady('[data-tab-button="product"]');
-      client.clickWhenReady('[data-tab-button="product"]');
-      client.waitForElementReady(productCheckboxSelector);
-      client.clickWhenReady(productCheckboxSelector);
-      client.clickWhenReady('[data-tab-button="apostrophe-page"]');
-      client.waitForElementReady(regressionTestPageCheckboxSelector);
-      client.clickWhenReady(regressionTestPageCheckboxSelector);
-      client.clickWhenReady(saveChoicesBtnSelector);
-      client.waitForElementReady(saveWidgetBtnSelector);
-      client.clickWhenReady(saveWidgetBtnSelector);
+      client.clickInModal('mixed-widgets-editor', browseBtnSelector)
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', articleCheckboxSelector);
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', '[data-tab-button="product"]');
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', productCheckboxSelector);
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', '[data-tab-button="apostrophe-page"]');
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', regressionTestPageCheckboxSelector);
+      client.clickInModal('apostrophe-polymorphic-manager-manager-modal', saveChoicesBtnSelector);
+      client.clickInModal('mixed-widgets-editor', saveWidgetBtnSelector);
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/articles/article-1"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-50"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products"]');
