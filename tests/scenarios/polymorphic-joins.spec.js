@@ -59,7 +59,7 @@ module.exports = Object.assign(
       client.clickInModal('apostrophe-polymorphic-manager-manager-modal', saveChoicesBtnSelector);
       client.clickInModal('mixed-widgets-editor', saveWidgetBtnSelector);
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/articles/article-1"]');
-      client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-50"]');
+      client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-01"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products"]');
       client.expect.element('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/regression-test"]').to.not.be.present;
     }
