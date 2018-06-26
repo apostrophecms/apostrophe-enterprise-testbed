@@ -150,6 +150,9 @@ function uploadReport(callback) {
             float: left;
             width: 33.33333%;
           }
+          .clearfix {
+            clear: left;
+          }
         </style>
       </head>
       <body>
@@ -170,6 +173,7 @@ function uploadReport(callback) {
                 <h5>Diff</h5>
                 <div><img src="diffs/${screenshot}" /></div>
               </div>
+              <div class="clearfix"></div>
             `
           ).join('')
         }
