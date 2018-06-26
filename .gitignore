@@ -1,3 +1,6 @@
+.DS_Store
+/screenshots
+/test-uploadfs
 /package-lock.json
 /locales
 /npm-debug.log
@@ -18,5 +21,5 @@ node_modules
 /public/js/_site-compiled.js
 /scripts/sync-up
 /tests/reports
-/screenshots/
 .*.sw*
+/visual-regression-test-config.js

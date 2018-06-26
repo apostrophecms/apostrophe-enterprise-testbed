@@ -1,5 +1,5 @@
-const steps = require('../steps');
-const server = require('../server');
+const steps = require('apostrophe-nightwatch-tools/steps');
+const server = require('apostrophe-nightwatch-tools/server');
 
 module.exports = Object.assign(
   {
@@ -89,6 +89,7 @@ module.exports = Object.assign(
       client.openAdminBarItem('apostrophe-blog');
       client.waitForElementReady(blogTitleSelector);
       client.expect.element(blogTitleSelector).text.to.equal('New Article Title');
+      client.saveScreenshot('screenshots/latest/revert.png');
       client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
       client.waitForNoModals();
     }

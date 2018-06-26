@@ -1,8 +1,8 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const path = require('path');
-const server = require('../server');
-const steps = require('../steps');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 const sauce = require('../sauce');
 
 const fixturesPath = path.resolve(__dirname, '..', 'fixtures');

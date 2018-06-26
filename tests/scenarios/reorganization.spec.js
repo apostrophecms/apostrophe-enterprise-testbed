@@ -1,5 +1,5 @@
-const server = require('../server');
-const steps = require('../steps');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 const sauce = require('../sauce');
 
 const firstTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(1)';
@@ -51,7 +51,7 @@ module.exports = Object.assign(
   steps.makeSubPage('test1'),
   steps.commit(),
   steps.navigateToHome(),
-  steps.makeSubPage('test2'),
+  steps.makeSubPage('test2a'),
   steps.commit(),
   steps.navigateToHome(),
   steps.openContextMenu('Reorganize'),
@@ -109,7 +109,9 @@ module.exports = Object.assign(
 
       client.expect.element(secondMenuItemSelector).text.to.contain('test2');
       client.expect.element(thirdMenuItemSelector).text.to.contain('test1');
+
+      client.saveScreenshot('screenshots/latest/reorganization.png');
+
     },
-  },
-  steps.navigateToRelativeUrlAndconfirm200('test1'),
+  }
 );

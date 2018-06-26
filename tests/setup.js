@@ -6,7 +6,6 @@ const onDeath = require('death')({
 });
 const chromedriver = require('chromedriver');
 const sauceConnectLauncher = require('sauce-connect-launcher');
-const server = require('./server');
 
 const WEBDRIVER_PORT = 4444;
 const scOpts = {

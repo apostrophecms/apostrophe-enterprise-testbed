@@ -1,5 +1,5 @@
-const server = require('../server');
-const steps = require('../steps/index');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 const sauce = require('../sauce');
 
 module.exports = Object.assign(
@@ -60,6 +60,9 @@ module.exports = Object.assign(
       const blogArticleTitleSelector = '.blog-card-title-container';
 
       client.expect.element(blogArticleTitleSelector).text.to.equal('New Blog Article Title');
+      // To get the footer onscreen for a better screenshot
+      client.click('footer');
+      client.saveScreenshot('screenshots/latest/blog-widget.png');
     }
   },
 );

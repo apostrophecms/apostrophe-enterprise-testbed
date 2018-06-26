@@ -1,5 +1,5 @@
-const server = require('../server');
-const steps = require('../steps');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 const sauce = require('../sauce');
 
 module.exports = Object.assign(
@@ -39,4 +39,9 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.navigateToPage('regression-test'),
   steps.changePageTypeTo('Alternate Page'),
+  {
+    'screenshot alternate page': client => {
+      client.saveScreenshot('screenshots/latest/page-creation-and-availability.png');
+    }
+  }
 );

@@ -1,5 +1,5 @@
-const server = require('../server');
-const steps = require('../steps');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 const sauce = require('../sauce');
 debugger;
 module.exports = Object.assign(
@@ -85,6 +85,7 @@ module.exports = Object.assign(
 
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
+      client.saveScreenshot('screenshots/latest/article.png');
     }
   },
 );

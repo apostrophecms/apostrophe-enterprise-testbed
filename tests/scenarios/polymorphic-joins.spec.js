@@ -1,5 +1,5 @@
-const server = require('../server');
-const steps = require('../steps/index');
+const server = require('apostrophe-nightwatch-tools/server');
+const steps = require('apostrophe-nightwatch-tools/steps');
 
 module.exports = Object.assign(
   {
@@ -62,6 +62,7 @@ module.exports = Object.assign(
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-01"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products"]');
       client.expect.element('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/regression-test"]').to.not.be.present;
+      client.saveScreenshot('screenshots/latest/polymorphic-joins.png');
     }
   }
 );

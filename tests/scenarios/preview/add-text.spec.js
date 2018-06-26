@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const request = require('request');
-const server = require('../../server');
-const steps = require('../../steps/index');
+const server = require('../apostrophe-nightwatch-tools/server');
+const steps = require('../../steps');
 const sauce = require('../../sauce');
 
 module.exports = Object.assign(

@@ -1,5 +1,5 @@
-const steps = require('../steps');
-const server = require('../server');
+const steps = require('apostrophe-nightwatch-tools/steps');
+const server = require('apostrophe-nightwatch-tools/server');
 const sauce = require('../sauce');
 
 module.exports = Object.assign(
@@ -35,6 +35,9 @@ module.exports = Object.assign(
       const richTextSelector = `.footer [data-rich-text]`;
 
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
+      // To get the footer onscreen for a better screenshot
+      client.click('footer');
+      client.saveScreenshot('screenshots/latest/apostrophe-global.png');
     }
   }
   );
