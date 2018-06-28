@@ -7,10 +7,12 @@
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
-    "e2e-local": "bash tests/run-all-local.bash",
-    "e2e-remote": "bash tests/run-all-remote.bash",
+    "e2e-local": "VISUAL_ENV=local tests/run-all",
+    "e2e-remote": "VISUAL_ENV=remote tests/run-all",
+    "e2e-local-with-visual": "VISUAL_ENV=local (node tests/screenshot-previous.js && tests/run-all)",
+    "e2e-remote-with-visual": "VISUAL_ENV=remote (node tests/screenshot-previous.js && tests/run-all)",
     "e2e-debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js tests/scenarios/* --config nightwatch.js --env local --inspect-brk",
-    "test": "npm run e2e-remote"
+    "test": "npm run e2e-remote-with-visual"
   },
   "repository": {
     "type": "git",
@@ -37,9 +39,9 @@
     "nightwatch": "^0.9.20",
     "once": "^1.4.0",
     "pixelmatch": "^4.0.2",
-    "sauce-connect-launcher": "^1.2.3",
-    "shelljs": "^0.8.1",
     "pngjs": "^3.0.0",
+    "sauce-connect-launcher": "^1.2.3",
+    "shelljs": "^0.8.2",
     "uploadfs": "^1.0.0"
   }
 }
