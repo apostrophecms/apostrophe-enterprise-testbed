@@ -41,7 +41,7 @@ module.exports = Object.assign(
   steps.changePageTypeTo('Alternate Page'),
   {
     'screenshot alternate page': client => {
-      client.saveScreenshot('screenshots/latest/page-creation-and-availability.png');
+      client.categoryScreenshot('page-creation-and-availability.png');
     }
   }
 );

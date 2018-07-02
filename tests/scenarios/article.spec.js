@@ -85,7 +85,7 @@ module.exports = Object.assign(
 
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.expect.element(manageTableRowSelector).text.to.contain('Published');
-      client.saveScreenshot('screenshots/latest/article.png');
+      client.categoryScreenshot('article.png');
     }
   },
 );

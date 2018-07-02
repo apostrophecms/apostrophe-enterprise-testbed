@@ -62,7 +62,7 @@ module.exports = Object.assign(
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-01"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products"]');
       client.expect.element('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/regression-test"]').to.not.be.present;
-      client.saveScreenshot('screenshots/latest/polymorphic-joins.png');
+      client.categoryScreenshot('polymorphic-joins.png');
     }
   }
 );

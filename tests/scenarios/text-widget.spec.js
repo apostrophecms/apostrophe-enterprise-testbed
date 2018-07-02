@@ -41,7 +41,7 @@ module.exports = Object.assign(
       const richTextSelector = `.demo-main [data-rich-text]`;
 
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line');
-      client.saveScreenshot('screenshots/latest/text-widget.png');
+      client.categoryScreenshot('text-widget.png');
     }
   },
 );

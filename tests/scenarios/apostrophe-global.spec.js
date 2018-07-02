@@ -37,7 +37,7 @@ module.exports = Object.assign(
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
       // To get the footer onscreen for a better screenshot
       client.click('footer');
-      client.saveScreenshot('screenshots/latest/apostrophe-global.png');
+      client.categoryScreenshot('apostrophe-global.png');
     }
   }
   );

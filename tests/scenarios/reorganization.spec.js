@@ -110,7 +110,7 @@ module.exports = Object.assign(
       client.expect.element(secondMenuItemSelector).text.to.contain('test2');
       client.expect.element(thirdMenuItemSelector).text.to.contain('test1');
 
-      client.saveScreenshot('screenshots/latest/reorganization.png');
+      client.categoryScreenshot('reorganization.png');
 
     },
   }

@@ -31,7 +31,7 @@ module.exports = Object.assign(
   {
     'Check URL' : function(client) {
       client.assert.urlContains('en');
-      client.saveScreenshot('screenshots/latest/locales.png');
+      client.categoryScreenshot('locales.png');
     }
   },
   steps.navigateToHome()

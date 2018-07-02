@@ -9,6 +9,7 @@ const comparable = {};
 const errors = {};
 
 if (!fs.existsSync(folder)) {
+  console.log(folder + 'allegedly does not exist, creating it');
   fs.mkdirSync(folder);
 }
 

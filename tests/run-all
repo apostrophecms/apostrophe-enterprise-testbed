@@ -2,9 +2,9 @@
 
 mkdir -p screenshots/latest
 echo "TODO turn on testing all of them again"
-npx nightwatch tests/scenarios/article.spec.js --config nightwatch.js --env $VISUAL_ENV --verbose &&
-#npx nightwatch tests/scenarios/* --config nightwatch.js --env $VISUAL_ENV --verbose &&
-node visual-regression-test.js &&
+#run one for POC
+#npx nightwatch tests/scenarios/article.spec.js --config nightwatch.js --env $VISUAL_ENV --verbose &&
+npx nightwatch tests/scenarios/* --config nightwatch.js --env $VISUAL_ENV --verbose &&
 
 # Separate nightwatch invocations to stomp out disparities in behavior
 
@@ -14,5 +14,4 @@ node visual-regression-test.js &&
 #   sleep 5
 # done
 
-echo "Nightwatch functional tests PASSED" &&
-echo "(Please review visual regression test results manually)"
+echo "Nightwatch functional tests PASSED"
