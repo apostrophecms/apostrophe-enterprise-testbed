@@ -1,36 +1,80 @@
-var _ = require('lodash');
-var locales;
-var prefixes;
-
-if (process.env.EXTRA_LOCALES) {
-  prefixes = {
-    fr: '/fr',
-    en: '/en',
-    es: '/es',
-    be: '/be',
-    de: '/de',
-    au: '/au',
-    nl: '/nl',
-    ru: '/ru',
-    hu: '/hu',
-    th: '/th'
-  };
-} else {
-  prefixes = {
-    fr: '/fr',
-    en: '/en',
-    es: '/es',
-  }
-}
+const _ = require('lodash');
 
 function run(config, ready) {
-  var address = process.env.ADDRESS || 'localhost';
-  var port = process.env.PORT || '3000';
+  const address = process.env.ADDRESS || 'localhost';
+  const port = process.env.PORT || '3000';
 
   const baseUrl = `http://${address}:${port}`;
   console.log('APP', address, port, baseUrl);
 
-  var apos = require('apostrophe')(
+  let locales = [
+    {
+      name: 'en',
+      label: 'en',
+    },
+    {
+      name: 'fr',
+      label: 'fr'
+    },
+    {
+      name: 'es',
+      label: 'es'
+    }
+  ];
+  if (process.env.MANY_LOCALES) {
+    locales = [
+      {
+        name: 'en',
+        label: 'en',
+      },
+      {
+        name: 'fr',
+        label: 'fr'
+      },
+      {
+        name: 'es',
+        label: 'es'
+      },
+      {
+        name: 'be',
+        label: 'Belgium'
+      },
+      {
+        name: 'de',
+        label: 'Germany'
+      },
+      {
+        name: 'au',
+        label: 'Australia'
+      },
+      {
+        name: 'nl',
+        label: 'Netherlands'
+      },
+      {
+        name: 'ru',
+        label: 'Russia'
+      },
+      {
+        name: 'hu',
+        label: 'Hungary'
+      },
+      {
+        name: 'th',
+        label: 'Thailand'
+      }
+    ];
+  }
+
+  if (process.env.WORLD_LOCALES_HALF) {
+    locales = worldLocales({ half: true });
+  }
+
+  if (process.env.WORLD_LOCALES) {
+    locales = worldLocales({});
+  }
+
+  const apos = require('apostrophe')(
     _.assign({
       shortName: 'apostrophe-enterprise-testbed',
       baseUrl: baseUrl,
@@ -64,11 +108,17 @@ function run(config, ready) {
           extend: 'apostrophe-pieces',
           name: 'product',
           label: 'Product',
+          alias: 'products'
         },
         'products-pages': {
           extend: 'apostrophe-pieces-pages'
         },
-        'apostrophe-blog': {},
+        'products-widgets': {
+          extend: 'apostrophe-pieces-widgets'
+        },
+        'apostrophe-blog': {
+          alias: 'blog'
+        },
         'apostrophe-blog-pages': {},
         'apostrophe-blog-widgets': {
           extend: 'apostrophe-pieces-widgets'
@@ -123,53 +173,11 @@ function run(config, ready) {
               name: 'master',
               label: 'Master',
               private: true,
-              children: [
-                {
-                  name: 'en',
-                  label: 'en',
-                },
-                {
-                  name: 'fr',
-                  label: 'fr'
-                },
-                {
-                  name: 'es',
-                  label: 'es'
-                }
-              ].concat(process.env.EXTRA_LOCALES ? [
-                {
-                  name: 'be',
-                  label: 'Belgium'
-                },
-                {
-                  name: 'de',
-                  label: 'Germany'
-                },
-                {
-                  name: 'au',
-                  label: 'Australia'
-                },
-                {
-                  name: 'nl',
-                  label: 'Netherlands'
-                },
-                {
-                  name: 'ru',
-                  label: 'Russia'
-                },
-                {
-                  name: 'hu',
-                  label: 'Hungary'
-                },
-                {
-                  name: 'th',
-                  label: 'Thailand'
-                }
-              ] : [])
+              children: locales
             }
           ],
           defaultLocale: 'en',
-          prefixes: prefixes
+          prefixes: computePrefixes(locales)
         },
 
 
@@ -188,7 +196,9 @@ function run(config, ready) {
               apikey: 'XYZ'
             }
           ]
-        }
+        },
+
+        'content-generator': {}
       },
 
       afterListen: function(err) {
@@ -209,3 +219,68 @@ module.exports = run;
 if (!global.testing) {
   run();
 }
+
+function worldLocales(options) {
+  let all = require('./lib/worldLocales.js');
+  if (options.half) {
+    all = all.filter((locale, index) => index & 1);
+  }
+  const locales = [];
+  const localesByName = {};
+  const seen = {};
+  // At least one duplicate in the source data
+  all = all.filter(locale => {
+    if (seen[locale.ABBREV]) {
+      return false;
+    }
+    seen[locale.ABBREV] = true;
+    return true;
+  });
+  all.forEach(locale => {
+    locale = {
+      name: locale.ABBREV,
+      label: locale.Country,
+      children: []
+    };
+    if (locale.name.match(/-.*-/)) {
+      // Three part locale names aren't good for this simple test
+      // and there are just three of them, they won't affect
+      // this test's realism as a measure of performance with
+      // many locales
+      return;
+    }
+    const matches = locale.name.match(/^([a-z]+)-([a-z])+$/);
+    if (!matches) {
+      localesByName[locale.name] = locale;
+      locales.push(locale);
+    } else {
+      if (!localesByName[matches[1]]) {
+        const labelMatches = locale.label.split(/ - /);
+        const parent = {
+          name: matches[1],
+          label: labelMatches[0],
+          children: []
+        };
+        locales.push(parent);
+        localesByName[matches[1]] = parent;
+      }
+      localesByName[matches[1]].children.push(locale);
+    }
+  });
+  return locales;
+}
+
+function computePrefixes(locales) {
+  const result = {};
+  recurse(locales);
+  return result;
+  function recurse(locales) {
+    locales.forEach(locale => {
+      result[locale.name] = '/' + locale.name;
+      if (locale.children) {
+        recurse(locale.children);
+      }
+    });
+  }
+}
+

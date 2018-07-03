@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Generating test site with absurdly obvious password, this is"
+echo "for testing only!"
+
+echo "Resetting database" &&
+node app apostrophe-db:reset &&
+echo "Adding admin group" &&
+node app apostrophe-groups:add admin admin &&
+echo "Adding admin user" &&
+( echo "demo" | node app apostrophe-users:add admin admin ) &&
+echo "Generating large amounts of content" &&
+node app content-generator:generate &&
+echo "Generating test sitemap" &&
+node app apostrophe-site-map:map --format=xml &&
+echo "Adding all world locales" &&
+export WORLD_LOCALES=1 &&
+time node app apostrophe-workflow:add-missing-locales --live &&
+echo "Generating test sitemap with all locales" &&
+time node app apostrophe-site-map:map --format=xml
