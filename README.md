@@ -23,6 +23,10 @@ Retrive name and access key, then subtitute it into command below:
 SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> npm run e2e-remote
 ```
 
+## Visual diff
+
+On travis/saucelabs a full run is automatically carried out on all pushes to apostrophe-enterprise-testbed master (TODO: should happen on all pushes to master of the relevant modules). This run is for both the latest npm releases and the latest git masters, resulting in a [visual diff report](https://s3.amazonaws.com/apostrophe-enterprise-testbed/index.html).
+
 ## Testing the site
 
 Restore the provided test database:
