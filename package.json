@@ -10,9 +10,9 @@
     "e2e-local": "VISUAL_ENV=local tests/run-all",
     "e2e-remote": "VISUAL_ENV=remote tests/run-all",
     "e2e-local-with-visual": "(VISUAL_ENV=local node tests/screenshot-previous.js && VISUAL_ENV=local tests/run-all && node visual-regression-test.js )",
-    "e2e-remote-with-visual": "(VISUAL_ENV=remote node tests/screenshot-previous.js && VISUAL_ENV=remote tests/run-all && node visual-regression-test.js )",
+    "e2e-remote-with-visual": "(echo 'RUNNING PREVIOUS' && VISUAL_ENV=remote node tests/screenshot-previous.js && echo 'RUNNING CURRENT' && VISUAL_ENV=remote tests/run-all && echo 'RUNNING VISUAL DIFF' && node visual-regression-test.js )",
     "e2e-debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js tests/scenarios/* --config nightwatch.js --env local --inspect-brk",
-    "test": "npm run e2e-remote"
+    "test": "npm run e2e-remote-with-visual"
   },
   "repository": {
     "type": "git",

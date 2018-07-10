@@ -3,6 +3,8 @@
 mkdir -p screenshots/latest
 #run one for POC
 #npx nightwatch tests/scenarios/article.spec.js --config nightwatch.js --env $VISUAL_ENV --verbose &&
+echo "** running from"
+echo $PWD
 npx nightwatch tests/scenarios/* --config nightwatch.js --env $VISUAL_ENV --verbose &&
 
 # Separate nightwatch invocations to stomp out disparities in behavior

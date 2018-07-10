@@ -50,21 +50,8 @@ function compare(callback) {
     fs.mkdirSync(folder + '/diffs');
   }
   return async.series([
-    copyOut,
     compare
   ], callback);
-  function copyOut(callback) {
-    return async.eachSeries(screenshots, function(screenshot, callback) {
-      const name = screenshot;
-      // What was latest is now previous
-      return uploadfs.copyOut('/latest/' + name, folder + '/previous/' + name, function(err) {
-        if (!err) {
-          comparable[screenshot] = true;
-        }
-        return callback(null);
-      });
-    }, callback);
-  }
   function compare(callback) {
     return async.eachSeries(screenshots, function(screenshot, callback) {
       if (!comparable[screenshot]) {

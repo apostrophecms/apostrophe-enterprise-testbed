@@ -25,6 +25,8 @@ module.exports = {
 
   before: function(done) {
     console.log('I - SETUP');
+    console.log('BEGIN');
+    console.log(process.argv);
     if (isLocalRunning.call(this)) {
       chromedriver.start([
         `--port=${WEBDRIVER_PORT}`,
@@ -46,6 +48,7 @@ module.exports = {
   },
   after: function(done) {
     console.log('I - SETUP AFTER');
+    console.log(process.argv);
     clean(done);
   },
   // More time to launch Chrome

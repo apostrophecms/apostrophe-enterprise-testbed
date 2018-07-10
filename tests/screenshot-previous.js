@@ -13,7 +13,7 @@ const package = JSON.parse(fs.readFileSync('package.json'));
 let tested = [];
 const versions = {};
 
-
+console.log('** beginning');
 for (let key in package.dependencies) {
   const version = package.dependencies[key];
   if (version.match(/^github:apostrophe/)) {
@@ -26,6 +26,7 @@ for (let key in package.dependencies) {
 initUploadfs();
 
 function initUploadfs(callback) {
+  console.log('** initUploadfs');
   return uploadfs.init({
     backend: process.env.VISUAL_BACKEND || 'local',
     uploadsPath: process.env.VISUAL_UPLOADS_PATH || (__dirname + '/test-uploadfs'),
@@ -38,24 +39,27 @@ function initUploadfs(callback) {
     if (err) {
       throw err;
     }
-    checkCache();
+    go();
+    // checkCache();
   });
 }
 
-function checkCache() {
-  return uploadfs.copyOut('/published.json', __dirname + '/published.json', function(err) {
-    if (err) {
-      go();
-    }
-    if (JSON.stringify(tested) !== fs.readFileSync(__dirname + '/published.json', 'utf8')) {
-      go();
-    }
-    console.error('Screenshots of previously published version are already up to date');
-    process.exit(0);
-  });
-}
+// function checkCache() {
+// Not completely thought through, where to keep old screenshots?
+//   return uploadfs.copyOut('/published.json', __dirname + '/published.json', function(err) {
+//     if (err) {
+//       go();
+//     }
+//     if (versioningKey() !== fs.readFileSync(__dirname + '/published.json', 'utf8')) {
+//       go();
+//     }
+//     console.error('Screenshots of previously published version are already up to date');
+//     process.exit(0);
+//   });
+// }
 
 function go() {
+  console.log('** copying');
   tested.forEach(function(module) {
     // This should be easier but npm install --global-style does bad permissions things
     // and then even plain npm install starts failing.
@@ -67,24 +71,30 @@ function go() {
     cp.execSync(cmd);
   });
   try {
-    cp.execSync('VISUAL_CATEGORY=previous ./tests/run-all');
+    console.log('** exec-ing');
+    console.log(cp.execSync('VISUAL_CATEGORY=previous ./tests/run-all', { encoding: 'utf8' }));
   } catch (e) {
-    console.log(e.stdout.toString('utf8'));
-    console.error(e.stderr.toString('utf8'));
+    console.log('** error');
+    console.error(e);
+    console.log(e.stdout);
+    console.error(e.stderr);
     console.log('Tests failed for EXISTING, PUBLISHED version! Cannot create visual reference');
     restorePackages();
     process.exit(1);
   }
-  fs.writeFileSync(__dirname + '/published.json', JSON.stringify(tested));
-  return uploadfs.copyIn(__dirname + '/published.json', '/published.json', function(err) {
-    if (err) {
-      restorePackages();
-      process.exit(1);
-    }
-    restorePackages();
-    console.log('\n\n\n**** FINISHED PREVIOUS SNAPSHOTS\n\n\n');
-    process.exit(0);
-  });
+  console.log('** restoring and exiting');
+  restorePackages();
+  process.exit(0);
+  // fs.writeFileSync(__dirname + '/published.json', versioningKey());
+  // return uploadfs.copyIn(__dirname + '/published.json', '/published.json', function(err) {
+  //   if (err) {
+  //     restorePackages();
+  //     process.exit(1);
+  //   }
+  //   restorePackages();
+  //   console.log('\n\n\n**** FINISHED PREVIOUS SNAPSHOTS\n\n\n');
+  //   process.exit(0);
+  // });
 }
 
 function restorePackages() {
@@ -93,3 +103,11 @@ function restorePackages() {
     cp.execSync(`mv node_modules/${module}.master node_modules/${module}`);
   });
 }
+
+// function versioningKey() {
+//   var key = {};
+//   _.each(tested, function(package) {
+//     key[package] = versions[package];
+//   });
+//   return JSON.stringify(key);
+// }
