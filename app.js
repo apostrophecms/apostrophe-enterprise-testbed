@@ -104,6 +104,27 @@ function run(config, ready) {
             }
           ]
         },
+
+        'array-widgets': {
+          extend: 'apostrophe-widgets',
+          label: 'Array',
+          addFields: [
+            {
+              name: 'array',
+              type: 'array',
+              label: 'People',
+              schema: [
+                {
+                  name: 'title',
+                  type: 'string',
+                  required: true
+                }
+              ],
+              labelField: 'title'
+            }
+          ]
+        },
+
         'pages-widgets': {
           extend: 'apostrophe-widgets',
           label: 'Pages',
