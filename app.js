@@ -82,10 +82,10 @@ function run(config, ready) {
               label: 'Media',
               items: [ 'apostrophe-images', 'apostrophe-files' ]
             },
-            {
-              label: 'Workflow',
-              items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
-            }
+            // {
+            //   label: 'Workflow',
+            //   items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
+            // }
           ]
         },
 
@@ -118,7 +118,7 @@ function run(config, ready) {
 
         'apostrophe-workflow': {
           alias: 'workflow',
-          locales: [
+          locales: process.env.WORKFLOW_ONLY ? null : [
             {
               name: 'master',
               label: 'Master',
@@ -168,10 +168,9 @@ function run(config, ready) {
               ] : [])
             }
           ],
-          defaultLocale: 'en',
-          prefixes: prefixes
+          defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
+          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
         },
-
 
         'apostrophe-review-and-deploy': {
           deployTo: [
