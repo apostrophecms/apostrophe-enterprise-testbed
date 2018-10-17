@@ -81,12 +81,13 @@ function run(config, ready) {
             {
               label: 'Media',
               items: [ 'apostrophe-images', 'apostrophe-files' ]
-            },
-            // {
-            //   label: 'Workflow',
-            //   items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
-            // }
-          ]
+            }
+          ].concat(process.env.WORKFLOW_ONLY ? [] : [
+            {
+              label: 'Workflow',
+              items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
+            }
+          ])
         },
 
         // Apostrophe Sandbox (as-) specific modules
