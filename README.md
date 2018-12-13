@@ -101,9 +101,6 @@ And that the slideshow is still present.
 
 *These tests currently require a developer, they could and should be automated too.*
 
-* Run `EXTRA_LOCALES=1 node app apostrophe-workflow:add-missing-locales`.
-* Restart the site, this time with `EXTRA_LOCALES=1 node app`.
-* Verify that the regression test page you created now exists, it may be as a trashed draft (find it via "Reorganize"), in the new `ru` locale (you may need to refresh the page to see this locale choice, that is OK).
-* The joined content (images and article) may not appear because it is also in the trash so far. This is OK for now.
-* Rescue the page from the trash and commit it.
-* View it in the incognito window.
+* Restart the site, this time with `EXTRA_LOCALES=1 node app`. Wait for it to listen on the port.
+* Verify that the regression test page you created now exists in the `ru` locale, and is not in the trash, because it was copied from `default`, the parent locale, among the many you exported this page to.
+* The joined content (images and article) will appear, as it was also copied from `default`, the parent locale.
