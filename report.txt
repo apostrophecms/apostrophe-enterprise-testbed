@@ -1,0 +1,118 @@
+
+> apostrophe-enterprise-testbed@2.0.0 e2e-local /home/boutell/apostrophecms/apostrophe-enterprise-testbed
+> VISUAL_ENV=local tests/run-all
+
+** running from
+/home/boutell/apostrophecms/apostrophe-enterprise-testbed
+I - SETUP
+BEGIN
+[ '/usr/bin/node',
+  '/home/boutell/apostrophecms/apostrophe-enterprise-testbed/node_modules/.bin/nightwatch',
+  'tests/scenarios/apostrophe-global.spec.js',
+  'tests/scenarios/article.spec.js',
+  'tests/scenarios/blog-widget.spec.js',
+  'tests/scenarios/locales.spec.js',
+  'tests/scenarios/page-creation-and-availability.spec.js',
+  'tests/scenarios/polymorphic-joins.spec.js',
+  'tests/scenarios/preview',
+  'tests/scenarios/reorganization.spec.js',
+  'tests/scenarios/revert.spec.js',
+  'tests/scenarios/text-widget.spec.js',
+  '--config',
+  'nightwatch.js',
+  '--env',
+  'local',
+  '--verbose' ]
+Starting ChromeDriver 2.43.600233 (523efee95e3d68b8719b3a1c83051aa63aa6b10d) on port 4444
+Only local connections are allowed.
+
+[0;36m[Scenarios / Apostrophe Global Spec] Test Suite[0m
+[0;35m===================================================[0m
+client { launch_url: 'http://localhost:8081',
+  selenium_port: 4444,
+  selenium_host: 'localhost',
+  silent: false,
+  apos_address: 'localhost',
+  apos_port: 3111,
+  screenshots: 
+   { enabled: true,
+     path: './screenshots',
+     on_failure: true,
+     on_error: true },
+  desiredCapabilities: 
+   { browserName: 'chrome',
+     javascriptEnabled: true,
+     acceptSslCerts: true,
+     chromeOptions: { args: [Array] },
+     name: 'Scenarios / Apostrophe Global Spec' },
+  custom_commands_path: 
+   [ 'node_modules/apostrophe-nightwatch-tools/commands',
+     'tests/commands' ],
+  custom_assertions_path: '',
+  page_objects_path: '',
+  globals: 
+   { before: [Function: before],
+     after: [Function: after],
+     asyncHookTimeout: 50000,
+     waitForConditionTimeout: 50000,
+     test_settings: [Circular] },
+  output: true,
+  parallelMode: false,
+  live_output: undefined,
+  detailed_output: true,
+  start_session: true,
+  report_prefix: '',
+  test_worker: false,
+  modulesNo: 11 }
+SERVER localhost 3111
+BD has been restored
+[1;35m[40mINFO[0m [1;36mRequest: POST /wd/hub/session[0m 
+ - data:  {"desiredCapabilities":{"browserName":"chrome","javascriptEnabled":true,"acceptSslCerts":true,"platform":"ANY","chromeOptions":{"args":["start-maximized","headless"]},"name":"Scenarios / Apostrophe Global Spec"}} 
+ - headers:  {"Content-Type":"application/json; charset=utf-8","Content-Length":212}
+APP localhost 3111 http://localhost:3111
+< APP localhost 3111 http://localhost:3111
+ >
+[1;35m[40mINFO[0m [1;36mResponse 200 POST /wd/hub/session (333ms) [0m{ sessionId: [32m'319d198fe683ca453b7a9305a7829444'[39m,
+  status: [33m0[39m,
+  value: 
+   { acceptInsecureCerts: [33mfalse[39m,
+     acceptSslCerts: [33mfalse[39m,
+     applicationCacheEnabled: [33mfalse[39m,
+     browserConnectionEnabled: [33mfalse[39m,
+     browserName: [32m'chrome'[39m,
+     chrome: 
+      { chromedriverVersion: [32m'2.43.600233 (523efee95e3d68b8719b3a1c83051aa63aa6b10d)'[39m,
+        userDataDir: [32m'/tmp/.org.chromium.Chromium.QPwZLU'[39m },
+     cssSelectorsEnabled: [33mtrue[39m,
+     databaseEnabled: [33mfalse[39m,
+     [32m'goog:chromeOptions'[39m: { debuggerAddress: [32m'localhost:45407'[39m },
+     handlesAlerts: [33mtrue[39m,
+     hasTouchScreen: [33mfalse[39m,
+     javascriptEnabled: [33mtrue[39m,
+     locationContextEnabled: [33mtrue[39m,
+     mobileEmulationEnabled: [33mfalse[39m,
+     nativeEvents: [33mtrue[39m,
+     networkConnectionEnabled: [33mfalse[39m,
+     pageLoadStrategy: [32m'normal'[39m,
+     platform: [32m'Linux'[39m,
+     rotatable: [33mfalse[39m,
+     setWindowRect: [33mtrue[39m,
+     takesHeapSnapshot: [33mtrue[39m,
+     takesScreenshot: [33mtrue[39m,
+     unexpectedAlertBehaviour: [32m''[39m,
+     version: [32m'69.0.3497.100'[39m,
+     webStorageEnabled: [33mtrue[39m } }
+[1;35m[40mINFO[0m [1;36mGot sessionId from selenium[0m 319d198fe683ca453b7a9305a7829444
+[1;35m[40mINFO[0m [1;36mRequest: POST /wd/hub/session/319d198fe683ca453b7a9305a7829444/window/current/size[0m 
+ - data:  {"width":1200,"height":800} 
+ - headers:  {"Content-Type":"application/json; charset=utf-8","Content-Length":27}
+[1;35m[40mINFO[0m [1;36mResponse 200 POST /wd/hub/session/319d198fe683ca453b7a9305a7829444/window/current/size (109ms) [0m{ sessionId: [32m'319d198fe683ca453b7a9305a7829444'[39m,
+  status: [33m0[39m,
+  value: [1mnull[22m }
+[1;37m[40mLOG [0m [1;37m   [0;32m→[0m Completed command [1;32mwindowSize[0m[0m (110 ms)
+[1;35m[40mINFO[0m [1;36mFINISHED[0m
+I - SETUP DEATH SIGINT SIGINT
+SIGINT
+I - SETUP CLEAN
+SAUCE CONNECT KILL undefined
+Nightwatch functional tests PASSED
