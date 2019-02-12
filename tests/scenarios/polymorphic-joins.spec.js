@@ -16,6 +16,10 @@ module.exports = Object.assign(
         }
         this._server.task('apostrophe-blog:generate --total=50');
         this._server.task('products:generate --total=50');
+        // Migration task must not crash when run noninteractively (pipe to file)
+        if (this._server.task('apostrophe-migrations:migrate > /tmp/migrate.results').code !== 0) {
+          return done('MIGRATION ERROR');
+        }
         return done();
       });
     },
