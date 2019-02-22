@@ -82,10 +82,15 @@ function run(config, ready) {
               label: 'Media',
               items: [ 'apostrophe-images', 'apostrophe-files' ]
             }
-          ].concat(process.env.WORKFLOW_ONLY ? [] : [
+          ].concat(process.env.WORKFLOW_ONLY ? [
             {
               label: 'Workflow',
-              items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal' ]
+              items: [ 'apostrophe-workflow-manage-modal', 'apostrophe-workflow-modified-documents' ]
+            }
+          ] : [
+            {
+              label: 'Workflow',
+              items: [ 'apostrophe-workflow-locale-picker-modal', 'apostrophe-workflow-manage-modal', 'apostrophe-workflow-modified-documents' ]
             }
           ])
         },
@@ -173,7 +178,7 @@ function run(config, ready) {
           prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
         },
 
-        'apostrophe-workflow-committables': {},
+        'apostrophe-workflow-modified-documents': {},
 
         'apostrophe-review-and-deploy': {
           deployTo: [
