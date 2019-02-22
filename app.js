@@ -173,6 +173,8 @@ function run(config, ready) {
           prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
         },
 
+        'apostrophe-workflow-committables': {},
+
         'apostrophe-review-and-deploy': {
           deployTo: [
             {
