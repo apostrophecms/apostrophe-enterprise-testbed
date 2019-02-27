@@ -23,7 +23,7 @@
   "dependencies": {
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
-    "apostrophe-nightwatch-tools": "^2.0.1",
+    "apostrophe-nightwatch-tools": "^2.0.6",
     "apostrophe-review-and-deploy": "^2.4.3",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
