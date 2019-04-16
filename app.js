@@ -180,6 +180,20 @@ function run(config, ready) {
 
         'apostrophe-workflow-modified-documents': {},
 
+        'apostrophe-personas': {
+          personas: [
+            {
+              name: 'developer',
+              label: 'Developer',
+              prefixes: {
+                'en': '/developer',
+                'fr': '/développeur',
+                'es': '/desarrollador'
+              }
+            }
+          ]
+        },
+
         'apostrophe-review-and-deploy': {
           deployTo: [
             {

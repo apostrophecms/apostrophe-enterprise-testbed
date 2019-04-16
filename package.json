@@ -4,6 +4,7 @@
   "description": "Testbed for browser-based functional testing of apostrophe, apostrophe-workflow and related modules common in an enterprise setting.",
   "main": "app.js",
   "scripts": {
+    "personas": "npx nightwatch tests/scenarios/personas.spec.js --config nightwatch.js --env local",
     "start": "node app.js",
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
@@ -24,6 +25,7 @@
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
     "apostrophe-nightwatch-tools": "^2.0.6",
+    "apostrophe-personas": "^3.0.0",
     "apostrophe-review-and-deploy": "^2.4.3",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
