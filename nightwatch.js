@@ -1,7 +1,3 @@
-// Use puppeteer's chromium binary so we can test in a CI environment with only npm dependencies
-
-process.env.CHROME_BIN = require('puppeteer').executablePath();
-
 module.exports = {
   src_folders: ["tests/scenarios"],
   output_folder: "tests/reports",
