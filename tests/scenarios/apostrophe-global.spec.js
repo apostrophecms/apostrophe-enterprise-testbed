@@ -1,6 +1,5 @@
 const steps = require('apostrophe-nightwatch-tools/steps');
 const server = require('apostrophe-nightwatch-tools/server');
-const sauce = require('../sauce');
 
 module.exports = Object.assign(
   {
@@ -14,7 +13,6 @@ module.exports = Object.assign(
       }
     },
 
-    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);

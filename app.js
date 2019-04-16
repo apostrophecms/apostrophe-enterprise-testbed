@@ -176,8 +176,7 @@ function run(config, ready) {
             }
           ],
           defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
-          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
-          replicateAcrossLocales: false
+          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
         },
 
         'apostrophe-workflow-modified-documents': {},

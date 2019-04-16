@@ -1,3 +1,7 @@
+// Use puppeteer's chromium binary so we can test in a CI environment with only npm dependencies
+
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = {
   src_folders: ["tests/scenarios"],
   output_folder: "tests/reports",
@@ -28,25 +32,6 @@ module.exports = {
         "chromeOptions": {
           "args": [ "start-maximized", "headless" ]
         }
-      }
-    },
-    remote: {
-      launch_url: 'http://ondemand.saucelabs.com:80',
-      selenium_port: 80,
-      selenium_host: 'ondemand.saucelabs.com',
-      username: process.env.SAUCE_USERNAME,
-      apos_address: 'localhost',
-      apos_port: 3111,
-      access_key: process.env.SAUCE_ACCESS_KEY,
-      silent: true,
-      screenshots: {
-        enabled: true,
-        path: './screenshots',
-      },
-      desiredCapabilities: {
-        browserName: 'chrome',
-        javascriptEnabled: true,
-        acceptSslCerts: true
       }
     }
   }
