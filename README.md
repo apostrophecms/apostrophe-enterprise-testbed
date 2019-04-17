@@ -6,26 +6,24 @@ This project is intended as a testbed for browser-based functional tests. It is 
 
 Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm. 
 
-## e2e testing
-```sh
-npm i
-```
-How to run locally:
-```sh
-npm run e2e-local
-```
-How to run remotely:
-Sign-up on [saucelabs](saucelabs.com).
+## end-to-end testing
 
-Retrive name and access key, then subtitute it into command below:
-
-```sh
-SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> npm run e2e-remote
 ```
+npm install
+npm test
+```
+
+This will do complete test runs: one with the default / legacy replication of all docs across all locales, and one with `replicateAcrossLocales` set to `false`. Both must pass as we have clients with both configurations.
 
 ## Visual diff
 
-On travis/saucelabs a full run is automatically carried out on all pushes to apostrophe-enterprise-testbed master (TODO: should happen on all pushes to master of the relevant modules). This run is for both the latest npm releases and the latest git masters, resulting in a [visual diff report](https://s3.amazonaws.com/apostrophe-enterprise-testbed/index.html).
+You can also run:
+
+```
+npm run test-with-visual-diff
+```
+
+To carry out full runs on both the latest npm release and the latest git master, resulting in a [visual diff report](https://s3.amazonaws.com/apostrophe-enterprise-testbed/index.html). **Currently not set up to test both with and without replication**. Our primary test for new releases is `npm test`.
 
 ## Testing the site
 
@@ -39,7 +37,7 @@ Then start the site:
 
 You (or your automated tests) can now log in at `http://localhost:3000` as username `admin`, password `demo`.
 
-## Tests to perform
+## Tests performed
 
 *References to an "incognito window" below should be understood as "a distinct browsing context, not able to see cookies etc. seen before in this sequence."*
 
