@@ -124,6 +124,7 @@ function run(config, ready) {
 
         'apostrophe-workflow': {
           alias: 'workflow',
+          replicateAcrossLocales: false,
           locales: process.env.WORKFLOW_ONLY ? null : [
             {
               name: 'master',
@@ -183,12 +184,12 @@ function run(config, ready) {
         'apostrophe-personas': {
           personas: [
             {
-              name: 'developer',
-              label: 'Developer',
+              name: 'robot',
+              label: 'Robot',
               prefixes: {
-                'en': '/developer',
-                'fr': '/développeur',
-                'es': '/desarrollador'
+                'en': '/robot',
+                'fr': '/robot',
+                'es': '/robot'
               }
             }
           ]
