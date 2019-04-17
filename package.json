@@ -27,7 +27,7 @@
     "apostrophe-personas": "^3.0.0",
     "apostrophe-review-and-deploy": "^2.4.3",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
-    "apostrophe-workflow": "^2.20.0",
+    "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
     "archiver": "^2.1.1",
     "cheerio": "^1.0.0-rc.2",
     "chromedriver": "^2.40.0",
