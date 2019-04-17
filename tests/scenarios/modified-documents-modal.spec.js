@@ -1,6 +1,6 @@
 const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
-const sauce = require('../sauce');
+
 debugger;
 module.exports = Object.assign(
     {
@@ -59,4 +59,33 @@ module.exports = Object.assign(
       client.expect.element(articleTitle).text.to.contain('Apostrophe Workflow Modified Document Article Title');
     }
   },
+  {
+    'Commit the article.': (client) => {
+      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
+      const commitArticleBtnSelector = `${manageTableRowSelector} [data-apos-workflow-commit]`;
+      const commitWorkflowBtnSelector = `[data-apos-save]`;
+
+      client.clickInModal('apostrophe-workflow-modified-documents-manager-modal', commitArticleBtnSelector);
+      client.clickInModal('apostrophe-workflow-commit-modal', commitWorkflowBtnSelector);
+      client.clickInModal('apostrophe-workflow-export-modal', '[data-apos-cancel]');
+    }
+  },
+  {
+    'Confirm the article is no longer listed using the modified filter': (client) => {
+      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
+      const articleTitle = `${manageTableRowSelector} td:nth-child(2) a`;
+      client.expect.element(articleTitle).to.not.be.present;
+    }
+  },
+  {
+    'Remove modified filter, and confirm the article is being shown': (client) => {
+      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
+      const modifiedFilter = '.apos-modal-filter [name=modified]';
+      const optionModifiedFilter = `${modifiedFilter} option[value="0"]`;
+      const articleTitle = `${manageTableRowSelector} td:nth-child(2) a`;
+      client.clickWhenReady(optionModifiedFilter);
+      client.pause(500);
+      client.expect.element(articleTitle).text.to.contain('Apostrophe Workflow Modified Document Article Title');
+    }
+  }
 );
