@@ -124,7 +124,6 @@ function run(config, ready) {
 
         'apostrophe-workflow': {
           alias: 'workflow',
-          replicateAcrossLocales: false,
           locales: process.env.WORKFLOW_ONLY ? null : [
             {
               name: 'master',
