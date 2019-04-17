@@ -91,7 +91,7 @@ And that the slideshow is still present.
 * Change page type back. All content appears as before.
 * View the reorganize modal (Page Menu -> Reorganize). Should display the page tree including the regression test page.
 * Move a page via reorganize (drag and drop the "regression test" page to "trash").
-* In the logged-inbrowser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
+* In the logged-in browser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
 * In the logged-in browser, return to the home page. Open reorganize and drag and drop the "regression test" page out of "trash" and drop it on the home page, making it a live child again.
 * In the logged-in browser, verify the page is now reachable at its URL again.
 
