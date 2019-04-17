@@ -1,6 +1,5 @@
 const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
-const sauce = require('../sauce');
 
 const firstTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(1)';
 const sendTreeItem = 'ul.jqtree-tree ul.jqtree_common li.jqtree_common:nth-child(2)';
@@ -37,7 +36,6 @@ module.exports = Object.assign(
         this._server.start(done);
       }
     },
-    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);

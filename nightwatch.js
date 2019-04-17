@@ -29,25 +29,6 @@ module.exports = {
           "args": [ "start-maximized", "headless" ]
         }
       }
-    },
-    remote: {
-      launch_url: 'http://ondemand.saucelabs.com:80',
-      selenium_port: 80,
-      selenium_host: 'ondemand.saucelabs.com',
-      username: process.env.SAUCE_USERNAME,
-      apos_address: 'localhost',
-      apos_port: 3111,
-      access_key: process.env.SAUCE_ACCESS_KEY,
-      silent: true,
-      screenshots: {
-        enabled: true,
-        path: './screenshots',
-      },
-      desiredCapabilities: {
-        browserName: 'chrome',
-        javascriptEnabled: true,
-        acceptSslCerts: true
-      }
     }
   }
 };
