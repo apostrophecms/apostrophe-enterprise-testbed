@@ -4,7 +4,7 @@
 
 This project is intended as a testbed for browser-based functional tests. It is not intended as a sample website.
 
-Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm. 
+Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm.
 
 ## end-to-end testing
 
@@ -45,7 +45,7 @@ You (or your automated tests) can now log in at `http://localhost:3000` as usern
 * Switch to "draft" node (menu next to locale menu).
 * Make a new "default" subpage titled "Regression Test" (via the context menu at lower left). Save Draft.
 * Add a new "images" (slideshow) widget to that page. You may do so with the middle content area's "+" button, centered here: <img src="https://www.dropbox.com/s/y1yfwvqc004bsmk/4nrzs2u0.png?raw=1" />
-* Upload images, add them to ther slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
+* Upload images, add them to the slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
 * "Submit" the page.
 * Confirm that the UI reflects the Submitted state (button says "Submitted").
 * Click Workflow in the admin bar, then Submissions. Verify that the page, as well as the images, appear in the submissions list.
