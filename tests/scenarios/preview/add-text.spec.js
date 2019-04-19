@@ -2,7 +2,6 @@ const cheerio = require('cheerio');
 const request = require('request');
 const server = require('../apostrophe-nightwatch-tools/server');
 const steps = require('../../steps');
-const sauce = require('../../sauce');
 
 module.exports = Object.assign(
   {
@@ -13,7 +12,6 @@ module.exports = Object.assign(
         this._server.start(done);
       }
     },
-    afterEach: sauce,
     after: (client, done) => {
       client.end(() => {
         this._server.stop(done);

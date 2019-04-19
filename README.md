@@ -4,28 +4,26 @@
 
 This project is intended as a testbed for browser-based functional tests. It is not intended as a sample website.
 
-Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm. 
+Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm.
 
-## e2e testing
-```sh
-npm i
-```
-How to run locally:
-```sh
-npm run e2e-local
-```
-How to run remotely:
-Sign-up on [saucelabs](saucelabs.com).
+## end-to-end testing
 
-Retrive name and access key, then subtitute it into command below:
-
-```sh
-SAUCE_USERNAME=<name> SAUCE_ACCESS_KEY=<key> npm run e2e-remote
 ```
+npm install
+npm test
+```
+
+This will do complete test runs: one with the default / legacy replication of all docs across all locales, and one with `replicateAcrossLocales` set to `false`. Both must pass as we have clients with both configurations.
 
 ## Visual diff
 
-On travis/saucelabs a full run is automatically carried out on all pushes to apostrophe-enterprise-testbed master (TODO: should happen on all pushes to master of the relevant modules). This run is for both the latest npm releases and the latest git masters, resulting in a [visual diff report](https://s3.amazonaws.com/apostrophe-enterprise-testbed/index.html).
+You can also run:
+
+```
+npm run test-with-visual-diff
+```
+
+To carry out full runs on both the latest npm release and the latest git master, resulting in a [visual diff report](https://s3.amazonaws.com/apostrophe-enterprise-testbed/index.html). **Currently not set up to test both with and without replication**. Our primary test for new releases is `npm test`.
 
 ## Testing the site
 
@@ -39,7 +37,7 @@ Then start the site:
 
 You (or your automated tests) can now log in at `http://localhost:3000` as username `admin`, password `demo`.
 
-## Tests to perform
+## Tests performed
 
 *References to an "incognito window" below should be understood as "a distinct browsing context, not able to see cookies etc. seen before in this sequence."*
 
@@ -47,7 +45,7 @@ You (or your automated tests) can now log in at `http://localhost:3000` as usern
 * Switch to "draft" node (menu next to locale menu).
 * Make a new "default" subpage titled "Regression Test" (via the context menu at lower left). Save Draft.
 * Add a new "images" (slideshow) widget to that page. You may do so with the middle content area's "+" button, centered here: <img src="https://www.dropbox.com/s/y1yfwvqc004bsmk/4nrzs2u0.png?raw=1" />
-* Upload images, add them to ther slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
+* Upload images, add them to the slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
 * "Submit" the page.
 * Confirm that the UI reflects the Submitted state (button says "Submitted").
 * Click Workflow in the admin bar, then Submissions. Verify that the page, as well as the images, appear in the submissions list.
@@ -93,7 +91,7 @@ And that the slideshow is still present.
 * Change page type back. All content appears as before.
 * View the reorganize modal (Page Menu -> Reorganize). Should display the page tree including the regression test page.
 * Move a page via reorganize (drag and drop the "regression test" page to "trash").
-* In the logged-inbrowser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
+* In the logged-in browser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
 * In the logged-in browser, return to the home page. Open reorganize and drag and drop the "regression test" page out of "trash" and drop it on the home page, making it a live child again.
 * In the logged-in browser, verify the page is now reachable at its URL again.
 

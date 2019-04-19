@@ -153,6 +153,7 @@ function run(config, ready) {
         'apostrophe-workflow': {
           alias: 'workflow',
           noLocaleCookie: true,
+          replicateAcrossLocales: process.env.NO_REPLICATE ? false : undefined,
           locales: process.env.WORKFLOW_ONLY ? null : [
             {
               name: 'master',
@@ -209,22 +210,22 @@ function run(config, ready) {
 
         'apostrophe-workflow-modified-documents': {},
 
-        'apostrophe-review-and-deploy': {
-          deployTo: [
-            {
-              name: '3001',
-              baseUrl: 'http://localhost:3001',
-              prefix: '',
-              apikey: 'XYZ'
-            },
-            {
-              name: '3002',
-              baseUrl: 'http://localhost:3002',
-              prefix: '',
-              apikey: 'XYZ'
-            }
-          ]
-        }
+        // 'apostrophe-review-and-deploy': {
+        //   deployTo: [
+        //     {
+        //       name: '3001',
+        //       baseUrl: 'http://localhost:3001',
+        //       prefix: '',
+        //       apikey: 'XYZ'
+        //     },
+        //     {
+        //       name: '3002',
+        //       baseUrl: 'http://localhost:3002',
+        //       prefix: '',
+        //       apikey: 'XYZ'
+        //     }
+        //   ]
+        // }
       },
 
       afterListen: function(err) {
