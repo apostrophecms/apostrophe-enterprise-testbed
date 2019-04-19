@@ -1,6 +1,13 @@
 var _ = require('lodash');
 var locales;
 var prefixes;
+var redisConfig = {
+  host: 'localhost',
+  port: 6379,
+  password: null,
+  tls: {}
+}
+
 
 if (process.env.EXTRA_LOCALES) {
   prefixes = {
@@ -47,11 +54,32 @@ function run(config, ready) {
           perLocale: true
         },
         'apostrophe-templates': { viewsFolderFallback: __dirname + '/views' },
+        // 'apostrophe-express': {
+        //   session: {
+        //     secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',
+        //     cookie: {
+        //       // domain: 'workflow.com'
+        //     }
+        //   }
+        // },
+
+        // 'apostrophe-caches-redis': {
+        //   // *NO* OPTIONS HERE
+        // },
+        // 'apostrophe-caches': {
+        //   redis: {}
+        // },
+
         'apostrophe-express': {
           session: {
             secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',
-            cookie: {
-              // domain: 'workflow.com'
+            disableAnonCsrf: true, // todo bad name!
+            store: {
+              name: 'connect-redis',
+              options: {
+                resave: false,
+                saveUninitialized: false
+              }
             }
           }
         },
@@ -124,6 +152,7 @@ function run(config, ready) {
 
         'apostrophe-workflow': {
           alias: 'workflow',
+          noLocaleCookie: true,
           locales: process.env.WORKFLOW_ONLY ? null : [
             {
               name: 'master',

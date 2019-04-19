@@ -23,6 +23,7 @@
   "dependencies": {
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
+    "apostrophe-caches-redis": "^2.1.1",
     "apostrophe-nightwatch-tools": "^2.0.6",
     "apostrophe-review-and-deploy": "^2.4.3",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
@@ -30,6 +31,7 @@
     "archiver": "^2.1.1",
     "cheerio": "^1.0.0-rc.2",
     "chromedriver": "^2.40.0",
+    "connect-redis": "^3.4.1",
     "death": "^1.1.0",
     "eslint": "^4.19.1",
     "html2plaintext": "^1.0.1",
