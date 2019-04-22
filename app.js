@@ -53,6 +53,12 @@ function run(config, ready) {
             cookie: {
               // domain: 'workflow.com'
             }
+          },
+          csrf: {
+            // Do not generate sessions just for CSRF's sake, reserve truly random
+            // CSRF tokens for logged-in users, use fallback protection based on
+            // Same Origin Policy for everyone else
+            disableAnonSession: true
           }
         },
 
