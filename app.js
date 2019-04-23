@@ -191,6 +191,15 @@ function run(config, ready) {
                 'fr': '/robot',
                 'es': '/robot'
               }
+            },
+            {
+              name: 'human',
+              label: 'Human',
+              prefixes: {
+                'en': '/human',
+                'fr': '/humain',
+                'es': '/humano'
+              }
             }
           ]
         },

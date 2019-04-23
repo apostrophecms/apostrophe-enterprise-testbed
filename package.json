@@ -20,7 +20,7 @@
   "dependencies": {
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
-    "apostrophe-nightwatch-tools": "^2.0.7",
+    "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "^3.0.0",
     "apostrophe-review-and-deploy": "^2.4.3",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
