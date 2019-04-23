@@ -58,7 +58,7 @@ function run(config, ready) {
             // Do not generate sessions just for CSRF's sake, reserve truly random
             // CSRF tokens for logged-in users, use fallback protection based on
             // Same Origin Policy for everyone else
-            disableAnonSession: true
+            disableAnonSession: !!process.env.DISABLE_ANON_SESSION
           }
         },
 
