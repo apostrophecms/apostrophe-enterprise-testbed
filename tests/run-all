@@ -7,12 +7,4 @@ echo "** running from"
 echo $PWD
 npx nightwatch tests/scenarios/* --config nightwatch.js --env $VISUAL_ENV &&
 
-# Separate nightwatch invocations to stomp out disparities in behavior
-
-# for scenario in tests/scenarios/*; do
-#   npx nightwatch $scenario --config nightwatch.js --env local --verbose || exit 1
-#   # Let sockets go away? Sleeping dogs lie? Something?
-#   sleep 5
-# done
-
 echo "Nightwatch functional tests PASSED"
