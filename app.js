@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var locales;
 var prefixes;
-var hostnames = {};
+var hostnames;
 
 if (process.env.EXTRA_LOCALES) {
   prefixes = {
@@ -25,6 +25,7 @@ if (process.env.EXTRA_LOCALES) {
 }
 
 if (process.env.HOSTNAMES) {
+  hostnames = {};
   Object.keys(prefixes).forEach(function(locale) {
     hostnames[locale] = locale + '.localhost';
   });
