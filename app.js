@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var locales;
 var prefixes;
+var hostnames = {};
 
 if (process.env.EXTRA_LOCALES) {
   prefixes = {
@@ -21,6 +22,13 @@ if (process.env.EXTRA_LOCALES) {
     en: '/en',
     es: '/es',
   }
+}
+
+if (process.env.HOSTNAMES) {
+  Object.keys(prefixes).forEach(function(locale) {
+    hostnames[locale] = locale + '.localhost';
+  });
+  prefixes = {};
 }
 
 function run(config, ready) {
@@ -182,7 +190,8 @@ function run(config, ready) {
             }
           ],
           defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
-          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
+          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
+          hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
         },
 
         'apostrophe-workflow-modified-documents': {},
