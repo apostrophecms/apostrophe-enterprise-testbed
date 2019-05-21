@@ -80,6 +80,7 @@ function run(config, ready) {
           name: 'product',
           label: 'Product',
         },
+        'products-widgets': {},
         'products-pages': {
           extend: 'apostrophe-pieces-pages'
         },
