@@ -1,8 +1,18 @@
 const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
-debugger;
+
+const mainBlockSelector = '.demo-main';
+const addContentBtnSelector = `${mainBlockSelector} [data-apos-add-content]`;
+const productsWidgetBtnSelector = `${mainBlockSelector} [data-apos-add-item=products]`;
+const modalDynamicStyleSelector = '[data-name="styleDynamic"] select[name="styleDynamic"]';
+const productsWidgetSelector = '[data-apos-widget="products"]';
+const widgetUiSelector = '[data-dot-path="main"] [data-apos-widget-controls] [data-apos-edit-item]';
+const productsWidgetModalName = 'products-widgets-editor';
+const dynamicStyleWidgetControlSelector = '[data-schema-widget-control-label="Style Dynamic"]';
+const dynamicColorsWidgetControlSelector = '[data-schema-widget-control-label="Colors Dynamic"]';
+
 module.exports = Object.assign(
-    {
+  {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
       if (!this._server) {
@@ -14,76 +24,52 @@ module.exports = Object.assign(
       client.end(() => {
         this._server.stop(done);
       });
-    },
+    }
   },
   steps.main(),
   steps.login(),
-  steps.switchLocale('en'),
   steps.switchToDraftMode(),
-  steps.createArticle('New Article Title'),
+  steps.makeSubPage('Regression test'),
   {
-    'submit the article, via the "Workflow" menu in the dialog box': (client) => {
-      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
-      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
-      const workflowModalBtnSelector =
-        `[data-apos-dropdown-name="workflow"]`;
-      const submitWorkflowBtnSelector = `[data-apos-workflow-submit]`;
-
-      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', submitWorkflowBtnSelector);
-      client.waitForModal('apostrophe-blog-manager-modal');
-    }
-  },
-  {
-    'reopen the article. Commit the article.': (client) => {
-      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
-      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
-      const workflowModalBtnSelector =
-        `[data-apos-dropdown-name="workflow"]`;
-      const commitBtnSelector = `[data-apos-workflow-commit]`;
-      const commitWorkflowBtnSelector = `[data-apos-save]`;
-
-      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', commitBtnSelector);
-      client.clickInModal('apostrophe-workflow-commit-modal', commitWorkflowBtnSelector);
-      client.clickInModal('apostrophe-workflow-export-modal', '[data-apos-cancel]');
-      client.waitForModal('apostrophe-blog-manager-modal');
-    }
-  },
-  {
-    'force export the article to all other locales.': (client) => {
-      const exportBtnSelector = `[data-apos-save]`;
-      const workflowModalBtnSelector =
-        `[data-apos-dropdown-name="workflow"]`;
-      const masterLocaleBtnSelector = '[for*=master] span';
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-      const editArticleBtnSelector = `${manageTableRowSelector} a`;
-      const forceExportBtnSelector = `[data-apos-workflow-force-export]`;
-      const notificationSelector = '.apos-notification-container';
-
-      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
-      client.clickInModal('apostrophe-blog-editor-modal', forceExportBtnSelector);
-      client.clickInModal('apostrophe-workflow-force-export-modal', masterLocaleBtnSelector);
-      client.clickInModal('apostrophe-workflow-force-export-modal', exportBtnSelector);
-      client.waitForModal('apostrophe-blog-manager-modal');
-      client.clickInModal('apostrophe-blog-manager-modal', '[data-apos-cancel]');
+    'Update dynamic fields in a products widget': (client) => {
+      client.waitForElementReady(addContentBtnSelector);
+      client.click(addContentBtnSelector);
+      client.waitForElementReady(productsWidgetBtnSelector);
+      // Select a dynamic style.
+      client.click(productsWidgetBtnSelector);
+      client.resetValueInModal(productsWidgetModalName, modalDynamicStyleSelector, 'Intrepid');
+      // Select some dynamic colors.
+      client.clickInModal(productsWidgetModalName, '[name="colorsDynamic"][value="purple"] + .apos-form-checkbox-indicator');
+      client.clickInModal(productsWidgetModalName, '[name="colorsDynamic"][value="silver"] + .apos-form-checkbox-indicator');
+      client.clickInModal(productsWidgetModalName, '[data-apos-save]');
       client.waitForNoModals();
+      // Move over the widget and reopen the modal to check saved values.
+      client.moveToElement(productsWidgetSelector, 5, 5);
+      client.waitForElementVisible(widgetUiSelector);
+      client.click(widgetUiSelector);
+      client.waitForModal(productsWidgetModalName);
+      // Check the values
+      client.expect.element(modalDynamicStyleSelector).to.have.value.that.equals('intrepid');
+      client.expect.element('[name="colorsDynamic"][value="silver"]').to.be.selected;
+      client.expect.element('[name="colorsDynamic"][value="purple"]').to.be.selected;
+      client.expect.element('[name="colorsDynamic"][value="yellow"]').to.not.be.selected;
+      client.clickInModal(productsWidgetModalName, '[data-apos-cancel]');
+      // Check the values in the widget controls UI.
+      client.moveToElement(productsWidgetSelector, 5, 5);
+      client.expect.element(dynamicStyleWidgetControlSelector).to.have.value.that.equals('intrepid');
+      client.expect.element(`${dynamicColorsWidgetControlSelector} option[value="__current"]`).text.to.equal('Purple, Silver');
+      // Change the values in the widget controls UI.
+      client.click(`${dynamicStyleWidgetControlSelector} [value="hideous"]`);
+      client.clickWhenReady(`${dynamicColorsWidgetControlSelector} [value="- silver"]`);
+      client.clickWhenReady(`${dynamicColorsWidgetControlSelector} [value="+ yellow"]`);
+      client.pause(3000);
+      // Check the values in the modal this time.
+      client.click(widgetUiSelector);
+      client.waitForModal(productsWidgetModalName);
+      client.expect.element(modalDynamicStyleSelector).to.have.value.that.equals('hideous');
+      client.expect.element('[name="colorsDynamic"][value="silver"]').to.not.be.selected;
+      client.expect.element('[name="colorsDynamic"][value="purple"]').to.be.selected;
+      client.expect.element('[name="colorsDynamic"][value="yellow"]').to.be.selected;
     }
-  },
-  steps.switchLocale('es'),
-  {
-    'article can be found under "Articles" in draft mode for the es locale': (client) => {
-      const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
-
-      client.openAdminBarItem('apostrophe-blog');
-      client.waitForModal('apostrophe-blog-manager-modal');
-
-      client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
-      client.expect.element(manageTableRowSelector).text.to.contain('Published');
-      client.categoryScreenshot('article.png');
-    }
-  },
+  }
 );

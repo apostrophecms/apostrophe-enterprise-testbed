@@ -4,6 +4,12 @@
   <h4>Small Treatment</h4>
 {% endif %}
 
+{% if data.widget.dynamicStyle == 'hideous' %}
+  <blockquote data-dynamic-style>So hideous.</blockquote>
+{% elif data.widget.dynamicStyle == 'intrepid' %}
+  <blockquote data-dynamic-style>Very intrepid.</blockquote>
+{% endif %}
+
 {% for color in data.widget.colors %}
   <h4 style="color: {{ color }}">{{ color }}</h4>
 {% endfor %}
