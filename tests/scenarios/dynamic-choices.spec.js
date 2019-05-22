@@ -22,38 +22,6 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   {
-    'reopen the article. Set value for dynamic choices.': (client) => {
-      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
-      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
-      const dynamicSelectSelector = '[name="dynamicSelect"]';
-      const saveBtnSelector = '[data-apos-save]';
-      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
-      client.resetValueInModal('apostrophe-blog-editor-modal', dynamicSelectSelector, 'Item 5');
-      client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
-      client.clickInModal('apostrophe-blog-editor-modal', '[name="dynamicCheckboxes"][value="3"] + .apos-form-checkbox-indicator');
-      client.clickInModal('apostrophe-blog-editor-modal', '[name="dynamicCheckboxes"][value="4"] + .apos-form-checkbox-indicator');
-      client.clickInModal('apostrophe-blog-editor-modal', saveBtnSelector);
-      client.waitForModal('apostrophe-blog-manager-modal');
-    }
-  },
-  {
-    'reopen the article. Verify values for dynamic choices stuck.': (client) => {
-      const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
-      const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
-      const dynamicSelectSelector = '[name="dynamicSelect"]';
-      const saveBtnSelector = '[data-apos-save]';
-      client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
-      client.waitForElementReady(dynamicSelectSelector);
-      client.expect.element(dynamicSelectSelector).to.have.value.that.equals('5');
-      // client.moveToElement('[name="dynamicCheckboxes"][value="4"] + .apos-form-checkbox-indicator');
-      client.expect.element('[name="dynamicCheckboxes"][value="2"]').to.not.be.selected;
-      client.expect.element('[name="dynamicCheckboxes"][value="3"]').to.be.selected;
-      client.expect.element('[name="dynamicCheckboxes"][value="4"]').to.be.selected;
-      client.clickInModal('apostrophe-blog-editor-modal', saveBtnSelector);
-      client.waitForModal('apostrophe-blog-manager-modal');
-    }
-  },
-  {
     'submit the article, via the "Workflow" menu in the dialog box': (client) => {
       const manageTableRowSelector = 'table[data-items] tr[data-piece]:first-child';
       const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
