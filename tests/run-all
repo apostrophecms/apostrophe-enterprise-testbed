@@ -1,10 +1,13 @@
 #!/bin/bash
 
 mkdir -p screenshots/latest
-#run one for POC
-#npx nightwatch tests/scenarios/article.spec.js --config nightwatch.js --env $VISUAL_ENV --verbose &&
-echo "** running from"
-echo $PWD
-npx nightwatch tests/scenarios/* --config nightwatch.js --env $VISUAL_ENV &&
+
+if [ -z "$TEST" ]; then
+  tests=tests/scenarios/* 
+else
+  tests=tests/scenarios/$TEST.spec.js
+fi
+
+npx nightwatch $tests --config nightwatch.js --env $VISUAL_ENV &&
 
 echo "Nightwatch functional tests PASSED"

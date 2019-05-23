@@ -20,8 +20,8 @@ if (process.env.EXTRA_LOCALES) {
   prefixes = {
     fr: '/fr',
     en: '/en',
-    es: '/es',
-  }
+    es: '/es'
+  };
 }
 
 if (process.env.HOSTNAMES) {
@@ -75,11 +75,12 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
-        'products' : {
+        'products': {
           extend: 'apostrophe-pieces',
           name: 'product',
-          label: 'Product',
+          label: 'Product'
         },
+        'products-widgets': {},
         'products-pages': {
           extend: 'apostrophe-pieces-pages'
         },
@@ -88,7 +89,6 @@ function run(config, ready) {
         'apostrophe-blog-widgets': {
           extend: 'apostrophe-pieces-widgets'
         },
-        'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
         'apostrophe-admin-bar': {
@@ -148,7 +148,7 @@ function run(config, ready) {
               children: [
                 {
                   name: 'en',
-                  label: 'en',
+                  label: 'en'
                 },
                 {
                   name: 'fr',
@@ -195,7 +195,7 @@ function run(config, ready) {
           hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
         },
 
-        'apostrophe-workflow-modified-documents': {},
+        'apostrophe-workflow-modified-documents': {}
 
         // 'apostrophe-review-and-deploy': {
         //   deployTo: [

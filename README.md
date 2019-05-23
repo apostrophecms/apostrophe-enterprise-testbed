@@ -15,6 +15,30 @@ npm test
 
 This will do complete test runs: one with the default / legacy replication of all docs across all locales, and one with `replicateAcrossLocales` set to `false`. Both must pass as we have clients with both configurations.
 
+## Test development
+
+`apostrophe-nightwatch-tools` is used. See the `tests/scenarios` folder.
+
+To run the tests for a single scenario in the browser, use:
+
+```
+TEST=scenarioname VISIBLE=1 npm run e2e-local
+```
+
+To run them in a headless browser, so you don't have to watch, use:
+
+```
+TEST=scenarioname  npm run e2e-local
+```
+
+To run all of the scenarios, use:
+
+```
+npm run e2e-local
+```
+
+Note: `npm test` will run the entire suite twice, with and without disabling sessions for anonymous users, and the set of flags like that it tests is expected to grow.
+
 ## Visual diff
 
 You can also run:
