@@ -73,7 +73,8 @@ function run(config, ready) {
 
         // Standard Apostrophe Modules
         'apostrophe-assets': {
-          jQuery: 3
+          jQuery: 3,
+          // lean: true
         },
         'products': {
           extend: 'apostrophe-pieces',
