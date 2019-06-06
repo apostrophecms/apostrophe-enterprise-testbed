@@ -47,6 +47,23 @@ function run(config, ready) {
 
       // These are the modules we want to bring into the project.
       modules: {
+        'apostrophe-forms': {},
+        'apostrophe-forms-widgets': {},
+        'apostrophe-forms-text-field-widgets': {},
+        'apostrophe-email': {
+          // See the nodemailer documentation, many
+          // different transports are available, this one
+          // matches how PHP does it on Linux servers
+          nodemailer: {
+            sendmail: true,
+            newline: 'unix',
+            path: '/usr/sbin/sendmail',
+            logger: true
+          }
+        },
+        'apostrophe-permissions': {
+          extended: true
+        },
         'apostrophe-site-map': {
           // array of doc types you do NOT want
           // to include, even though they are
@@ -75,6 +92,11 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3,
           // lean: true
+        },
+        'apostrophe-lean-frontend': {
+          widgets: {
+            'apostrophe-video': true
+          },
         },
         'products': {
           extend: 'apostrophe-pieces',
