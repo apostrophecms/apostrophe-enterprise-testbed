@@ -50,6 +50,7 @@ function run(config, ready) {
         'apostrophe-forms': {},
         'apostrophe-forms-widgets': {},
         'apostrophe-forms-text-field-widgets': {},
+        'apostrophe-forms-file-field-widgets': {},
         'apostrophe-email': {
           // See the nodemailer documentation, many
           // different transports are available, this one
