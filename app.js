@@ -63,7 +63,11 @@ function run(config, ready) {
           }
         },
         'apostrophe-permissions': {
-          extended: true
+          construct: function(self, options) {
+            // Necessary if you want to use apostrophe-forms-file-field-widgets
+            // on public pages
+            self.addPublic([ 'edit-attachment' ]);
+          }
         },
         'apostrophe-site-map': {
           // array of doc types you do NOT want
