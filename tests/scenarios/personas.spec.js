@@ -21,12 +21,42 @@ module.exports = Object.assign(
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Personas Test'),
-  steps.addTextWidgetTo({selector: '.demo-main', text: 'Rich Text Widget Robot Line'}),
+  {
+    'Add Two Column Block': function (client) {
+      const blackoutSelector = '.apos-modal-blackout';
+      const addContentBtnSelector = `.demo-secondary [data-apos-add-content]`;
+      const twoColumnBlockSelector = `.demo-secondary [data-apos-add-item=as-two-column-block]`;
+      client.waitForElementNotPresent(blackoutSelector);
+      client.getLocationInView('.demo-secondary');
+      client.waitForElementReady(addContentBtnSelector);
+      client.clickWhenReady(addContentBtnSelector);
+      client.waitForElementReady(twoColumnBlockSelector);
+      client.pause(200);
+      client.clickWhenReady(twoColumnBlockSelector);
+      client.pause(2000);
+    }
+  },
+  steps.addTextWidgetTo({selector: '.demo-main', text: 'Robot'}),
   steps.submitChanges(),
   {
     'Switch to robot persona': function(client) {
       const personaSelect = '.demo-main .apos-area-widget-controls .apos-button[name=personas]';
       const testPersonaValue = `${personaSelect} option[value="robot"]`;
+      const richText = '.demo-main [data-rich-text]';
+      client.moveToElement(personaSelect, 0, 0);
+      client.clickWhenReady(personaSelect);
+      client.clickWhenReady(testPersonaValue);
+      client.pause(500);
+    }
+  },
+  steps.commitAndExport(),
+  steps.addTextWidgetTo({selector: '.demo-secondary .column.width-50', text: 'Human'}),
+  steps.submitChanges(),
+  {
+    'Switch to human persona': function(client) {
+      const personaSelect = '.demo-secondary .column.width-50 .apos-area-widget-controls .apos-button[name=personas]';
+      const testPersonaValue = `${personaSelect} option[value="human"]`;
+      const richText = '.demo-secondary .column.width-50 [data-rich-text]';
       client.moveToElement(personaSelect, 0, 0);
       client.clickWhenReady(personaSelect);
       client.clickWhenReady(testPersonaValue);
@@ -35,46 +65,40 @@ module.exports = Object.assign(
   },
   steps.commitAndExport(),
   {
-    'add video widget': function(client) {
-      const selector = '.demo-main .apos-area-widget-wrapper';
-      const addContentBtnSelector = `${selector} [data-apos-add-content]`;
-      const videoBtnSelector = `${selector} [data-apos-add-item=apostrophe-video]`;
-      const videoInput = `.apos-field-input[name=video]`;
-      const videoUrl = 'https://www.youtube.com/watch?v=OV1yagf8Uqk';
-      const save = '[data-apos-save]';
-      client.getLocationInView(selector);
-      client.moveToElement(addContentBtnSelector, 0, 0);
-      client.waitForElementReady(addContentBtnSelector);
-      client.clickWhenReady(addContentBtnSelector);
-      client.waitForElementReady(videoBtnSelector);
-      client.pause(200);
-      client.clickWhenReady(videoBtnSelector);
-      client.waitForModal('apostrophe-video-widgets-editor');
-      client.resetValueInModal('apostrophe-video-widgets-editor', videoInput, videoUrl);
-      client.pause(3000);
-      client.clickInModal('apostrophe-video-widgets-editor', save);
-      client.waitForNoModals();
+    'Wait for notification cluster to slow down': function (client) {
+      client.pause(2000);
     }
   },
   {
-    'Switch to human persona': function(client) {
-      const aposUi = '[data-apos-widget-wrapper=apostrophe-video] .apos-area-widget-controls'
-      const personaSelect = `${aposUi} .apos-button[name=personas]`;
-      const humanPersonaValue = `${personaSelect} option[value="human"]`;
-      client.execute(function(aposUi) {
-        $(aposUi).css({opacity: '1'});
-      },[aposUi]);
+    'Hide apos notifications': function (client) {
+      client.execute(function() {
+        $('.apos-notification').hide();
+      });
+    }
+  },
+  {
+    'Wait for notification cluster to slow down': function (client) {
+      client.pause(2000);
+    }
+  },
+  steps.addTextWidgetTo({selector: '.demo-secondary .column.width-40', text: 'No Persona'}),
+  steps.submitChanges(),
+  {
+    'Switch to no persona': function(client) {
+      const personaSelect = '.demo-secondary .column.width-40 .apos-area-widget-controls .apos-button[name=personas]';
+      const testPersonaValue = `${personaSelect} option[value="none"]`;
+      const richText = '.demo-secondary .column.width-40 [data-rich-text]';
       client.moveToElement(personaSelect, 0, 0);
       client.clickWhenReady(personaSelect);
-      client.clickWhenReady(humanPersonaValue);
+      client.clickWhenReady(testPersonaValue);
+      client.pause(500);
     }
   },
+  steps.commitAndExport(),
+  steps.addTextWidgetTo({selector: '.footer', text: 'Universal'}),
   {
-    'Hide video widget to avoid accidently playing it when submitting': function(client) {
-      const aposUi = '[data-apos-widget-wrapper=apostrophe-video]'
-      client.execute(function(aposUi) {
-        $(aposUi).css({display: 'none'});
-      },[aposUi]);
+    'Add universal class to rich text': function(client) {
+      const richText = '.footer [data-rich-text]';
     }
   },
   steps.submitChanges(),
@@ -86,27 +110,67 @@ module.exports = Object.assign(
   },
   steps.navigateToRelativeUrl('robot/personas-test'),
   {
-    'should have the Rich Text widget in robot persona': function(client) {
-      const richTextSelector = `.demo-main [data-rich-text]`;
-      client.expect.element(richTextSelector).text.to.contain('Rich Text Widget Robot Line');
+    'ROBOT PERSONA: should have the rich text widget in robot persona': function(client) {
+      const robotRichTextSelector = '.demo-main [data-rich-text]';
+      client.expect.element(robotRichTextSelector).text.to.contain('Robot');
+    }
+  },
+  {
+    'ROBOT PERSONA: should have the rich text widget in universal persona': function(client) {
+      const universalRichTextSelector = '.footer [data-rich-text]';
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+    }
+  },
+  {
+    'ROBOT PERSONA: should not have the rich text widget in human persona': function(client) {
+      const humanRichTextSelector = '.demo-secondary .column.width-50 [data-rich-text]';
+      client.expect.element(humanRichTextSelector).to.not.be.present;
+    }
+  },
+  {
+    'ROBOT PERSONA: should not have the rich text widget in none persona': function(client) {
+      const noneRichTextSelector = '.demo-secondary .column.width-40 [data-rich-text]';
+      client.expect.element(noneRichTextSelector).to.not.be.present;
     }
   },
   steps.navigateToHome(),
   steps.navigateToRelativeUrl('human/personas-test'),
   {
-    'should have the Video widget in human persona': function(client) {
-      const videoWidget = `.demo-main [data-apos-widget-wrapper=apostrophe-video]`;
-      client.expect.element(videoWidget).to.be.present;
+    'HUMAN PERSONA: should not have the rich text widget in robot persona': function(client) {
+      const robotRichTextSelector = '.demo-main [data-rich-text]';
+      client.expect.element(robotRichTextSelector).to.not.be.present;
+    }
+  },
+  {
+    'HUMAN PERSONA: should have the rich text widget in universal persona': function(client) {
+      const universalRichTextSelector = '.footer [data-rich-text]';
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+    }
+  },
+  {
+    'HUMAN PERSONA: should have the rich text widget in human persona': function(client) {
+      const humanRichTextSelector = '.demo-secondary .column.width-50 [data-rich-text]';
+      client.expect.element(humanRichTextSelector).text.to.contain('Human');
+    }
+  },
+  {
+    'HUMAN PERSONA: should not have the rich text widget in none persona': function(client) {
+      const noneRichTextSelector = '.demo-secondary .column.width-40 [data-rich-text]';
+      client.expect.element(noneRichTextSelector).to.not.be.present;
     }
   },
   steps.navigateToHome(),
   steps.navigateToRelativeUrl('personas-test'),
   {
-    'should not have any widgets in universal persona': function(client) {
-      const richTextSelector = `.demo-main [data-rich-text]`;
-      const videoWidgetSelector = `.demo-main [data-apos-widget-wrapper=apostrophe-video]`;
-      client.expect.element(richTextSelector).to.not.be.present;
-      client.expect.element(richTextSelector).to.not.be.present;
+    'UNIVERSAL PERSONA: should have all the widgets': function(client) {
+      const robotRichTextSelector = '.demo-main [data-rich-text]';
+      const universalRichTextSelector = '.footer [data-rich-text]';
+      const humanRichTextSelector = '.demo-secondary .column.width-50 [data-rich-text]';
+      const noneRichTextSelector = '.demo-secondary .column.width-40 [data-rich-text]';
+      client.expect.element(robotRichTextSelector).text.to.contain('Robot');
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+      client.expect.element(humanRichTextSelector).text.to.contain('Human');
+      client.expect.element(noneRichTextSelector).text.to.contain('No Persona');
     }
-  },
+  }
 );

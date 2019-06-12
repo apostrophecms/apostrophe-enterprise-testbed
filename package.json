@@ -8,6 +8,7 @@
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
     "e2e-local": "VISUAL_ENV=local tests/run-all",
+    "personas": "npx nightwatch tests/scenarios/personas.spec.js --config nightwatch.js --env local",
     "test-with-visual-diff": "( VISUAL_ENV=local node tests/screenshot-previous.js && VISUAL_ENV=local tests/run-all && node visual-regression-test.js )",
     "test": "( npm run e2e-local ) && ( NO_REPLICATE=1 npm run e2e-local )"
   },
@@ -18,7 +19,7 @@
   "author": "P'unk Avenue",
   "license": "MIT",
   "dependencies": {
-    "apostrophe": "github:apostrophecms/apostrophe",
+    "apostrophe": "2.88.0",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "^3.0.0",
@@ -31,7 +32,7 @@
     "death": "^1.1.0",
     "eslint": "^4.19.1",
     "html2plaintext": "^1.0.1",
-    "kill-port": "^1.3.0",
+    "kill-port": "^1.5.1",
     "lodash": "^3.10.1",
     "moment": "^2.22.2",
     "nightwatch": "^0.9.20",
