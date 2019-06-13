@@ -9,6 +9,9 @@ jobs:
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@5'
+      - run:
+          name: install-mongo-cli
+          command: 'sudo ci-helpers/install-mongo-cli.bash'
       - restore_cache:
           key: proj-dependency-cache-{{ checksum "package.json" }}
       - run:
