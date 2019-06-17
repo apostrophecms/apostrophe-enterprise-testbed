@@ -1,0 +1,24 @@
+{% extends 'apostrophe-templates:layout.html' %}
+{% block bodyClass %}{{ super() }} personas-page{% endblock %}
+{% block beforeMain %}{% endblock %}
+{% block afterMain %}{% endblock %}
+
+{% block mainContent %}
+  <div class="block content" data-component="personas">
+    <div>
+      <h1 data-role="target"> Personas </h1>
+    </div>
+    <div data-role="primary">
+      {{ apos.area(data.page, 'primary', { widgets: { 'apostrophe-rich-text': {} } }) }}
+    </div>
+    <div data-role="secondary">
+      {{ apos.area(data.page, 'secondary', { widgets: { 'apostrophe-rich-text': {} } }) }}
+    </div>
+    <div data-role="tertiary">
+      {{ apos.area(data.page, 'tertiary', { widgets: { 'apostrophe-rich-text': {} } }) }}
+    </div>
+    <div data-role="quaternary">
+      {{ apos.area(data.page, 'quaternary', { widgets: { 'apostrophe-rich-text': {} } }) }}
+    </div>
+  </div>
+{% endblock %}

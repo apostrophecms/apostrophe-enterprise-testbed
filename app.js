@@ -204,6 +204,10 @@ function run(config, ready) {
           ]
         },
 
+        'apostrophe-docs': {
+          conflictResolution: false
+        },
+
         // 'apostrophe-review-and-deploy': {
         //   deployTo: [
         //     {
