@@ -1,5 +1,9 @@
 const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
+const humanRichTextSelector = '[data-role=primary] [data-rich-text]';
+const robotRichTextSelector = '[data-role=secondary] [data-rich-text]';
+const noneRichTextSelector = '[data-role=tertiary] [data-rich-text]';
+const universalRichTextSelector = '[data-role=quaternary] [data-rich-text]';
 
 module.exports = Object.assign(
   {
@@ -26,7 +30,6 @@ module.exports = Object.assign(
       const pageMenuDropdownSelector = '.apos-context-menu .apos-dropdown-items';
       const pageMenuCreatePageSelector = '.apos-context-menu .apos-dropdown-items .apos-dropdown-item:first-child';
       const pageName = 'Personas';
-
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageMenuDropdownSelector);
       client.clickWhenReady(pageMenuCreatePageSelector);
@@ -35,114 +38,82 @@ module.exports = Object.assign(
       client.clickInModal('apostrophe-pages-editor', '[data-apos-save]');
     }
   },
-
   steps.addTextWidgetTo({selector: '[data-role=primary]', text: 'Human'}),
   {
-    'Click out of rich text': function (client) {
+    'Unfocus "human" apostrophe-rich-text editor': function (client) {
       client.click('[data-role=target]');
     }
   },
-  {
-    'Switch to human persona': function(client) {
-      const personaSelect = '[data-role=primary] .apos-area-widget-controls .apos-button[name=personas]';
-      const testPersonaValue = `${personaSelect} option[value="human"]`;
-      const richText = '[data-role=primary] [data-rich-text]';
-      client.pause(2000);
-      client.moveToElement(personaSelect, 0, 0);
-      client.clickWhenReady(personaSelect);
-      client.clickWhenReady(testPersonaValue);
-      client.pause(500);
-    }
-  },
-  {
-    'take snapshot': function (client) {
-      client.saveScreenshot('./screenshots/human.png');
-    }
-  },
-
+  steps.changeWidgetPersona({selector: '[data-role=primary]', value: 'human'}),
   steps.addTextWidgetTo({selector: '[data-role=secondary]', text: 'Robot'}),
   {
-    'Click out of rich text 2': function (client) {
+    'Unfocus "robot" apostrophe-rich-text editor': function (client) {
       client.click('[data-role=target]');
     }
   },
-  {
-    'Switch to robot persona': function(client) {
-      const personaSelect = '[data-role=secondary] .apos-area-widget-controls .apos-button[name=personas]';
-      const testPersonaValue = `${personaSelect} option[value="robot"]`;
-      const richText = '[data-role=secondary] [data-rich-text]';
-      client.pause(2000);
-      client.moveToElement(personaSelect, 0, 0);
-      client.clickWhenReady(personaSelect);
-      client.clickWhenReady(testPersonaValue);
-      client.pause(500);
-    }
-  },
-  {
-    'take snapshot 1': function (client) {
-      client.saveScreenshot('./screenshots/robot.png');
-    }
-  },
-
+  steps.changeWidgetPersona({selector: '[data-role=secondary]', value: 'robot'}),
   steps.addTextWidgetTo({selector: '[data-role=tertiary]', text: 'No Persona'}),
   {
-    'Click out of another rich text again': function (client) {
+    'Unfocus "no persona" apostrophe-rich-text editor': function (client) {
       client.click('[data-role=target');
-      client.saveScreenshot('./screenshots/noPersonaText.png');
     }
   },
-  {
-    'Switch to no persona': function(client) {
-      const personaSelect = '[data-role=tertiary] .apos-area-widget-controls .apos-button[name=personas]';
-      const testPersonaValue = `${personaSelect} option[value="none"]`;
-      const richText = '[data-role=tertiary] [data-rich-text]';
-      client.pause(2000);
-      client.moveToElement(personaSelect, 0, 0);
-      client.clickWhenReady(personaSelect);
-      client.clickWhenReady(testPersonaValue);
-      client.pause(500);
-    }
-  },
-
-  {
-    'take snapshot 2': function (client) {
-      client.saveScreenshot('./screenshots/no_persona.png');
-    }
-  },
-
+  steps.changeWidgetPersona({selector: '[data-role=tertiary]', value: 'none'}),
   steps.addTextWidgetTo({selector: '[data-role=quaternary]', text: 'Universal'}),
+  steps.commit(),
   {
-    'take snapshot 3': function (client) {
-      client.saveScreenshot('./screenshots/test.png');
+    '[1] log out of Apostrophe': function(client) {
+      client.openAdminBarItem('apostrophe-login-logout')
     }
   },
-  steps.commit()
-  // {
-  //   'log out of Apostrophe': function(client) {
-  //     client.openAdminBarItem('apostrophe-login-logout')
-  //   }
-  // },
-  // steps.navigateToRelativeUrl('human/personas'),
-  // {
-  //   'ROBOT PERSONA: should display both the "robot" and "universal" widgets, and not display the "human" or "none" widgets.': function(client) {
-  //     const universalRichTextSelector = '[data-role=quaternary] [data-rich-text]';
-  //     const humanRichTextSelector = '[data-role=secondary] [data-rich-text]';
-  //     const noneRichTextSelector = '[data-role=tertiary] [data-rich-text]';
-  //     client.expect.element(universalRichTextSelector).text.to.contain('Universal');
-  //     client.expect.element(humanRichTextSelector).text.to.contain('Human');
-  //     client.expect.element(noneRichTextSelector).to.not.be.present;
-  //   }
-  // },
-  // steps.navigateToHome(),
-  // steps.navigateToRelativeUrl('personas'),
-  // {
-  //   'UNIVERSAL PERSONA: should have all the widgets': function(client) {
-  //     const universalRichTextSelector = '[data-role=quaternary] [data-rich-text]';
-  //     const humanRichTextSelector = '[data-role=secondary] [data-rich-text]';
-  //     const noneRichTextSelector = '[data-role=tertiary] [data-rich-text]';
-  //     client.expect.element(universalRichTextSelector).text.to.contain('Universal');
-  //     client.expect.element(humanRichTextSelector).text.to.contain('Human');
-  //     client.expect.element(noneRichTextSelector).text.to.contain('No Persona');
-  //   }
-  // }
+  steps.navigateToRelativeUrl('robot/personas'),
+  {
+    'ROBOT PERSONA: should display both "robot" and "universal" widgets, and not display "human" or "no persona" widgets.': function(client) {
+      client.expect.element(robotRichTextSelector).text.to.contain('Robot');
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+      client.expect.element(humanRichTextSelector).to.not.be.present;
+      client.expect.element(noneRichTextSelector).to.not.be.present;
+    }
+  },
+  steps.navigateToHome(),
+  steps.navigateToRelativeUrl('human/personas'),
+  {
+    'Human PERSONA: should display both "human" and "universal" widgets, and not display "robot" or "no persona" widgets.': function(client) {
+      client.expect.element(robotRichTextSelector).to.not.be.present;
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+      client.expect.element(humanRichTextSelector).text.to.contain('Human');
+      client.expect.element(noneRichTextSelector).to.not.be.present;
+    }
+  },
+  steps.navigateToHome(),
+  steps.navigateToRelativeUrl('personas'),
+  {
+    'UNIVERSAL PERSONA: should have all the widgets': function(client) {
+      client.expect.element(robotRichTextSelector).text.to.contain('Robot');
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+      client.expect.element(humanRichTextSelector).text.to.contain('Human');
+      client.expect.element(noneRichTextSelector).text.to.contain('No Persona');
+    }
+  },
+  steps.main(),
+  steps.login(),
+  steps.switchLocale('en'),
+  steps.switchToDraftMode(),
+  steps.navigateToRelativeUrl('personas'),
+  steps.changeWidgetPersona({selector: '[data-role=secondary]', value: 'human'}),
+  steps.commit(),
+  {
+    '[2] log out of Apostrophe': function(client) {
+      client.openAdminBarItem('apostrophe-login-logout')
+    }
+  },
+  steps.navigateToRelativeUrl('human/personas'),
+  {
+    'HUMAN PERSONA: Should have both "universal" and "human" widgets, as well as the recently changed "robot" widget. "No Persona" should not be visible.': function(client) {
+      client.expect.element(robotRichTextSelector).text.to.contain('Robot');
+      client.expect.element(universalRichTextSelector).text.to.contain('Universal');
+      client.expect.element(humanRichTextSelector).text.to.contain('Human');
+      client.expect.element(noneRichTextSelector).to.not.be.present;
+    }
+  }
 );
