@@ -41,6 +41,7 @@ module.exports = Object.assign(
       // Select some dynamic colors.
       client.clickInModal(productsWidgetModalName, '[name="colorsDynamic"][value="purple"] + .apos-form-checkbox-indicator');
       client.clickInModal(productsWidgetModalName, '[name="colorsDynamic"][value="silver"] + .apos-form-checkbox-indicator');
+      client.pause(2000);
       client.clickInModal(productsWidgetModalName, '[data-apos-save]');
       client.waitForNoModals();
       // Move over the widget and reopen the modal to check saved values.
