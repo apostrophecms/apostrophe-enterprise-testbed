@@ -61,7 +61,7 @@ module.exports = Object.assign(
       client.clickInModal('apostrophe-polymorphic-manager-manager-modal', '[data-tab-button="apostrophe-page"]');
       client.clickInModal('apostrophe-polymorphic-manager-manager-modal', regressionTestPageCheckboxSelector);
       client.clickInModal('apostrophe-polymorphic-manager-manager-modal', saveChoicesBtnSelector);
-      client.pause(2000);
+      client.pause(5000);
       client.clickInModal('mixed-widgets-editor', saveWidgetBtnSelector);
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/articles/article-1"]');
       client.waitForElementReady('[data-apos-widget="mixed"] a[href="http://localhost:3111/en/products/product-01"]');
