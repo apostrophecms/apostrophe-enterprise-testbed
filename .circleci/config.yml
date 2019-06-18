@@ -23,4 +23,4 @@ jobs:
             - ./node_modules
       - run:
           name: test
-          command: npm test-polymorphic
+          command: npm run test-polymorphic
