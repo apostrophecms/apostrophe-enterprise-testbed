@@ -9,9 +9,9 @@
     "dump": "mongodump -d apostrophe-enterprise-testbed",
     "restore": "mongorestore --noIndexRestore mongodump/ --drop",
     "e2e-local": "VISUAL_ENV=local tests/run-all",
-    "personas": "npx nightwatch tests/scenarios/personas.spec.js --config nightwatch.js --env local",
     "test-with-visual-diff": "( VISUAL_ENV=local node tests/screenshot-previous.js && VISUAL_ENV=local tests/run-all && node visual-regression-test.js )",
-    "test": "( npm run e2e-local ) && ( DISABLE_ANON_SESSION=1 NO_REPLICATE=1 npm run e2e-local )"
+    "test": "( npm run e2e-local ) && ( DISABLE_ANON_SESSION=1 NO_REPLICATE=1 npm run e2e-local )",
+    "test-polymorphic": "TEST=polymorphic-joins npm run e2e-local"
   },
   "repository": {
     "type": "git",
