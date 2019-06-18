@@ -1,0 +1,27 @@
+{% if data.widget.style == 'large' %}
+  <h2>Large Treatment</h2>
+{% else %}
+  <h4>Small Treatment</h4>
+{% endif %}
+
+{% if data.widget.dynamicStyle == 'hideous' %}
+  <blockquote data-dynamic-style>So hideous.</blockquote>
+{% elif data.widget.dynamicStyle == 'intrepid' %}
+  <blockquote data-dynamic-style>Very intrepid.</blockquote>
+{% endif %}
+
+{% for color in data.widget.colors %}
+  <h4 style="color: {{ color }}">{{ color }}</h4>
+{% endfor %}
+
+<ul>
+  {% for piece in data.pieces %}
+    <li><a href="{{ piece._url }}">{{ piece.title }}</a></li>
+  {% endfor %}
+</ul>
+
+{% for color in data.widget.colorsDynamic %}
+  <h4 style="color: {{ color }}">Dynamic color: {{ color }}</h4>
+{% endfor %}
+
+<h3>Dynamic style: {{ data.widget.styleDynamic }}</h3>

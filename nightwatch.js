@@ -26,8 +26,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         "chromeOptions": {
-          "args": [ "start-maximized", "headless" ],
-
+          "args": [ "start-maximized" ].concat(process.env.VISIBLE ? [] : [ "headless" ])
         }
       }
     }

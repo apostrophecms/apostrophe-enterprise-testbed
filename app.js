@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var locales;
 var prefixes;
+var hostnames;
 
 if (process.env.EXTRA_LOCALES) {
   prefixes = {
@@ -19,8 +20,16 @@ if (process.env.EXTRA_LOCALES) {
   prefixes = {
     fr: '/fr',
     en: '/en',
-    es: '/es',
-  }
+    es: '/es'
+  };
+}
+
+if (process.env.HOSTNAMES) {
+  hostnames = {};
+  Object.keys(prefixes).forEach(function(locale) {
+    hostnames[locale] = locale + '.localhost';
+  });
+  prefixes = {};
 }
 
 function run(config, ready) {
@@ -53,6 +62,12 @@ function run(config, ready) {
             cookie: {
               // domain: 'workflow.com'
             }
+          },
+          csrf: {
+            // Do not generate sessions just for CSRF's sake, reserve truly random
+            // CSRF tokens for logged-in users, use fallback protection based on
+            // Same Origin Policy for everyone else
+            disableAnonSession: !!process.env.DISABLE_ANON_SESSION
           }
         },
 
@@ -60,11 +75,12 @@ function run(config, ready) {
         'apostrophe-assets': {
           jQuery: 3
         },
-        'products' : {
+        'products': {
           extend: 'apostrophe-pieces',
           name: 'product',
-          label: 'Product',
+          label: 'Product'
         },
+        'products-widgets': {},
         'products-pages': {
           extend: 'apostrophe-pieces-pages'
         },
@@ -73,7 +89,6 @@ function run(config, ready) {
         'apostrophe-blog-widgets': {
           extend: 'apostrophe-pieces-widgets'
         },
-        'apostrophe-blog-widgets': {},
         'apostrophe-users': {},
 
         'apostrophe-admin-bar': {
@@ -133,7 +148,7 @@ function run(config, ready) {
               children: [
                 {
                   name: 'en',
-                  label: 'en',
+                  label: 'en'
                 },
                 {
                   name: 'fr',
@@ -176,7 +191,8 @@ function run(config, ready) {
             }
           ],
           defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
-          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes
+          prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
+          hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
         },
 
         'apostrophe-workflow-modified-documents': {},

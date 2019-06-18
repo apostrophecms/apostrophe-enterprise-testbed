@@ -4,7 +4,7 @@
 
 This project is intended as a testbed for browser-based functional tests. It is not intended as a sample website.
 
-Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm. 
+Dependencies point to the github master branches of modules in order to ensure they all meet the current regression testing expectations before those that have been updated can be published to npm.
 
 ## end-to-end testing
 
@@ -14,6 +14,30 @@ npm test
 ```
 
 This will do complete test runs: one with the default / legacy replication of all docs across all locales, and one with `replicateAcrossLocales` set to `false`. Both must pass as we have clients with both configurations.
+
+## Test development
+
+`apostrophe-nightwatch-tools` is used. See the `tests/scenarios` folder.
+
+To run the tests for a single scenario in the browser, use:
+
+```
+TEST=scenarioname VISIBLE=1 npm run e2e-local
+```
+
+To run them in a headless browser, so you don't have to watch, use:
+
+```
+TEST=scenarioname  npm run e2e-local
+```
+
+To run all of the scenarios, use:
+
+```
+npm run e2e-local
+```
+
+Note: `npm test` will run the entire suite twice, with and without disabling sessions for anonymous users, and the set of flags like that it tests is expected to grow.
 
 ## Visual diff
 
@@ -45,7 +69,7 @@ You (or your automated tests) can now log in at `http://localhost:3000` as usern
 * Switch to "draft" node (menu next to locale menu).
 * Make a new "default" subpage titled "Regression Test" (via the context menu at lower left). Save Draft.
 * Add a new "images" (slideshow) widget to that page. You may do so with the middle content area's "+" button, centered here: <img src="https://www.dropbox.com/s/y1yfwvqc004bsmk/4nrzs2u0.png?raw=1" />
-* Upload images, add them to ther slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
+* Upload images, add them to the slideshow and save (you may select multiple files for a single upload). Observe the images are present on the page.
 * "Submit" the page.
 * Confirm that the UI reflects the Submitted state (button says "Submitted").
 * Click Workflow in the admin bar, then Submissions. Verify that the page, as well as the images, appear in the submissions list.
@@ -91,7 +115,7 @@ And that the slideshow is still present.
 * Change page type back. All content appears as before.
 * View the reorganize modal (Page Menu -> Reorganize). Should display the page tree including the regression test page.
 * Move a page via reorganize (drag and drop the "regression test" page to "trash").
-* In the logged-inbrowser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
+* In the logged-in browser, verify the regression test page URL is now a 404 (the incognito browser will still see it because the move to the trash has not been committed).
 * In the logged-in browser, return to the home page. Open reorganize and drag and drop the "regression test" page out of "trash" and drop it on the home page, making it a live child again.
 * In the logged-in browser, verify the page is now reachable at its URL again.
 
