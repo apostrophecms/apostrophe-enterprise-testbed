@@ -27,7 +27,9 @@ module.exports = Object.assign(
       const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const dynamicSelectSelector = '[name="dynamicSelect"]';
       const saveBtnSelector = '[data-apos-save]';
+      const basicsTabSelector = '[data-apos-open-group=basic]';
       client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', basicsTabSelector);
       client.resetValueInModal('apostrophe-blog-editor-modal', dynamicSelectSelector, 'Item 5');
       client.expect.element(manageTableRowSelector).text.to.contain('New Article Title');
       client.clickInModal('apostrophe-blog-editor-modal', '[name="dynamicCheckboxes"][value="3"] + .apos-form-checkbox-indicator');
@@ -42,7 +44,9 @@ module.exports = Object.assign(
       const editArticleBtnSelector = `${manageTableRowSelector} .apos-manage-apostrophe-blog-title a`;
       const dynamicSelectSelector = '[name="dynamicSelect"]';
       const saveBtnSelector = '[data-apos-save]';
+      const basicsTabSelector = '[data-apos-open-group=basic]';
       client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
+      client.clickInModal('apostrophe-blog-editor-modal', basicsTabSelector);
       client.waitForElementReady(dynamicSelectSelector);
       client.expect.element(dynamicSelectSelector).to.have.value.that.equals('5');
       // client.moveToElement('[name="dynamicCheckboxes"][value="4"] + .apos-form-checkbox-indicator');

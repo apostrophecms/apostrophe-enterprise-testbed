@@ -195,7 +195,34 @@ function run(config, ready) {
           hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
         },
 
-        'apostrophe-workflow-modified-documents': {}
+        'apostrophe-workflow-modified-documents': {},
+
+        'apostrophe-personas': {
+          personas: [
+            {
+              name: 'robot',
+              label: 'Robot',
+              prefixes: {
+                'en': '/robot',
+                'fr': '/robot',
+                'es': '/robot'
+              }
+            },
+            {
+              name: 'human',
+              label: 'Human',
+              prefixes: {
+                'en': '/human',
+                'fr': '/humain',
+                'es': '/humano'
+              }
+            }
+          ]
+        },
+
+        'apostrophe-docs': {
+          conflictResolution: false
+        },
 
         // 'apostrophe-review-and-deploy': {
         //   deployTo: [
