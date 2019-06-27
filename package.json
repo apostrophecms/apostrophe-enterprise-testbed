@@ -33,7 +33,7 @@
     "eslint": "^4.19.1",
     "html2plaintext": "^1.0.1",
     "kill-port": "^1.5.1",
-    "lodash": "^3.10.1",
+    "@sailshq/lodash": "^3.10.3",
     "moment": "^2.22.2",
     "nightwatch": "^0.9.20",
     "once": "^1.4.0",
