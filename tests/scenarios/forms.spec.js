@@ -35,13 +35,13 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.makeSubPage('Form test'),
   {
-    'Add a form to a page': (client) => {
+    '️☑️ Add a form to a page and commit': (client) => {
       const mainBlockSelector = '.demo-main';
       const addContentBtnSelector = `${mainBlockSelector} [data-apos-add-content]`;
       const formWidgetBtnSelector = `${mainBlockSelector} [data-apos-add-item=apostrophe-forms]`;
       const browseBtnSelector = '[data-apos-browse]';
-
-      const saveWidgetBtnSelector = '[data-apos-save]';
+      const saveButtonSelector = '[data-apos-save]';
+      const commitModalClass = 'apostrophe-workflow-commit-modal';
 
       // To make sure we scroll down far enough to eliminate certain conflicts
       client.click('footer');
@@ -51,12 +51,37 @@ module.exports = Object.assign(
       client.clickInModal('apostrophe-forms-widgets-editor', browseBtnSelector);
       client.waitForModal('apostrophe-forms-manager-modal');
       client.clickInModal('apostrophe-forms-manager-modal', '[data-apos-manage-view] [data-piece]:first-child label');
-      client.clickInModal('apostrophe-forms-manager-modal', saveWidgetBtnSelector);
+      client.clickInModal('apostrophe-forms-manager-modal', saveButtonSelector);
       client.waitForModal('apostrophe-forms-widgets-editor');
-      client.clickInModal('apostrophe-forms-widgets-editor', saveWidgetBtnSelector);
+      client.clickInModal('apostrophe-forms-widgets-editor', saveButtonSelector);
+      
+      // Make sure the form is on the page.
+      client.pause(2000); // TEMP
+      client.expect.element('input[name="DogName"]').to.be.present;
 
-      // Great expectations:
-      client.expect.element('.apos-forms-label').to.be.present;
+      // Commit the page and switch to live mode.
+      client.click('[data-apos-workflow-commit]');
+      client.waitForModal(commitModalClass);
+      client.clickInModal(commitModalClass, saveButtonSelector);
+      client.waitForModal('apostrophe-workflow-export-modal');
+      client.clickInModal('apostrophe-workflow-export-modal', '.apos-workflow-locale-control-label[for="locales[master]"]');
+      client.clickInModal('apostrophe-workflow-export-modal', saveButtonSelector);
+      client.pause(2000); // TEMP
+    }
+  },
+  steps.switchToLiveMode(),
+  {
+    '☑️ Review the form': (client) => {
+      client.pause(1000); // TEMP
+      client.expect.element('input[name="DogName"]').to.be.present;
+      client.expect.element('input[name="DogName"]').to.have.attribute('required');
+      client.expect.element('input[name="DogTraits"][value="Runs fast"]').to.be.present;
+      client.expect.element('input[name="DogTraits"][value="Barks loundly"]').to.be.present;
+      client.expect.element('input[name="DogTraits"][value="Likes treats"]').to.be.present;
+      client.expect.element('input[name="DogPhoto"][type="file"]').to.be.present;
+      client.expect.element('select[name="DogToy"]').to.have.attribute('required');
+      client.expect.element('[name="participate"]').to.have.attribute('required');
+      client.expect.element('[name="participate"]').to.have.attribute('checked');
     }
   }
 );
