@@ -23,7 +23,6 @@
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
     "apostrophe-forms": "github:apostrophecms/apostrophe-forms",
-    "apostrophe-forms-submit-google": "github:apostrophecms/apostrophe-forms-submit-google",
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "^3.0.0",
     "apostrophe-review-and-deploy": "^2.4.3",
