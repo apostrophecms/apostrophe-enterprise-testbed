@@ -3,6 +3,7 @@ const steps = require('apostrophe-nightwatch-tools/steps');
 
 const dogTraitsMessageSelector = '[data-apos-input-message="DogTraits"]';
 const formMessageSelector = '[data-apos-forms-submit-error]';
+const formSubmitSelector = '[data-apos-forms-form] button[type="submit"]';
 
 module.exports = Object.assign(
   {
@@ -99,12 +100,26 @@ module.exports = Object.assign(
       client.setValue('input[name="DogName"]', 'Benny');
       client.click('[name="DogBreed"][value="Dachshund"] + label');
       client.click('select[name="DogToy"] option[value="Frisbee"]');
-      client.click('[data-apos-forms-form] button[type="submit"]');
+      client.click(formSubmitSelector);
       client.pause(100);
+
       client.expect.element(dogTraitsMessageSelector).to.be.visible;
       client.expect.element(dogTraitsMessageSelector).text.to.equal('This field is required');
       client.expect.element(formMessageSelector).to.be.visible;
       client.expect.element(formMessageSelector).text.to.equal('An error occurred submitting the form. Please try again.');
+    }
+  },
+  {
+    '🙆‍♀️ Fix the form submission and submit successfully': (client) => {
+      const thankYouSelector = '[data-apos-forms-thank-you]';
+
+      client.click('input[name="DogTraits"][value="Likes treats"]');
+      client.click('input[name="DogTraits"][value="Barks loudly"]');
+      client.click(formSubmitSelector);
+      client.pause(100);
+
+      client.expect.element(`${thankYouSelector} h3`).text.to.equal('Gracias.');
+      client.expect.element(`${thankYouSelector} p`).text.to.equal('Thanks for your submission!');
     }
   }
 );
