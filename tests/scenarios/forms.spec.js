@@ -54,9 +54,8 @@ module.exports = Object.assign(
       client.clickInModal('apostrophe-forms-manager-modal', saveButtonSelector);
       client.waitForModal('apostrophe-forms-widgets-editor');
       client.clickInModal('apostrophe-forms-widgets-editor', saveButtonSelector);
-      
+
       // Make sure the form is on the page.
-      client.pause(2000); // TEMP
       client.expect.element('input[name="DogName"]').to.be.present;
 
       // Commit the page and switch to live mode.
@@ -69,14 +68,17 @@ module.exports = Object.assign(
       client.pause(2000); // TEMP
     }
   },
+  steps.commit(),
   steps.switchToLiveMode(),
   {
     '☑️ Review the form': (client) => {
+      // Move us down the page.
+      client.click('footer');
       client.pause(1000); // TEMP
       client.expect.element('input[name="DogName"]').to.be.present;
       client.expect.element('input[name="DogName"]').to.have.attribute('required');
       client.expect.element('input[name="DogTraits"][value="Runs fast"]').to.be.present;
-      client.expect.element('input[name="DogTraits"][value="Barks loundly"]').to.be.present;
+      client.expect.element('input[name="DogTraits"][value="Barks loudly"]').to.be.present;
       client.expect.element('input[name="DogTraits"][value="Likes treats"]').to.be.present;
       client.expect.element('input[name="DogPhoto"][type="file"]').to.be.present;
       client.expect.element('select[name="DogToy"]').to.have.attribute('required');
