@@ -224,6 +224,24 @@ function run(config, ready) {
           conflictResolution: false
         },
 
+        'apostrophe-forms': {},
+        'apostrophe-forms-widgets': {},
+        // Form field widgets
+        'apostrophe-forms-text-field-widgets': {},
+        'apostrophe-forms-textarea-field-widgets': {},
+        'apostrophe-forms-select-field-widgets': {},
+        'apostrophe-forms-radio-field-widgets': {},
+        'apostrophe-forms-checkboxes-field-widgets': {},
+        'apostrophe-forms-file-field-widgets': {},
+        'apostrophe-forms-boolean-field-widgets': {},
+        // TODO: 'apostrophe-forms-submit-google': {},
+        'apostrophe-permissions': {
+          construct: function (self, options) {
+            // Needed if you want file fields to work on public pages
+            self.addPublic(['edit-attachment']);
+          }
+        }
+
         // 'apostrophe-review-and-deploy': {
         //   deployTo: [
         //     {
