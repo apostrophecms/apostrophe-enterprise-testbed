@@ -1,6 +1,9 @@
 const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
 
+const dogTraitsMessageSelector = '[data-apos-input-message="DogTraits"]';
+const formMessageSelector = '[data-apos-forms-submit-error]';
+
 module.exports = Object.assign(
   {
     before: (client, done) => {
@@ -11,7 +14,6 @@ module.exports = Object.assign(
 
       this._server.start((err) => {
         if (err) {
-          console.error(err);
           return done(err);
         }
         this._server.task('apostrophe-forms:addForm');
@@ -35,7 +37,7 @@ module.exports = Object.assign(
   steps.switchToDraftMode(),
   steps.makeSubPage('Form test'),
   {
-    '️☑️ Add a form to a page and commit': (client) => {
+    '️📝 Add a form to a page and commit': (client) => {
       const mainBlockSelector = '.demo-main';
       const addContentBtnSelector = `${mainBlockSelector} [data-apos-add-content]`;
       const formWidgetBtnSelector = `${mainBlockSelector} [data-apos-add-item=apostrophe-forms]`;
@@ -71,7 +73,7 @@ module.exports = Object.assign(
   steps.commit(),
   steps.switchToLiveMode(),
   {
-    '☑️ Review the form': (client) => {
+    '👀 Review the form': (client) => {
       // Move us down the page.
       client.click('footer');
       client.pause(1000); // TEMP
@@ -84,6 +86,25 @@ module.exports = Object.assign(
       client.expect.element('select[name="DogToy"]').to.have.attribute('required');
       client.expect.element('[name="participate"]').to.have.attribute('required');
       client.expect.element('[name="participate"]').to.have.attribute('checked');
+      client.expect.element(dogTraitsMessageSelector).to.be.present;
+      client.expect.element(dogTraitsMessageSelector).to.not.be.visible;
+      client.expect.element(formMessageSelector).to.be.present;
+      client.expect.element(formMessageSelector).to.not.be.visible;
+    }
+  },
+  {
+    '🙅‍♀️ Fill out the form insufficiently (trigger errors)': (client) => {
+      // Move field into view.
+      client.click('input[name="DogName"]');
+      client.setValue('input[name="DogName"]', 'Benny');
+      client.click('[name="DogBreed"][value="Dachshund"] + label');
+      client.click('select[name="DogToy"] option[value="Frisbee"]');
+      client.click('[data-apos-forms-form] button[type="submit"]');
+      client.pause(100);
+      client.expect.element(dogTraitsMessageSelector).to.be.visible;
+      client.expect.element(dogTraitsMessageSelector).text.to.equal('This field is required');
+      client.expect.element(formMessageSelector).to.be.visible;
+      client.expect.element(formMessageSelector).text.to.equal('An error occurred submitting the form. Please try again.');
     }
   }
 );
