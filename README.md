@@ -28,7 +28,7 @@ TEST=scenarioname VISIBLE=1 npm run e2e-local
 To run them in a headless browser, so you don't have to watch, use:
 
 ```
-TEST=scenarioname  npm run e2e-local
+TEST=scenarioname npm run e2e-local
 ```
 
 To run all of the scenarios, use:
