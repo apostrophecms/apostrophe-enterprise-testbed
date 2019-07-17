@@ -234,7 +234,8 @@ function run(config, ready) {
         'apostrophe-forms-checkboxes-field-widgets': {},
         'apostrophe-forms-file-field-widgets': {},
         'apostrophe-forms-boolean-field-widgets': {},
-        // TODO: 'apostrophe-forms-submit-google': {},
+        'apostrophe-forms-conditional-widgets': {},
+
         'apostrophe-permissions': {
           construct: function (self, options) {
             // Needed if you want file fields to work on public pages

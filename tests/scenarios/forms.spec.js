@@ -100,6 +100,7 @@ module.exports = Object.assign(
       client.setValue('input[name="DogName"]', 'Benny');
       client.click('[name="DogBreed"][value="Dachshund"] + label');
       client.click('select[name="DogToy"] option[value="Frisbee"]');
+      client.click('select[name="participateContact"] option[value="phone"]');
       client.click(formSubmitSelector);
       client.pause(100);
 
@@ -107,6 +108,26 @@ module.exports = Object.assign(
       client.expect.element(dogTraitsMessageSelector).text.to.equal('This field is required');
       client.expect.element(formMessageSelector).to.be.visible;
       client.expect.element(formMessageSelector).text.to.equal('An error occurred submitting the form. Please try again.');
+    }
+  },
+  {
+    '🔀 Check for conditional fields': (client) => {
+      client.click('[name="DogBreed"][value="Dachshund"]');
+      client.pause(100);
+      client.expect.element('input[name="pumiColor"]').to.not.be.visible;
+      client.expect.element('input[name="pumiAge"]').to.not.be.visible;
+
+      client.click('[name="DogBreed"][value="Pumi"]');
+      client.expect.element('input[name="pumiColor"]').to.be.visible;
+      client.expect.element('input[name="pumiAge"]').to.be.visible;
+
+      client.click('select[name="DogToy"] option[value="Bone"]');
+      client.expect.element('input[name="boneFlavor"]').to.be.visible;
+      client.expect.element('input[name="ballColor"]').to.not.be.visible;
+
+      client.click('select[name="DogToy"] option[value="Ball"]');
+      client.expect.element('input[name="ballColor"]').to.be.visible;
+      client.expect.element('input[name="boneFlavor"]').to.not.be.visible;
     }
   },
   {
