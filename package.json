@@ -22,7 +22,7 @@
     "@sailshq/lodash": "^3.10.3",
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
-    "apostrophe-forms": "github:apostrophecms/apostrophe-forms",
+    "apostrophe-forms": "github:apostrophecms/apostrophe-forms#feat/conditional-fields",
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "^3.0.0",
     "apostrophe-review-and-deploy": "^2.4.3",
