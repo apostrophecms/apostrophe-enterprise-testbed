@@ -29,7 +29,7 @@ module.exports = Object.assign(
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const workflowModalBtnSelector = '[data-apos-dropdown-name="workflow"]';
-      const editTitleField = 'input[name=title]';
+      const editTitleField = 'input[name="title"]';
       const saveBtnSelector = '[data-apos-save]';
       const commitWorkflowBtnSelector = '[data-apos-workflow-commit]';
 

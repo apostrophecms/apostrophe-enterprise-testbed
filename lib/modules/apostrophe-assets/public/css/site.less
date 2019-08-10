@@ -5,12 +5,30 @@
 @import 'components/_index.less';
 @import 'global/_index.less';
 
+// Ensure no overlap between admin bar and content, this breaks
+// tests in a way that is not relevant
+
+body
+{
+  position: relative;
+  margin-top: 80px;
+}
+
+.apos-admin-bar
+{
+  position: absolute !important;
+  top: -60px !important;
+}
+
+// We normally choose to slightly overlap the first menu item with
+// the "+" button, but nightwatch regression testing considers this to be
+// too much overlap and won't allow that button to be clicked. This
+// is a rather large gap to ensure it is not the issue; if there are
+// further recurrences we need to look somewhere else
+
 .apos-dropdown-items
 {
-  // We normally choose to slightly overlap the first menu item with
-  // the "+" button, but nightwatch regression testing considers this to be
-  // too much overlap and won't allow that button to be clicked
-  margin-top: 16px !important;
+  margin-top: 64px !important;
 }
 
 .apos-slideshow-item

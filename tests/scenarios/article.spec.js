@@ -97,7 +97,6 @@ module.exports = Object.assign(
       const manageTableRowSelector = '.apos-manage-table tr[data-piece]';
       const editArticleBtnSelector = `${manageTableRowSelector} a`;
       const forceExportBtnSelector = `[data-apos-workflow-force-export]`;
-      const notificationSelector = '.apos-notification-container';
 
       client.clickInModal('apostrophe-blog-manager-modal', editArticleBtnSelector);
       client.clickInModal('apostrophe-blog-editor-modal', workflowModalBtnSelector);
