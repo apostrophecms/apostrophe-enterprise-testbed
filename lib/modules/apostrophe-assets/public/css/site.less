@@ -5,6 +5,14 @@
 @import 'components/_index.less';
 @import 'global/_index.less';
 
+.apos-dropdown-items
+{
+  // We normally choose to slightly overlap the first menu item with
+  // the "+" button, but nightwatch regression testing considers this to be
+  // too much overlap and won't allow that button to be clicked
+  margin-top: 16px !important;
+}
+
 .apos-slideshow-item
 {
   h4

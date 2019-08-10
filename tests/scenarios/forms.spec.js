@@ -9,7 +9,7 @@ module.exports = Object.assign(
   {
     before: (client, done) => {
       // eslint-disable-next-line camelcase
-      const { apos_address, apos_port } = client.globals.test_settings;
+      const { apos_address, apos_port } = client.globals;
       client.resizeWindow(1200, 800);
       this._server = server.create(apos_address, apos_port);
 
@@ -47,7 +47,7 @@ module.exports = Object.assign(
       const commitModalClass = 'apostrophe-workflow-commit-modal';
 
       // To make sure we scroll down far enough to eliminate certain conflicts
-      client.click('footer');
+      client.getLocationInView('footer');
       client.clickWhenReady(addContentBtnSelector);
       client.clickWhenReady(formWidgetBtnSelector);
       client.waitForModal('apostrophe-forms-widgets-editor');
@@ -76,7 +76,7 @@ module.exports = Object.assign(
   {
     '👀 Review the form': (client) => {
       // Move us down the page.
-      client.click('footer');
+      client.getLocationInView('footer');
       client.pause(1000); // TEMP
       client.expect.element('input[name="DogName"]').to.be.present;
       client.expect.element('input[name="DogName"]').to.have.attribute('required');

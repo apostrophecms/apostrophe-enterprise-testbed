@@ -4,7 +4,7 @@ const steps = require('apostrophe-nightwatch-tools/steps');
 module.exports = Object.assign(
   {
     before: (client, done) => {
-      const { apos_address, apos_port } = client.globals.test_settings;
+      const { apos_address, apos_port } = client.globals;
       client.resizeWindow(1200, 800);
       this._server = server.create(apos_address, apos_port);
       process.env.PRODUCTS_PAGE = "1";
@@ -51,7 +51,7 @@ module.exports = Object.assign(
       const saveChoicesBtnSelector = '[data-apos-save]';
       const saveWidgetBtnSelector = '[data-apos-save]';
       // To make sure we scroll down far enough to eliminate certain conflicts
-      client.click('footer');
+      client.getLocationInView('footer');
       client.clickWhenReady(addContentBtnSelector);
       client.clickWhenReady(mixedWidgetBtnSelector);
       client.clickInModal('mixed-widgets-editor', browseBtnSelector)

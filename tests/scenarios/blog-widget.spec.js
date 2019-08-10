@@ -59,7 +59,7 @@ module.exports = Object.assign(
 
       client.expect.element(blogArticleTitleSelector).text.to.equal('New Blog Article Title');
       // To get the footer onscreen for a better screenshot
-      client.click('footer');
+      client.getLocationInView('footer');
       client.categoryScreenshot('blog-widget.png');
     }
   },

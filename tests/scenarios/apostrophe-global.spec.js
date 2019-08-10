@@ -4,8 +4,7 @@ const server = require('apostrophe-nightwatch-tools/server');
 module.exports = Object.assign(
   {
     before: (client, done) => {
-      console.log('client', client.globals.test_settings);
-      const { apos_address, apos_port } = client.globals.test_settings;
+      const { apos_address, apos_port } = client.globals;
       client.resizeWindow(1200, 800);
       if (!this._server) {
         this._server = server.create(apos_address, apos_port);
@@ -34,7 +33,7 @@ module.exports = Object.assign(
 
       client.expect.element(richTextSelector).text.to.contain('Rich Text Widget line global');
       // To get the footer onscreen for a better screenshot
-      client.click('footer');
+      client.getLocationInView('footer');
       client.categoryScreenshot('apostrophe-global.png');
     }
   }

@@ -34,7 +34,7 @@ module.exports = Object.assign(
       client.waitForElementReady(pageMenuDropdownSelector);
       client.clickWhenReady(pageMenuCreatePageSelector);
       client.resetValueInModal('apostrophe-pages-editor', '[name="title"]', pageName);
-      client.resetValueInModal('apostrophe-pages-editor', '[name="type"]', 'personas');
+      client.resetValueInModal('apostrophe-pages-editor', '[name="type"]', 'Personas (Testing)');
       client.clickInModal('apostrophe-pages-editor', '[data-apos-save]');
     }
   },
