@@ -4,6 +4,8 @@ language: node_js
 node_js:
 - stable
 sudo: false
+addons:
+  - chrome: stable
 services:
 - docker
 - mongodb
