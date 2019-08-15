@@ -2,7 +2,7 @@ const server = require('apostrophe-nightwatch-tools/server');
 const steps = require('apostrophe-nightwatch-tools/steps');
 debugger;
 module.exports = Object.assign(
-    {
+  {
     before: (client, done) => {
       client.resizeWindow(1200, 800);
       if (!this._server) {
