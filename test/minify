@@ -10,27 +10,26 @@ APOS_BUNDLE=1 node app &
 sleep 10
 # Verify we can get the home page
 wget http://localhost:3000 -O /tmp/$$.html || exit 1
-# http://localhost:3000/uploads/assets/ck199jeiq00013quk6zgkmbd2/apos-minified/anon-ck199jeiq00013quk6zgkmbd2.css
-if ! grep -P "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html ; then
+if ! egrep "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html ; then
   echo "Output does not load anon CSS from bundle"
   exit 1
 fi
-LINE=`grep -P "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html`
-MATCH=`echo $LINE | grep -o -P 'http[^"]+'` 
+LINE=`egrep "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html`
+MATCH=`echo $LINE | egrep -o 'http[^"]+'` 
 wget $MATCH -O /dev/null || exit 1
 echo "Good CSS from bundle"
 
-if ! grep -P "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html ; then
+if ! egrep "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html ; then
   echo "Output does not load anon JS from bundle"
   exit 1
 fi
-LINE=`grep -P "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html`
+LINE=`egrep "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html`
 echo "Line is $LINE"
-MATCH=`echo $LINE | grep -o -P 'http[^"]+'` 
+MATCH=`echo $LINE | egrep -o 'http[^"]+'` 
 wget $MATCH -O /dev/null || exit 1
 echo "Good JS from bundle"
 
 # Don't litter or we'll break dev assets
 rm data/generation || exit 1
 rm -rf public/modules || exit 1
-
+rm /tmp/$$.html
