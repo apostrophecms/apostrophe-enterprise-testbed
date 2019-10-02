@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Make sure the webserver process dies when we exit
+trap 'kill $(jobs -p)' EXIT
+
+# Create an asset bundle the recommended way
+APOS_BUNDLE=1 node app apostrophe:generation || exit 1
+# Fire up the site using that bundle's assets
+APOS_BUNDLE=1 node app &
+sleep 10
+# Verify we can get the home page
+wget http://localhost:3000 -O /tmp/$$.html || exit 1
+if ! egrep "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html ; then
+  echo "Output does not load anon CSS from bundle"
+  exit 1
+fi
+LINE=`egrep "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html`
+MATCH=`echo $LINE | egrep -o 'http[^"]+'` 
+wget $MATCH -O /dev/null || exit 1
+echo "Good CSS from bundle"
+
+if ! egrep "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html ; then
+  echo "Output does not load anon JS from bundle"
+  exit 1
+fi
+LINE=`egrep "uploads/assets/.*/apos-minified/anon-.*.js" /tmp/$$.html`
+echo "Line is $LINE"
+MATCH=`echo $LINE | egrep -o 'http[^"]+'` 
+wget $MATCH -O /dev/null || exit 1
+echo "Good JS from bundle"
+
+# Don't litter or we'll break dev assets
+rm data/generation || exit 1
+rm -rf public/modules || exit 1
+rm /tmp/$$.html
