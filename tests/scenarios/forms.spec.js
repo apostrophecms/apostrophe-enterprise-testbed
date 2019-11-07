@@ -10,7 +10,7 @@ module.exports = Object.assign(
     before: (client, done) => {
       // eslint-disable-next-line camelcase
       const { apos_address, apos_port } = client.globals;
-      client.resizeWindow(1200, 800);
+      client.resizeWindow(1200, 1200);
       this._server = server.create(apos_address, apos_port);
 
       this._server.start((err) => {

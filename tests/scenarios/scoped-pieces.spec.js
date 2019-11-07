@@ -18,7 +18,7 @@ module.exports = Object.assign(
       process.env.SCOPED_PIECES = '1';
       mkdirp.sync(`${root}/node_modules/@scoped/pieces`);
       fs.writeFileSync(`${root}/node_modules/@scoped/pieces/index.js`, fs.readFileSync(`${__dirname}/scoped-pieces/index.js`, 'utf8'));
-      client.resizeWindow(1200, 800);
+      client.resizeWindow(1200, 1200);
       if (!this._server) {
         this._server = server.create('localhost', 3111);
         this._server.start(done);

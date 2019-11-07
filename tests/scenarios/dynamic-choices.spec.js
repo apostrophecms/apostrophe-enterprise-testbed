@@ -14,7 +14,7 @@ const dynamicColorsWidgetControlSelector = '[data-schema-widget-control-label="C
 module.exports = Object.assign(
   {
     before: (client, done) => {
-      client.resizeWindow(1200, 800);
+      client.resizeWindow(1200, 1200);
       if (!this._server) {
         this._server = server.create('localhost', 3111);
         this._server.start(done);

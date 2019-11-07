@@ -5,7 +5,7 @@ module.exports = Object.assign(
   {
     before: (client, done) => {
       const { apos_address, apos_port } = client.globals;
-      client.resizeWindow(1200, 800);
+      client.resizeWindow(1200, 1200);
       this._server = server.create(apos_address, apos_port);
       process.env.PRODUCTS_PAGE = "1";
       process.env.ARTICLES_PAGE = "1";
