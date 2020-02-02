@@ -35,7 +35,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   {
     'Create a scoped piece': (client) => {
       const scopedPieceName = 'Sample Scoped Piece';

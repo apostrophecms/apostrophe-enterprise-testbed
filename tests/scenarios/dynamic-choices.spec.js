@@ -28,7 +28,6 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
-  steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   {
     'Update dynamic fields in a products widget': (client) => {

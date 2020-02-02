@@ -20,7 +20,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.createArticle('Apostrophe Workflow Modified Document Article Title'),
   {
     'submit an article, via the "Workflow" menu in the dialog box': (client) => {

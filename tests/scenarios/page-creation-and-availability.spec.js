@@ -19,7 +19,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   steps.submitChanges(),
   steps.checkSubmitted(['Regression test']),

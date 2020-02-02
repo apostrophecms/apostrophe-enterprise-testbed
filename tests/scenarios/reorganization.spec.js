@@ -46,7 +46,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.makeSubPage('test1'),
   steps.commit(),
   steps.navigateToHome(),

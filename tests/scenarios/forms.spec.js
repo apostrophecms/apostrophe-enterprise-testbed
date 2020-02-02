@@ -35,7 +35,6 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
-  steps.switchToDraftMode(),
   steps.makeSubPage('Form test'),
   {
     '️📝 Add a form to a page and commit': (client) => {

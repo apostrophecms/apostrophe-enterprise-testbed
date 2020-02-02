@@ -36,7 +36,6 @@ module.exports = Object.assign(
   },
   steps.main(),
   steps.login(),
-  steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   {
     'add a mixed widget to the page': (client) => {

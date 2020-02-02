@@ -19,7 +19,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('es'),
-  steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
   steps.createArticle('New Blog Article Title'),
   {

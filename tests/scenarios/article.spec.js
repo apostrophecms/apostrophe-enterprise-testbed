@@ -19,7 +19,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.createArticle('New Article Title'),
   {
     'reopen the article. Set value for dynamic choices.': (client) => {

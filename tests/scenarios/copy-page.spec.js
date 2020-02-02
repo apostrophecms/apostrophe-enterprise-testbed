@@ -19,7 +19,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.addTextWidgetTo({selector: '.demo-pageheader', text: 'Home Page Rich Text!'}),
   steps.submitChanges(),
   {

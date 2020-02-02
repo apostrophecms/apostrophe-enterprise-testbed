@@ -23,7 +23,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   {
     'Make personas page': function (client) {
       const pageMenuBtnSelector = '.apos-context-menu .apos-button';
@@ -98,7 +97,6 @@ module.exports = Object.assign(
   steps.main(),
   steps.login(),
   steps.switchLocale('en'),
-  steps.switchToDraftMode(),
   steps.navigateToRelativeUrl('personas'),
   steps.changeWidgetPersona({selector: '[data-role=secondary]', value: 'human'}),
   steps.commit(),
