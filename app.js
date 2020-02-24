@@ -40,6 +40,11 @@ function run(config, ready) {
   console.log('APP', address, port, baseUrl);
 
   let modules =  {
+    'apostrophe-db': {
+      connect: {
+        useUnifiedTopology: true
+      }
+    },
     'apostrophe-site-map': {
       // array of doc types you do NOT want
       // to include, even though they are
