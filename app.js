@@ -218,10 +218,6 @@ function run(config, ready) {
       ]
     },
 
-    'apostrophe-docs': {
-      conflictResolution: false
-    },
-
     'apostrophe-forms': {},
     'apostrophe-forms-widgets': {},
     // Form field widgets
