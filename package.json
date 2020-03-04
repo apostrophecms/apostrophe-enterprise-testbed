@@ -11,7 +11,8 @@
     "e2e-local": "VISUAL_ENV=local tests/run-all",
     "test-with-visual-diff": "( VISUAL_ENV=local node tests/screenshot-previous.js && VISUAL_ENV=local tests/run-all && node visual-regression-test.js )",
     "minify-test": "test/minify",
-    "test": "rm -f package-lock.json && rm -rf node_modules && npm install && npm run minify-test && ( npm run e2e-local ) && ( DISABLE_ANON_SESSION=1 NO_REPLICATE=1 npm run e2e-local )"
+    "headless-tests": "test/headless",
+    "test": "rm -f package-lock.json && rm -rf node_modules && npm install && npm run minify-test && npm run headless-tests && ( npm run e2e-local ) && ( DISABLE_ANON_SESSION=1 NO_REPLICATE=1 npm run e2e-local )"
   },
   "repository": {
     "type": "git",
