@@ -8,7 +8,7 @@
   npm install &&
   npm install apostrophecms/apostrophe &&
   npm test &&
-  rm rm -rf /tmp/$$
+  rm -rf /tmp/$$
 ) || FAIL=1
 
 rm -rf /tmp/$$
