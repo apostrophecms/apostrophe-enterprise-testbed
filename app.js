@@ -40,6 +40,7 @@ function run(config, ready) {
   console.log('APP', address, port, baseUrl);
 
   let modules =  {
+    'apostrophe-seo': {},
     'apostrophe-db': {
       connect: {
         useUnifiedTopology: true
@@ -235,26 +236,20 @@ function run(config, ready) {
         // Needed if you want file fields to work on public pages
         self.addPublic(['edit-attachment']);
       }
-    }
-
-    // 'apostrophe-review-and-deploy': {
-    //   deployTo: [
-    //     {
-    //       name: '3001',
-    //       baseUrl: 'http://localhost:3001',
-    //       prefix: '',
-    //       apikey: 'XYZ'
-    //     },
-    //     {
-    //       name: '3002',
-    //       baseUrl: 'http://localhost:3002',
-    //       prefix: '',
-    //       apikey: 'XYZ'
-    //     }
-    //   ]
-    // }
+    },
   };
-
+  if (!process.env.WORKFLOW_ONLY) {
+    modules['apostrophe-i18n'] = {
+      namespaces: true
+    };
+    modules['apostrophe-i18n-static'] = {
+      defaultLocale: 'en',
+      objectNotation: '-',
+      useWorkflowLocales: true,
+      disableLocaleChange: true,
+      ignoreNamespaces: [ 'apostrophe' ]
+    };
+  }
   if (process.env.SCOPED_PIECES) {
     // Only intended for use by tests/scenarios/scoped-pieces.spec.js,
     // which copies a temporary folder for this purpose into node_modules

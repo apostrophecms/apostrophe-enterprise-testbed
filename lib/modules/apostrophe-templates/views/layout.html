@@ -2,6 +2,25 @@
 {% import 'macros/nav.html' as nav %}
 {% import 'global/svg/toolbox.html' as tool %}
 
+{% if data.piece %}
+  {% if data.piece.seoTitle %}
+    {% set title = data.piece.seoTitle %}
+  {% else %}
+    {% set title = data.piece.title %}
+  {% endif %}
+{% else %}
+  {% if data.page.seoTitle %}
+    {% set title = data.page.seoTitle %}
+  {% else %}
+    {% set title = data.page.title %}
+  {% endif %}
+{% endif %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extraHead %}
+  {% include "apostrophe-seo:view.html" %}
+{% endblock %}
 
 {% block beforeMain %}
   {% if data.user %}
