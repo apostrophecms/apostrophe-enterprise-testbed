@@ -24,6 +24,7 @@
     "@sailshq/lodash": "^3.10.3",
     "apostrophe": "github:apostrophecms/apostrophe",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
+    "apostrophe-db-mongo-3-driver": "^2.0.1",
     "apostrophe-forms": "github:apostrophecms/apostrophe-forms",
     "apostrophe-i18n-debugger": "github:apostrophecms/apostrophe-i18n-debugger",
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",

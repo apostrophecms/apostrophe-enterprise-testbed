@@ -40,6 +40,7 @@ function run(config, ready) {
   console.log('APP', address, port, baseUrl);
 
   let modules =  {
+    'apostrophe-db-mongo-3-driver': {},
     'apostrophe-seo': {},
     'apostrophe-db': {
       connect: {
