@@ -136,63 +136,63 @@ function run(config, ready) {
       ]
     },
 
-    'apostrophe-workflow': {
-      alias: 'workflow',
-      replicateAcrossLocales: process.env.NO_REPLICATE ? false : undefined,
-      locales: process.env.WORKFLOW_ONLY ? null : [
-        {
-          name: 'master',
-          label: 'Master',
-          private: true,
-          children: [
-            {
-              name: 'en',
-              label: 'en'
-            },
-            {
-              name: 'fr',
-              label: 'fr'
-            },
-            {
-              name: 'es',
-              label: 'es'
-            }
-          ].concat(process.env.EXTRA_LOCALES ? [
-            {
-              name: 'be',
-              label: 'Belgium'
-            },
-            {
-              name: 'de',
-              label: 'Germany'
-            },
-            {
-              name: 'au',
-              label: 'Australia'
-            },
-            {
-              name: 'nl',
-              label: 'Netherlands'
-            },
-            {
-              name: 'ru',
-              label: 'Russia'
-            },
-            {
-              name: 'hu',
-              label: 'Hungary'
-            },
-            {
-              name: 'th',
-              label: 'Thailand'
-            }
-          ] : [])
-        }
-      ],
-      defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
-      prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
-      hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
-    },
+    // 'apostrophe-workflow': {
+    //   alias: 'workflow',
+    //   replicateAcrossLocales: process.env.NO_REPLICATE ? false : undefined,
+    //   locales: process.env.WORKFLOW_ONLY ? null : [
+    //     {
+    //       name: 'master',
+    //       label: 'Master',
+    //       private: true,
+    //       children: [
+    //         {
+    //           name: 'en',
+    //           label: 'en'
+    //         },
+    //         {
+    //           name: 'fr',
+    //           label: 'fr'
+    //         },
+    //         {
+    //           name: 'es',
+    //           label: 'es'
+    //         }
+    //       ].concat(process.env.EXTRA_LOCALES ? [
+    //         {
+    //           name: 'be',
+    //           label: 'Belgium'
+    //         },
+    //         {
+    //           name: 'de',
+    //           label: 'Germany'
+    //         },
+    //         {
+    //           name: 'au',
+    //           label: 'Australia'
+    //         },
+    //         {
+    //           name: 'nl',
+    //           label: 'Netherlands'
+    //         },
+    //         {
+    //           name: 'ru',
+    //           label: 'Russia'
+    //         },
+    //         {
+    //           name: 'hu',
+    //           label: 'Hungary'
+    //         },
+    //         {
+    //           name: 'th',
+    //           label: 'Thailand'
+    //         }
+    //       ] : [])
+    //     }
+    //   ],
+    //   defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
+    //   prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
+    //   hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
+    // },
 
     'apostrophe-workflow-modified-documents': {},
 
@@ -230,6 +230,7 @@ function run(config, ready) {
     'apostrophe-forms-file-field-widgets': {},
     'apostrophe-forms-boolean-field-widgets': {},
     'apostrophe-forms-conditional-widgets': {},
+    'apostrophe-forms-submit-google': {},
 
     'apostrophe-permissions': {
       construct: function (self, options) {
