@@ -219,7 +219,25 @@ function run(config, ready) {
       ]
     },
 
-    'apostrophe-forms': {},
+    'apostrophe-forms': {
+      formWidgets: {
+        'apostrophe-forms-text-field': {},
+        'apostrophe-forms-phone-field': {},
+        'apostrophe-forms-textarea-field': {},
+        'apostrophe-forms-file-field': {},
+        'apostrophe-forms-boolean-field': {},
+        'apostrophe-forms-select-field': {},
+        'apostrophe-forms-radio-field': {},
+        'apostrophe-forms-checkboxes-field': {},
+        'apostrophe-forms-conditional': {},
+        'apostrophe-rich-text': {
+          toolbar: [
+            'Styles', 'Bold', 'Italic', 'Link', 'Anchor', 'Unlink',
+            'NumberedList', 'BulletedList'
+          ]
+        }
+      }
+    },
     'apostrophe-forms-widgets': {},
     // Form field widgets
     'apostrophe-forms-text-field-widgets': {},
@@ -230,6 +248,7 @@ function run(config, ready) {
     'apostrophe-forms-file-field-widgets': {},
     'apostrophe-forms-boolean-field-widgets': {},
     'apostrophe-forms-conditional-widgets': {},
+    'apostrophe-forms-phone-field-widgets': {},
 
     'apostrophe-permissions': {
       construct: function (self, options) {
@@ -241,13 +260,6 @@ function run(config, ready) {
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
       namespaces: true
-    };
-    modules['apostrophe-i18n-static'] = {
-      defaultLocale: 'en',
-      objectNotation: '-',
-      useWorkflowLocales: true,
-      disableLocaleChange: true,
-      ignoreNamespaces: [ 'apostrophe' ]
     };
   }
   if (process.env.SCOPED_PIECES) {
