@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"apostrophe-enterprise-testbed.aposGeneration"}],"uuid":"b8ea70c8e06a4f03a3a6dc5a293eb467"}
