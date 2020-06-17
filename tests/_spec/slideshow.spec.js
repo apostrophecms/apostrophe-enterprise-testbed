@@ -28,7 +28,6 @@ module.exports = Object.assign(
   steps.switchLocale('en'),
   steps.switchToDraftMode(),
   steps.makeSubPage('Regression test'),
-  steps.submitChanges(),
   {
     'upload images': function(client) {
       throw new Error('TODO bring back this widget in default template, commented out temporarily because it pushed the mixed widget into the workflow buttons');
@@ -65,8 +64,6 @@ module.exports = Object.assign(
       client.pause(1000); // TODO: rewrote to be able to wait for close paranja
     }
   },
-  steps.submitChanges(),
-  steps.checkSubmitted(['slide1', 'slide2',]),
   steps.commitAndExport(3),
 
   /* steps.makeIncognitoRequestByRelativeUrl((client, $) => { */

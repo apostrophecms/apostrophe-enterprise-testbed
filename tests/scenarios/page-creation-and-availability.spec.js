@@ -20,13 +20,6 @@ module.exports = Object.assign(
   steps.login(),
   steps.switchLocale('en'),
   steps.makeSubPage('Regression test'),
-  steps.submitChanges(),
-  steps.checkSubmitted(['Regression test']),
-  {
-    'confirm regression-test page url': client => {
-      client.assert.urlEquals('http://localhost:3111/en/regression-test');
-    }
-  },
   steps.switchToLiveMode(),
   steps.switchToDraftMode(),
   steps.navigateToPage('regression-test'),

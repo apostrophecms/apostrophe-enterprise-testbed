@@ -17,7 +17,7 @@ module.exports = Object.assign(
     },
   },
   steps.main(),
-  steps.login(),
+  steps.login('submitter', 'submitter'),
   steps.switchLocale('en'),
   steps.addTextWidgetTo({selector: '.demo-pageheader', text: 'Home Page Rich Text!'}),
   steps.submitChanges(),
@@ -53,7 +53,6 @@ module.exports = Object.assign(
     }
   },
   steps.addTextWidgetTo({selector: '.demo-main', text: 'A default page that is not the home page!'}),
-  steps.commit(),
   {
     'Copy The Default Page': client => {
       const pageMenuBtnSelector = '.apos-context-menu .apos-button';

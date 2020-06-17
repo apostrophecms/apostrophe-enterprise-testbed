@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"apostrophe-enterprise-testbed.aposBlessings"}],"uuid":"f0d70f17c6ad46cdbd751d8c7f63e329"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"apostrophe-enterprise-testbed.aposBlessings"}],"uuid":"a8c0d851588a4a24a49291858ca9ffc8"}
