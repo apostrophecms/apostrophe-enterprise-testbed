@@ -24,3 +24,4 @@ node_modules
 /tests/reports
 .*.sw*
 /visual-regression-test-config.js
+/lib/modules/apostrophe-forms-submit-google/credentials.json
