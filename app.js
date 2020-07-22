@@ -39,7 +39,14 @@ function run(config, ready) {
   const baseUrl = `http://${address}:${port}`;
   console.log('APP', address, port, baseUrl);
 
-  let modules =  {
+  let modules = {
+    'apostrophe-login': {
+      throttle: {
+        attempts: 3,
+        per: 1,
+        lockout: 1
+      }
+    },
     'apostrophe-seo': {},
     'apostrophe-db': {
       connect: {
@@ -219,7 +226,25 @@ function run(config, ready) {
       ]
     },
 
-    'apostrophe-forms': {},
+    'apostrophe-forms': {
+      formWidgets: {
+        'apostrophe-forms-text-field': {},
+        'apostrophe-forms-regexp-text-field': {},
+        'apostrophe-forms-textarea-field': {},
+        'apostrophe-forms-file-field': {},
+        'apostrophe-forms-boolean-field': {},
+        'apostrophe-forms-select-field': {},
+        'apostrophe-forms-radio-field': {},
+        'apostrophe-forms-checkboxes-field': {},
+        'apostrophe-forms-conditional': {},
+        'apostrophe-rich-text': {
+          toolbar: [
+            'Styles', 'Bold', 'Italic', 'Link', 'Anchor', 'Unlink',
+            'NumberedList', 'BulletedList'
+          ]
+        }
+      }
+    },
     'apostrophe-forms-widgets': {},
     // Form field widgets
     'apostrophe-forms-text-field-widgets': {},
@@ -230,14 +255,21 @@ function run(config, ready) {
     'apostrophe-forms-file-field-widgets': {},
     'apostrophe-forms-boolean-field-widgets': {},
     'apostrophe-forms-conditional-widgets': {},
+    'apostrophe-forms-regexp-text-field-widgets': {},
 
     'apostrophe-permissions': {
       construct: function (self, options) {
         // Needed if you want file fields to work on public pages
         self.addPublic(['edit-attachment']);
       }
-    },
+    }
   };
+  if (process.env.RECAPTCHA_SITE) {
+    modules['apostrophe-login-recaptcha'] = {
+      recaptchaSite: process.env.RECAPTCHA_SITE,
+      recaptchaSecret: process.env.RECAPTCHA_SECRET
+    };
+  }
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
       namespaces: true
