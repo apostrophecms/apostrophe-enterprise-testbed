@@ -8,6 +8,6 @@ else
   tests=tests/scenarios/$TEST.spec.js
 fi
 
+echo "Running nightwatch"
 npx nightwatch $tests --config nightwatch.js --env $VISUAL_ENV &&
-
 echo "Nightwatch functional tests PASSED"

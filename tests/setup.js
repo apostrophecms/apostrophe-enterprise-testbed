@@ -16,6 +16,9 @@ module.exports = {
     console.log(process.argv);
     chromedriver.start([
       `--port=${WEBDRIVER_PORT}`,
+      '--verbose',
+      // Required Chrome flag to run under Docker, which already counts as a sandbox
+      '--no-sandbox',
       '--url-base=wd/hub',
     ]);
     return done();
