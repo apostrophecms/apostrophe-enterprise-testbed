@@ -16,10 +16,12 @@ module.exports = {
     console.log(process.argv);
     chromedriver.start([
       `--port=${WEBDRIVER_PORT}`,
-      '--verbose',
+      // '--verbose',
       // Required Chrome flag to run under Docker, which already counts as a sandbox
       '--no-sandbox',
       '--url-base=wd/hub',
+      // Avoids errors under Docker
+      '--disable-ipv6'
     ]);
     return done();
   },

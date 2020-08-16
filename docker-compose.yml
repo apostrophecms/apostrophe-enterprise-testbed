@@ -1,22 +1,26 @@
 version: "2"
 services:
-  apostrophe:
-    restart: always
-    build: .
-    #    ports:
-    #  - "3000:3000"
-    links:
-      - mongo
-    volumes:
-      - ./data/uploads:/app/public/uploads
-    environment:
-      - APOS_MONGODB_URI=mongodb://mongo:27017/db
-    depends_on:
-      - mongo
   mongo:
-    image: mongo
+    image: mongo:${MONGODB_VERSION}-bionic
     restart: always
     volumes:
       - ./data/db:/data/db
     expose:
       - "27017"
+    command: --quiet
+  apostrophe:
+    # restart: always
+    build:
+      context: .
+      args:
+        - MONGODB_VERSION=${MONGODB_VERSION}
+    environment:
+      - APOS_MONGODB_URI=mongodb://mongo:27017/apostrophe-enterprise-testbed
+    ports:
+      - 3001:3000
+    volumes:
+      - ./data/uploads:/app/public/uploads
+    links:
+      - mongo
+    depends_on:
+      - mongo

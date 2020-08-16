@@ -3,6 +3,9 @@
 (
   mkdir /tmp/$$ &&
   cd /tmp/$$ &&
+  if ! [ -z "$APOS_MONGODB_URI" ]; then
+    export APOS_MONGODB_URI="${APOS_MONGODB_URI/apostrophe-enterprise-testbed/test}"
+  fi
   git clone https://github.com/apostrophecms/apostrophe-headless &&
   cd apostrophe-headless &&
   npm install &&

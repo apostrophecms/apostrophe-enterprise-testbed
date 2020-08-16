@@ -1,11 +1,3 @@
 #!/bin/bash
 
-# Need a virtual frame buffer X server for chrome
-export DISPLAY=:99
-echo "Launching Xvfb..."
-Xvfb -ac :99 -screen 0 1280x1024x16 &
-# Wait for Unix socket of Xvfb to exist
-echo "Waiting for Xvfb..."
-while [ ! -e /tmp/.X11-unix/X99 ]; do sleep 0.1; done
-echo "Waiting for mongodb..."
-./scripts/wait-for-it.sh mongo:27017 -- npm run e2e-local-with-fresh-npm-install
+npm run e2e-local-with-fresh-npm-install
