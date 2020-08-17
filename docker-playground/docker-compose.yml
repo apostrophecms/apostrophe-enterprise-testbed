@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:${MONGODB_VERSION}-bionic
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    expose:
+      - "27017"
+  apostrophe:
+    build:
+      context: .
+      args:
+        - MONGODB_VERSION=${MONGODB_VERSION}
+    volumes:
+      # Persistent volume to hack in. Use "delegated" for acceptable performance
+      - ./workspace:/workspace:delegated
+    ports:
+      - 3001:3001
+    environment:
+      - APOS_MONGODB_URI=mongodb://mongo:27017/apostrophe-enterprise-testbed
+    links:
+      - mongo
+    depends_on:
+      - mongo
