@@ -58,7 +58,8 @@ module.exports = Object.assign(
       const pageMenuBtnSelector = '.apos-context-menu .apos-button';
       const pageMenuDropdownSelector = '.apos-context-menu .apos-dropdown-items';
       const pageMenuCopyPageSelector = '.apos-context-menu .apos-dropdown-items [data-apos-copy-page]';
-
+      // Make sure we saved before leaving the page
+      client.pause(5000);
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageMenuDropdownSelector);
       client.clickWhenReady(pageMenuCopyPageSelector);
