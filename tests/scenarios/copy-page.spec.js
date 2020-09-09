@@ -29,6 +29,8 @@ module.exports = Object.assign(
 
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageMenuDropdownSelector);
+      // Allow page to save asynchronously first
+      client.pause(500);
       client.clickWhenReady(pageMenuCopyPageSelector);
       client.resetValueInModal('apostrophe-pages-editor-copy', '[name="title"]', 'Home Page Copy');
       client.clickInModal('apostrophe-pages-editor-copy', '[data-apos-save]');
@@ -62,6 +64,8 @@ module.exports = Object.assign(
       client.pause(5000);
       client.clickWhenReady(pageMenuBtnSelector);
       client.waitForElementReady(pageMenuDropdownSelector);
+      // Allow page to save asynchronously first
+      client.pause(500);
       client.clickWhenReady(pageMenuCopyPageSelector);
       client.resetValueInModal('apostrophe-pages-editor-copy', '[name="title"]', 'Default Page Copy');
       client.clickInModal('apostrophe-pages-editor-copy', '[data-apos-save]');
