@@ -29,7 +29,7 @@
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "github:apostrophecms/apostrophe-personas",
     "apostrophe-review-and-deploy": "github:apostrophecms/apostrophe-review-and-deploy",
-    "apostrophe-seo": "github:apostrophecms/apostrophe-seo",
+    "apostrophe-seo": "github:apostrophecms/apostrophe-seo#main",
     "apostrophe-site-map": "github:apostrophecms/apostrophe-site-map",
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
     "archiver": "^2.1.1",
