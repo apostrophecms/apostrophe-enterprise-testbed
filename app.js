@@ -216,7 +216,12 @@ function run(config, ready) {
             'es': '/humano'
           }
         }
-      ]
+      ],
+      disableEmptyUniversal: true
+    },
+
+    'apostrophe-login': {
+      totp: true
     },
 
     'apostrophe-forms': {},
