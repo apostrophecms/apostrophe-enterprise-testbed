@@ -26,6 +26,7 @@
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
     "apostrophe-forms": "github:apostrophecms/apostrophe-forms",
     "apostrophe-i18n-debugger": "github:apostrophecms/apostrophe-i18n-debugger",
+    "apostrophe-i18n-static": "github:apostrophecms/apostrophe-i18n-static",
     "apostrophe-nightwatch-tools": "github:apostrophecms/apostrophe-nightwatch-tools",
     "apostrophe-personas": "github:apostrophecms/apostrophe-personas",
     "apostrophe-review-and-deploy": "github:apostrophecms/apostrophe-review-and-deploy",

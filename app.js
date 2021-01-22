@@ -237,6 +237,10 @@ function run(config, ready) {
         self.addPublic(['edit-attachment']);
       }
     },
+
+    'apostrophe-i18n-static': {
+      useWorkflowLocales: true
+    }
   };
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
