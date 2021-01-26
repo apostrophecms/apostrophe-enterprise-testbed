@@ -239,12 +239,16 @@ function run(config, ready) {
     },
 
     'apostrophe-i18n-static': {
-      useWorkflowLocales: true
-    }
+      useWorkflowLocales: true,
+      verbose: true
+    },
+
+    'fetch-data-always': {}
   };
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
-      namespaces: true
+      namespaces: true,
+      updateFiles: false
     };
     modules['apostrophe-i18n-static'] = {
       defaultLocale: 'en',
