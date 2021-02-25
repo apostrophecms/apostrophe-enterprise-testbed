@@ -236,7 +236,7 @@ function run(config, ready) {
         // Needed if you want file fields to work on public pages
         self.addPublic(['edit-attachment']);
       }
-    },
+    }
   };
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
@@ -249,6 +249,7 @@ function run(config, ready) {
       disableLocaleChange: true,
       ignoreNamespaces: [ 'apostrophe' ]
     };
+    console.log('** we have i18n static');
   }
   if (process.env.SCOPED_PIECES) {
     // Only intended for use by tests/scenarios/scoped-pieces.spec.js,
