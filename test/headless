@@ -6,7 +6,7 @@
   git clone https://github.com/apostrophecms/apostrophe-headless &&
   cd apostrophe-headless &&
   npm install &&
-  npm install apostrophecms/apostrophe &&
+  npm install "apostrophecms/apostrophe#2.0" &&
   npm test &&
   rm -rf /tmp/$$
 ) || FAIL=1

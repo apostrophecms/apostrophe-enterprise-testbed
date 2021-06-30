@@ -7,7 +7,7 @@ trap 'kill $(jobs -p)' EXIT
 APOS_BUNDLE=1 node app apostrophe:generation || exit 1
 # Fire up the site using that bundle's assets
 APOS_BUNDLE=1 node app &
-sleep 10
+sleep 30
 # Verify we can get the home page
 wget http://localhost:3000 -O /tmp/$$.html || exit 1
 if ! egrep "uploads/assets/.*/apos-minified/anon-.*.css" /tmp/$$.html ; then
