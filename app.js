@@ -250,11 +250,6 @@ function run(config, ready) {
       ignoreNamespaces: [ 'apostrophe' ]
     };
   }
-  if (process.env.SCOPED_PIECES) {
-    // Only intended for use by tests/scenarios/scoped-pieces.spec.js,
-    // which copies a temporary folder for this purpose into node_modules
-    modules['@scoped/pieces'] = {};
-  }
 
   const apos = require('apostrophe')(
     _.assign({
