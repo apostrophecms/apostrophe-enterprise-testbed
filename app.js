@@ -190,9 +190,15 @@ function run(config, ready) {
         }
       ],
       defaultLocale: process.env.WORKFLOW_ONLY ? null : 'en',
-      prefixes: process.env.WORKFLOW_ONLY ? null : prefixes,
-      hostnames: process.env.WORKFLOW_ONLY ? null : hostnames
+      prefixes: null,
+      hostnames: {
+        'en': 'localhost',
+        'fr': 'french-test.com',
+        'es': 'spanish-test.com'
+      },
     },
+
+    'apostrophe-passport': {},
 
     'apostrophe-workflow-modified-documents': {},
 
