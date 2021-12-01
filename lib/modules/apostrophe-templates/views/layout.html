@@ -52,7 +52,9 @@
               You are using the Apostrophe enterprise testbed site.
             {% endblock %}</h5>
             {%- if not data.user and not data.user._permissions.admin -%}
-              <h5 class="demo-login-button"><a href="http://localhost:3000/auth/google/login"><span>&#xf090;</span>Log In with Google</a></h5>
+              {% for link in apos.passport.loginLinks() %}
+                <h5 class="demo-login-button"><a href="{{ link.href }}"><span>&#xf090;</span> Log in with {{ link.label }}</a></h5>
+              {% endfor %}
             {%- endif -%}
             <p><strong>Just click on text to edit it.</strong> There is no save button because <strong>your edits are saved automatically.</strong></p>
             <p>To add images, slideshow and more <strong>click the "+" icons</strong> that appear when you hover the mouse over the page.</p>
