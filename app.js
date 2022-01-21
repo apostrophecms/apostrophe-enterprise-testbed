@@ -237,6 +237,8 @@ function run(config, ready) {
         self.addPublic(['edit-attachment']);
       }
     },
+
+    '@apostrophecms/sync-content': {}
   };
   if (!process.env.WORKFLOW_ONLY) {
     modules['apostrophe-i18n'] = {
