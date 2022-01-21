@@ -255,7 +255,7 @@ function run(config, ready) {
 
   const apos = require('apostrophe')(
     _.assign({
-      shortName: 'apostrophe-enterprise-testbed',
+      shortName: 'apostrophe-enterprise-testbed-b',
       baseUrl: baseUrl,
       root: module,
       modules: modules,
