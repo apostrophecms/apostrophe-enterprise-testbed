@@ -60,7 +60,8 @@ function run(config, ready) {
         secret: 'ksajhfkdsfha43fahif3a8asdfkyfsd7f',
         cookie: {
           // domain: 'workflow.com'
-        }
+        },
+        port: 3001
       },
       csrf: {
         // Do not generate sessions just for CSRF's sake, reserve truly random
