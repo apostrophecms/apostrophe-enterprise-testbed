@@ -230,6 +230,9 @@ function run(config, ready) {
     'apostrophe-forms-file-field-widgets': {},
     'apostrophe-forms-boolean-field-widgets': {},
     'apostrophe-forms-conditional-widgets': {},
+    'apostrophe-forms-google-address-field-widgets': {
+      googleApiKey: process.env.GOOGLE_PLACES_API_KEY
+    },
 
     'apostrophe-permissions': {
       construct: function (self, options) {
