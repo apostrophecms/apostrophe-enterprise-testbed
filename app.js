@@ -40,6 +40,7 @@ function run(config, ready) {
   console.log('APP', address, port, baseUrl);
 
   let modules =  {
+    'apostrophe-headless': {},
     'apostrophe-seo': {},
     'apostrophe-db': {
       connect: {
@@ -77,7 +78,17 @@ function run(config, ready) {
     'products': {
       extend: 'apostrophe-pieces',
       name: 'product',
-      label: 'Product'
+      label: 'Product',
+      restApi: {
+        // max 50 pieces per API result (the default)
+        maxPerPage: 50,
+        // Allow the public API to invoke additional
+        // cursor filters. Note that most schema
+        // fields have a cursor filter available
+        safeFilters: [ 'slug' ],
+        // Restrict GET routes to users with correct permission (false by default)
+        getRequiresEditPermission: false
+      }
     },
     'products-widgets': {},
     'products-pages': {
