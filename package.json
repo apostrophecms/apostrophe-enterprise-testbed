@@ -33,7 +33,7 @@
     "apostrophe-workflow": "github:apostrophecms/apostrophe-workflow",
     "archiver": "^2.1.1",
     "cheerio": "^1.0.0-rc.3",
-    "chromedriver": "^102.0.0",
+    "chromedriver": "^104.0.0",
     "death": "^1.1.0",
     "eslint": "^4.19.1",
     "eslint-config-apostrophe": "^2.0.2",
