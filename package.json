@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@sailshq/lodash": "^3.10.3",
-    "apostrophe": "github:apostrophecms/apostrophe#2.0",
+    "apostrophe": "github:apostrophecms/apostrophe#a2",
     "apostrophe-blog": "github:apostrophecms/apostrophe-blog",
     "apostrophe-forms": "github:apostrophecms/apostrophe-forms",
     "apostrophe-i18n-debugger": "github:apostrophecms/apostrophe-i18n-debugger",
